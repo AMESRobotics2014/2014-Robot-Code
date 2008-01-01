@@ -17,6 +17,7 @@ public class MasterTimer extends Timer {
         addEventTimer("printsDEBUG");
         addEventTimer("potential");
         addEventTimer("TableTimer");
+        addEventTimer("Retract");
     }
 
     public void addEventTimer(String tid) {
@@ -60,6 +61,7 @@ public class MasterTimer extends Timer {
         for (i = 0; i < actindex.size(); i++) {
             use = (accessdata) actindex.elementAt(i);
             use.wipe();
+            actindex.setElementAt(use, i);
         }
     }
 
@@ -72,6 +74,7 @@ public class MasterTimer extends Timer {
                     break;
                 } else {
                     use.wipe();
+                    actindex.setElementAt(use, i);
                 }
             }
         }
@@ -82,6 +85,7 @@ public class MasterTimer extends Timer {
         for (i = 0; i < include.length; i++) {
             use = (accessdata) actindex.elementAt(i);
             use.wipe();
+            actindex.setElementAt(use, i);
         }
     }
 

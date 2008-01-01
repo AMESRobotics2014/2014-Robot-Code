@@ -61,23 +61,27 @@ public class RobotMain extends IterativeRobot {
     }
 
     public void autonomousPeriodic() {
-                                        /* Plan */
-        // Check to see if goal is hot or not. If hot, shoot.
-        // There needs to be a method that specifically tells the robot to shoot in this autonomous mode.
-         
     }
 
     public void teleopPeriodic() {
+        MT.Freset();
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
-                
-            //if (MT.gdt(3) >= 1) {
-            //    Com.processTable();
-          //      MT.sc(3);
-            //}
             Event.Alwaysrun();
             if (R.manualONLY) {
                 if (!IM.SettingsL.getState()) {
+                   /* if(MT.gdt(4) < 15){
+                        System.out.println("grab event");
+                        Event.s_GrabSustain();
+                    }
+                    else if(!(MT.gdt(4) > 25)){
+                        Event.s_GrabRetract();
+                        System.out.println("retract event");
+                    }
+                    else{
+                        System.out.println("Shutdown event");
+                        Event.s_GrabShutdown();
+                    }*/
                     Event.m_Elevator();
                     Event.m_Grab();
                     Event.m_Shoot();
@@ -89,6 +93,7 @@ public class RobotMain extends IterativeRobot {
                 }
             }
         }
+        MT.Freset();
     }
 
     public static class Event {
@@ -96,12 +101,23 @@ public class RobotMain extends IterativeRobot {
         //Sorted into scripted events and manual events by prefix s and m
         public static void Alwaysrun() {
             MC.drive(IM.getFinalAxis());
-            if (MT.gdt(1) >= 5.0) {
+            if (MT.gdt(1) >= 16) {
                 MT.sc(1);
-                System.out.println("Does the robot even lift????");
-                
-                //  MT.listIndicesDEBUG();
+                Event.Debug();
             }
+        }
+        public static void s_FastDebug(){
+            
+            if (MT.gdt(1) >= 3) {
+                MT.sc(1);
+                Event.Debug();
+            }
+        }
+        public static void Debug(){
+            System.out.println("Does the robot even lift????");
+            System.out.println("Grabber Timer:" + MT.gdt(4));
+            System.out.println("Debug timer" + MT.gdt(1));
+         //   MT.listIndicesDEBUG();
         }
         public static void m_Grab() {
             //Manually apply from input
@@ -174,17 +190,20 @@ public class RobotMain extends IterativeRobot {
         public static void s_GrabSustain() {
             //Use scripted event
             if (IM.GrabberLowerLimit.get()) {
-                MC.grabber((byte) 1);
+                MC.grabber((byte) 2);
             } else {
                 MC.grabber((byte) 0);
             }
         }
         public static void s_GrabRetract() {
             if (IM.GrabberLiftLimit.get()) {
-                MC.grabber((byte) 2);
+                MC.grabber((byte) 1);
             } else {
                 MC.grabber((byte) 0);
             }
+        }
+        public static void s_GrabShutdown(){
+            MC.grabber((byte)0);
         }
         public static void s_ShootAbs() {//The secret police will find you and shoot you no matter what
             if (IM.clutchReleasedLimit.get()) {
@@ -224,7 +243,7 @@ public class RobotMain extends IterativeRobot {
         }
         public static void s_Testlimits() {
             if (MT.gdt(0) >= .6 & IM.FaceLeft.getState()) {
-                MT.sc(0);
+                MT.gdt(0);
                 System.out.println("Checking limits");
                 System.out.println("Clutch Engage" + ": " + IM.clutchEngagedLimit.get());
                 System.out.println("Clutch Released" + ": " + IM.clutchReleasedLimit.get());
@@ -248,7 +267,6 @@ public class RobotMain extends IterativeRobot {
         }
     }
 
-    //Not sure if I want to keep this or not, will be good for complex button combos but I'm not sure we need it}
     public static void UsetheForce(int mitichlorians) {
         System.out.println("Feel don't think");
     }

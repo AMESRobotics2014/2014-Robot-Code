@@ -106,7 +106,7 @@ public class MotorControl {
         if(dir == 1){
             PullBack.set(-1);
         }else if(dir == 2){
-            PullBack.set(0.75);
+            PullBack.set(0.55);
         }
         else if(dir == 3){
             PullBack.set(0.3);
