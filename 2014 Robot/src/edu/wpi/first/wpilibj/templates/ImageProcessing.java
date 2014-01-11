@@ -8,7 +8,7 @@ package edu.wpi.first.wpilibj.templates;
 
 /**
  *
- * @author AliNazzal
+ * @author AliNazzal, Mark, & TARUN
  */
 public class ImageProcessing {
     
