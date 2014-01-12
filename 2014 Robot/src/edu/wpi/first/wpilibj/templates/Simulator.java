@@ -10,6 +10,6 @@ package edu.wpi.first.wpilibj.templates;
  *
  * @author AliNazzal
  */
-public class BallSimulator {
+public class Simulator {
     
 }
