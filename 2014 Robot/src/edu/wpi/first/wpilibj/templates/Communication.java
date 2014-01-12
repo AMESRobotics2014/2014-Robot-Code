@@ -1,15 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is responsable for all communication with other devices such as the Raspberry pie, the driver's station, some 
+ * cameras, and anything else external.
  */
 
 package edu.wpi.first.wpilibj.templates;
 
-/**
- *
- * @author AliNazzal
- */
 public class Communication {
     
 }

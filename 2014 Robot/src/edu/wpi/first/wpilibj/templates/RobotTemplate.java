@@ -5,6 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+
+
+//___
+// | |_  o  _     o  _    _|_|_  _    __  _  o __     _  |  _  _  _
+// | | | | _>     | _>     |_| |(/_   |||(_| | | |   (_  | (_|_> _>
+//The main class is under control of Ali Nazzal. DO NOT EDIT WITHOUT EXPLICIT PERMISSION!
+
 package edu.wpi.first.wpilibj.templates;
 
 

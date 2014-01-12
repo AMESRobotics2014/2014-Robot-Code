@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*This class is for code that simulates dynamics of the robot and physical world to predict real world events. It should take data from
+ * human users, various parts of image processing, and other inputs to be developed as the build continues. It should be organized to be accessible from the main class. 
  */
 
 package edu.wpi.first.wpilibj.templates;
 
-/**
- *
- * @author AliNazzal
- */
 public class Simulator {
     
 }

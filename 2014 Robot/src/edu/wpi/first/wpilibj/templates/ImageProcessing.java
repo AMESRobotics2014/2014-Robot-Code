@@ -1,7 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*Class for handeling massive amounts of image processing code, this may actually end up holding very little if the Raspberry pie is used instead.
  */
 
 package edu.wpi.first.wpilibj.templates;
