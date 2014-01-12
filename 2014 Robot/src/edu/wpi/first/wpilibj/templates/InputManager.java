@@ -18,6 +18,33 @@ public class InputManager {
         OhDearGodStop = new button(1, true);
         
     }
+    public double[] getPureAxis() { // Gets, stores, and returns the status of the joysticks on the PS2 Controller
+        /* We will use a double dimension arry to hold the joystick data so that everything can be sent to other functions.
+         * Both of the first dimensions will hold 2 doulbes, the first is the x & y axis of the first (paning) joystick
+         * The second dimension holds the x & y for the second (pivoting) joystick
+         */
+        // double[] axis = new double[2];// Variable for storing all that data
+        double[] dir = new double[4];
+        dir[0] = -ps2cont.getRawAxis(1);// X
+        dir[1] = ps2cont.getRawAxis(3);// Y
+        //dir[2] = monoJoystick.getRawAxis(1);// X
+        //dir[3] = monoJoystick.getRawAxis(2);// Y
+
+        dir = deadZone(dir);
+        //dir = ramp(dir);
+        return (dir); // Returns axis data to the caller.
+    }
+    
+    protected static double[] deadZone(double[] axis) {// Checks for deadzone
+        //This is a skeleton of the deadzone funtion. Mark should fill this in.
+
+        for (byte si = 0; si < axis.length; si++) {//loops through the array.
+            if (axis[si] <= .05 && axis[si] >= -.05) {
+                axis[si] = 0;
+            }
+        }
+        return (axis);
+    }
 
     public static class button {
 

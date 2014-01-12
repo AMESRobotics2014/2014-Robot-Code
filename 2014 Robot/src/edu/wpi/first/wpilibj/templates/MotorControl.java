@@ -14,10 +14,10 @@ public class MotorControl {
     
     
     void init() {
-        VDriveL[0] = new Victor(null);//Will be hard coded for this test
-        VDriveL[1] = new Victor(null);
-        VDriveR[0] = new Victor(null);
-        VDriveR[1] = new Victor(null);
+        VDriveL[0] = new Victor(1);//Will be hard coded for this test
+        VDriveL[1] = new Victor(2);
+        VDriveR[0] = new Victor(3);
+        VDriveR[1] = new Victor(4);
     }
     
         static double limit(double value) {
@@ -41,11 +41,11 @@ public class MotorControl {
             
         }
         
-        void Prepcmd(double[] tank){
-           double Lcmd = limit(tank[0]);
-           double Rcmd = limit(tank[1]);
+        //void Prepcmd(double[] tank){
+        //   double Lcmd = limit(tank[0]);
+        //   double Rcmd = limit(tank[1]);
             
-        }
+       // }
     
     
 }

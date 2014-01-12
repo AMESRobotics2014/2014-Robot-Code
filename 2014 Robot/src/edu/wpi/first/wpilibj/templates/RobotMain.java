@@ -29,14 +29,19 @@ public class RobotMain extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+    InputManager IM;
+    MotorControl MC;
+    
     public void robotInit() {
-
+        IM = new InputManager();
+        MC = new MotorControl();
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+        //Nah
 
     }
 
@@ -44,6 +49,11 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        //This is supposed to loop on it's own but it doesn't 
+        while(isOperatorControl() && isEnabled()){
+            MC.Drive(IM.getPureAxis());
+            
+        }
         
     }
     
