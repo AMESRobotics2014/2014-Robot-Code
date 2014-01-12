@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class RobotTemplate extends IterativeRobot {
+public class RobotMain extends IterativeRobot {
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
