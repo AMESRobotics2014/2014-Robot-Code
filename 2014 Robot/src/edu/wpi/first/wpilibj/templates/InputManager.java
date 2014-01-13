@@ -5,11 +5,13 @@
  */
 
 package edu.wpi.first.wpilibj.templates;
+import edu.wpi.first.wpilibj.camera.AxisCamera;
 
-/**
- *
- * @author AliNazzal
- */
 public class InputManager {
+    AxisCamera FCam;
     
+    
+    void Init(){
+        //Set up camera here
+    }
 }
