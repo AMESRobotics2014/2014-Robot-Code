@@ -8,8 +8,12 @@ package edu.wpi.first.wpilibj.templates;
 
 /**
  *
- * @author AliNazzal
+ * @author Erin Turnley
  */
+
 public class InputManager {
     
+    public void initialize(){
+        
+    }
 }

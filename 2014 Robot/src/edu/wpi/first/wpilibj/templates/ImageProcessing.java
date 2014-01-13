@@ -10,6 +10,8 @@ package edu.wpi.first.wpilibj.templates;
  *
  * @author AliNazzal, Mark, & TARUN
  */
+
+
 public class ImageProcessing {
     
 }
