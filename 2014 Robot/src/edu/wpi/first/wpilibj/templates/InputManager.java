@@ -8,7 +8,6 @@
 //Blarg
 
 package edu.wpi.first.wpilibj.templates;
-import edu.wpi.first.wpilibj.camera.AxisCamera;
 
 /**
  *
@@ -16,9 +15,5 @@ import edu.wpi.first.wpilibj.camera.AxisCamera;
  */
 
 public class InputManager {
-    AxisCamera FCam;
-    
-    void Init(){
-        //Set up camera here
-    }
+
 }
