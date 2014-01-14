@@ -5,6 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+
+
+//___
+// | |_  o  _     o  _    _|_|_  _    __  _  o __     _  |  _  _  _
+// | | | | _>     | _>     |_| |(/_   |||(_| | | |   (_  | (_|_> _>
+//The main class is under control of Ali Nazzal & Ben Rose. DO NOT EDIT WITHOUT EXPLICIT PERMISSION!
+
 package edu.wpi.first.wpilibj.templates;
 
 
@@ -21,7 +28,7 @@ import edu.wpi.first.wpilibj.Timer;
  * directory.
  * 
  */
-public class RobotTemplate extends IterativeRobot {
+public class RobotMain extends IterativeRobot {
     
     RobotDrive drive;
     Joystick leftstick;
