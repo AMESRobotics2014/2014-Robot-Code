@@ -3,6 +3,8 @@
 
 package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
+import edu.wpi.first.wpilibj.image.CriteriaCollection;
+import edu.wpi.first.wpilibj.image.NIVision;
 import java.lang.Math.*;
 
 /**
@@ -14,6 +16,7 @@ import java.lang.Math.*;
 public class ImageProcessing {
    
     AxisCamera Fcam;
+    CriteriaCollection Crit;
     /** 
      * The view angle and image resolution need to be in compliance with the camera.
      */
@@ -22,6 +25,8 @@ public class ImageProcessing {
     public final double PI = Math.PI;//This is Pi, pretty self explanatory
     
     // Score limits.
+    
+    final int AreaMinimum = 150;
     
     public class Targetreport {
 		int verticalLocation;
@@ -35,7 +40,8 @@ public class ImageProcessing {
     };
     
     void Init(){
-        
+        Crit = new CriteriaCollection();
+        Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AreaMinimum, 65535, false);
     }
     
 }
