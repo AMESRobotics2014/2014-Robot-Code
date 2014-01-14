@@ -19,13 +19,24 @@ public class ImageProcessing {
      */
     public final int Y_IMAGE_RES = 480; // Need to check if this is resolution on camera.
     public final double VIEW_ANGLE = 37.4; // For the M1011 Axis Camera - need to check model of camera.
-    public final double PI = Math.PI;
+    public final double PI = Math.PI;//This is Pi, pretty self explanatory
     
     // Score limits.
     
+    public class Targetreport {
+		int verticalLocation;
+		int horizontalLocation;
+		boolean Hot;
+		double totalScore;
+		double leftScore;
+		double rightScore;
+		double tapeWidthScore;
+		double verticalScore;
+    };
     
     void Init(){
         
     }
     
 }
+
