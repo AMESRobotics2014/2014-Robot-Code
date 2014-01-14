@@ -43,6 +43,9 @@ public class ImageProcessing {
         Crit = new CriteriaCollection();
         Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AreaMinimum, 65535, false);
     }
+    public void autonomous() {
+        
+    }
     
 }
 
