@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.Timer;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
+ * 
  */
 public class RobotTemplate extends IterativeRobot {
     
@@ -29,8 +30,15 @@ public class RobotTemplate extends IterativeRobot {
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
+     * 
      */
     public void robotInit() {
+        /**
+         * @param: leftMotorPin
+         * @param: rightMotorPin
+         */
+        drive = new RobotDrive(1, 2);
+        
         leftstick = new Joystick(1);
         rightstick = new Joystick(2);
     }
