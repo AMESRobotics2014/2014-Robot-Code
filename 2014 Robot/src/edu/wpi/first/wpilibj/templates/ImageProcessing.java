@@ -47,6 +47,12 @@ public class ImageProcessing {
 		double verticalScore;
     };
     
+    public class Scores {
+        double rectangularity;
+        double aspectRatioVertical;
+        double aspectRatioHorizontal;
+    }
+    
     void Init(){
         Fcam = AxisCamera.getInstance();  // get an instance of the camera
         Crit = new CriteriaCollection();// create the criteria for the particle filter
