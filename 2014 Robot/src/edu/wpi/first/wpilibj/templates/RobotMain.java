@@ -33,20 +33,18 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class RobotMain extends IterativeRobot {
     
+    /** Drive Settings */
     RobotDrive drive;
+    /** Left Joystick Parameters */
     Joystick leftstick;
+    /** Right Joystick Parameters */
     Joystick rightstick;
     
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
-     * 
      */
     public void robotInit() {
-        /**
-         * @param: leftMotorPin
-         * @param: rightMotorPin
-         */
         drive = new RobotDrive(1, 2);
         
         leftstick = new Joystick(1);
