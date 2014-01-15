@@ -1,6 +1,3 @@
-/*Class for handeling massive amounts of image processing code, this may actually end up holding very little if the Raspberry pie is used instead.
- */
-
 package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.image.CriteriaCollection;
@@ -8,7 +5,7 @@ import edu.wpi.first.wpilibj.image.NIVision;
 import java.lang.Math.*;
 
 /**
- *
+ * Class for handling massive amounts of image processing code. This may actually end up holding very little if the Raspberry pie is used instead.
  * @author AliNazzal, Mark, & TARUN
  */
 
