@@ -20,10 +20,21 @@ public class ImageProcessing {
     public final int Y_IMAGE_RES = 480; // Need to check if this is resolution on camera.
     public final double VIEW_ANGLE = 37.4; // For the M1011 Axis Camera - need to check model of camera.
     public final double PI = Math.PI;//This is Pi, pretty self explanatory
-    
-    // Score limits.
-    
-    final int AreaMinimum = 150;//minnimum of area in pixels that our camera will keep track of
+
+    //Score limits used for target identification
+    final int  RECTANGULARITY_LIMIT = 40;
+    final int ASPECT_RATIO_LIMIT = 55;
+
+    //Score limits used for hot target determination
+    final int TAPE_WIDTH_LIMIT = 50;
+    final int  VERTICAL_SCORE_LIMIT = 50;
+    final int LR_SCORE_LIMIT = 50;
+
+    //Minimum area of particles to be considered
+    final int AREA_MINIMUM = 150;
+
+    //Maximum number of particles to process
+    final int MAX_PARTICLES = 8;
     
     public class Targetreport {
 		int verticalLocation;
@@ -39,7 +50,7 @@ public class ImageProcessing {
     void Init(){
         Fcam = AxisCamera.getInstance();  // get an instance of the camera
         Crit = new CriteriaCollection();// create the criteria for the particle filter
-        Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AreaMinimum, 65535, false);//sets limits for the objects we will keep track of. lower bound is AreaMinimum & upper bound is 65535 pixels^2
+        Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AREA_MINIMUM, 65535, false);//sets limits for the objects we will keep track of. lower bound is AreaMinimum & upper bound is 65535 pixels^2
     }
     public void autonomous() {
         
