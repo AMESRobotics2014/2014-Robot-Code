@@ -26,7 +26,7 @@ public class InputManager {
         // double[] axis = new double[2];// Variable for storing all that data
         double[] dir = new double[4];
         dir[0] = -ps2cont.getRawAxis(1);// X
-        dir[1] = ps2cont.getRawAxis(3);// Y
+        dir[1] = ps2cont.getRawAxis(4);// Y
         //dir[2] = monoJoystick.getRawAxis(1);// X
         //dir[3] = monoJoystick.getRawAxis(2);// Y
 

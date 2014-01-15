@@ -15,9 +15,9 @@ public class MotorControl {
     
     void init() {
         VDriveL[0] = new Victor(1);//Will be hard coded for this test
-        VDriveL[1] = new Victor(2);
-        VDriveR[0] = new Victor(3);
-        VDriveR[1] = new Victor(4);
+        VDriveL[1] = new Victor(8);
+        VDriveR[0] = new Victor(9);
+        VDriveR[1] = new Victor(10);
     }
     
         static double limit(double value) {
