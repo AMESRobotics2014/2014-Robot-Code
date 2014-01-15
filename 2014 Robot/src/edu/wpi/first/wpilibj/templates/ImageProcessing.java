@@ -46,6 +46,5 @@ public class ImageProcessing {
     public void autonomous() {
         
     }
-    
 }
 
