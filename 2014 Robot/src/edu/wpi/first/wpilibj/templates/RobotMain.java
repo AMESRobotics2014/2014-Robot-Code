@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.Timer;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  * 
+ * @author AliNazzal, BenRose
  */
 public class RobotMain extends IterativeRobot {
     
