@@ -44,6 +44,8 @@ public class ImageProcessing {
         Crit = new CriteriaCollection();// create the criteria for the particle filter
         Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AreaMinimum, 65535, false);//sets limits for the objects we will keep track of. lower bound is AreaMinimum & upper bound is 65535 pixels^2
     }
-    
+    public void autonomous() {
+        
+    }
 }
 
