@@ -12,8 +12,8 @@ import java.lang.Math.*;
 
 public class ImageProcessing {
    
-    AxisCamera Fcam;
-    CriteriaCollection Crit;
+    AxisCamera Fcam;//this is the axis camera we will use
+    CriteriaCollection Crit;//our collection of criterias 
     /** 
      * The view angle and image resolution need to be in compliance with the camera.
      */
@@ -23,7 +23,7 @@ public class ImageProcessing {
     
     // Score limits.
     
-    final int AreaMinimum = 150;
+    final int AreaMinimum = 150;//minnimum of area in pixels that our camera will keep track of
     
     public class Targetreport {
 		int verticalLocation;
@@ -37,9 +37,12 @@ public class ImageProcessing {
     };
     
     void Init(){
-        Crit = new CriteriaCollection();
-        Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AreaMinimum, 65535, false);
+        Fcam = AxisCamera.getInstance();  // get an instance of the camera
+        Crit = new CriteriaCollection();// create the criteria for the particle filter
+        Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AreaMinimum, 65535, false);//sets limits for the objects we will keep track of. lower bound is AreaMinimum & upper bound is 65535 pixels^2
     }
-    
+    public void autonomous() {
+        
+    }
 }
 
