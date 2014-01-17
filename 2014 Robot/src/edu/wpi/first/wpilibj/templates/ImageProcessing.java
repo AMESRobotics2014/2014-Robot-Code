@@ -85,6 +85,10 @@ public class ImageProcessing {
         //while (isAutonomous() && isEnabled()) {
             try{
                 ColorImage image = camera.getImage();
+                 BinaryImage thresholdImage = image.thresholdHSV(105, 137, 230, 255, 133, 183);   // keep only green objects
+                //thresholdImage.write("/threshold.bmp");
+                BinaryImage filteredImage = thresholdImage.particleFilter(Crit);           // filter out small particles
+                //filteredImage.write("/filteredImage.bmp");
             } catch (NIVisionException ex) {
             ex.printStackTrace();
         } 
