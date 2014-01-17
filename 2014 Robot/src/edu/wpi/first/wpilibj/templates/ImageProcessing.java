@@ -95,7 +95,15 @@ public class ImageProcessing {
                 {
                     for(int i=0; i<MAX_PARTICLES && i<filteredImage.getNumberParticles();i++)//start with an variable which starts at 0, goes up until 8 or lower,depending on particles detected, and increment by one every time
                     {
+                        ParticleAnalysisReport report = filteredImage.getParticleAnalysisReport(i);//Goes through particles.
+                        scores[i] = new Scores();
                         
+                        //Score each particle on rectangularity and aspect ratio.
+                        scores[i].rectangularity = scoreRectangularity(report);//check for it's rectangularity with a function we will use later
+                        scores[i].aspectRatioVertical = scoreAspectRatio(filteredImage, report, i, true);//check for it's aspect ratio vertical with a function we will use later
+                        scores[i].aspectRatioHorizontal = scoreASpectRatio(filteredImage, report, i, true);//check for it's horizontal with a function we will use later
+                        
+                        //Check if the particle is a horizontal target, if not, check if it's a vertical target.
                     }
                 }
             } 
