@@ -6,10 +6,11 @@
  */
 package edu.wpi.first.wpilibj.templates;
 
+import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class InputManager {
-    RobotMap R;
+   protected static RobotMap R;
 
     protected static Joystick ps2cont;
     protected static button Stop;
@@ -25,9 +26,16 @@ public class InputManager {
         UnlockL1 = new button(R.L1,true);
         misc9 = new button(R.misc9,true);
         misc10 = new button(R.misc10, true);
+        RobotMap R = new RobotMap();
         
         
         
+    }
+    
+    public double[] getFinalAxis(){
+        double[] drv = new double[4];
+        ramp(getPureAxis());
+        return (drv);
     }
     public double[] getPureAxis() {
         double[] dir = new double[4];
@@ -47,6 +55,13 @@ public class InputManager {
             }
         }
         return (axis);
+    }
+    protected static double[] ramp(double [] axis){
+        for (byte ri = 0; ri < axis.length; ri++) {
+            //axis[ri] = MathUtils.pow(axis[ri], rm.expo_ramp);
+            axis[ri] = ((.666) * MathUtils.pow(axis[ri], R.expo_ramp)) + ((.333) * axis[ri]);
+        }
+        return(axis);
     }
     
    public static void UpdateButtons(){

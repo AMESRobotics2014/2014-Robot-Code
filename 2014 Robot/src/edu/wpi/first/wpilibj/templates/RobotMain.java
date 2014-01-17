@@ -35,6 +35,8 @@ public class RobotMain extends IterativeRobot {
     public void robotInit() {
         IM = new InputManager();
         MC = new MotorControl();
+        IM.init();
+        MC.init();
     }
 
     /**

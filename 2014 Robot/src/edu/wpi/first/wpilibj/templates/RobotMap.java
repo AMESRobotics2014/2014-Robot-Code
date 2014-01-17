@@ -14,6 +14,7 @@ public class RobotMap {
     protected static final int L1 = 7;
     protected static final int misc9 = 9;
     protected static final int misc10 = 10;
+    protected static final int expo_ramp = 3;
             
     
     
