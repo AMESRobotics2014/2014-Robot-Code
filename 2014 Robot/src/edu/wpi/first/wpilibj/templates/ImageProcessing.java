@@ -109,6 +109,11 @@ public class ImageProcessing {
                             System.out.println("particle: " + i + " is a Horizontal Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);//shows center values of x & y for our particle i
                             horizontalTargets[horizontalTargetCount++] = i; //Adds particle to target array and increment count
                         }
+                        else if(scoreCompare(scores[i],true)) {
+                              System.out.println("particle: " + i + " is a Vertical Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);//shows center values of x & y for our particle i
+                               verticalTargets[verticalTargetCount++] = i;  //Add particle to target array and increment count
+                              
+                        }
                     }
                 }
             } 
