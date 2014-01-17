@@ -3,7 +3,10 @@ import edu.wpi.first.wpilibj.camera.AxisCamera;
 import edu.wpi.first.wpilibj.image.CriteriaCollection;
 import edu.wpi.first.wpilibj.image.NIVision;
 import java.lang.Math.*;
-
+import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.image.*;
+import edu.wpi.first.wpilibj.image.NIVision.MeasurementType;
 /**
  * Class for handling massive amounts of image processing code. This may actually end up holding very little if the Raspberry pie is used instead.
  * @author AliNazzal, Mark, & TARUN
@@ -19,31 +22,22 @@ public class ImageProcessing {
     public final int Y_IMAGE_RES = 480; // Need to check if this is resolution on camera.
     /** Viewing angle - needs to be in compliance w/ camera. */
     public final double VIEW_ANGLE = 37.4; // For the M1011 Axis Camera - need to check model of camera.
-    /** Pi (~3.14), as defined in the Math class. */
-    public final double PI = Math.PI; 
-    /** Minimum area the camera keeps track of, in pixels. */
-    final int AreaMinimum = 150;
-
-
-    //Score limits used for target identification
-    /** Rectangularity goal limit. Helps identify target. */
+    public final double PI = Math.PI;//This is Pi, pretty self explanatory
+        //Score limits used for target identification
     final int  RECTANGULARITY_LIMIT = 40;
-    /** Aspect ratio limit. Helps identify target */
     final int ASPECT_RATIO_LIMIT = 55;
 
     //Score limits used for hot target determination
-    /** Limit for tape width */
     final int TAPE_WIDTH_LIMIT = 50;
-    /** Vertical goal limit */
     final int  VERTICAL_SCORE_LIMIT = 50;
-    /** Lower goal limit */
     final int LR_SCORE_LIMIT = 50;
 
-    /** Minimum area of particles to be considered */
+    //Minimum area of particles to be considered
     final int AREA_MINIMUM = 150;
 
-    //* Maximum number of particles to process */
+    //Maximum number of particles to process
     final int MAX_PARTICLES = 8;
+
     
     /** Records and reports information about the target tape. */
     public class Targetreport {
@@ -82,6 +76,20 @@ public class ImageProcessing {
     }
     /** This is called periodically during autonomous mode */
     public void autonomous() {
+        Targetreport target = new Targetreport();//make a target and have all the variables in our targetreport class did
+	int verticalTargets[] = new int[MAX_PARTICLES];//make an array called verticaltargets and store 8 elements
+	int horizontalTargets[] = new int[MAX_PARTICLES];//make an array called horizontaltargets and store 8 elements
+	int verticalTargetCount, horizontalTargetCount;
         
-    }
+        //while (isAutonomous() && isEnabled()) {
+        ColorImage image = camera.getImage();
+        
+        
+        
+        
+        
+    //}
 }
+    }
+        
+          
