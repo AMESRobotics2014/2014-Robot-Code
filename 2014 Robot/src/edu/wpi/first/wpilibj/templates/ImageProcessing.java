@@ -42,6 +42,7 @@ public class ImageProcessing {
     
     /** Records and reports information about the target tape. */
     public class Targetreport {
+                int verticalIndex;
                 /** Vertical Location of Tape */
 		int verticalLocation;
                 /** Horizontal Location of Tape */
@@ -119,6 +120,9 @@ public class ImageProcessing {
                         System.out.println("rect: " + scores[i].rectangularity + "ARHoriz: " + scores[i].aspectRatioHorizontal);
                         System.out.println("ARVert: " + scores[i].aspectRatioVertical);
                     }
+                    //Zero out scores and set verticalIndex to first target in case there are no horizontal targets
+                    target.totalScore = target.leftScore = target.rightScore = target.tapeWidthScore = target.verticalScore = 0;
+                    target.verticalIndex = verticalTargets[0];
                 }
             } 
             
