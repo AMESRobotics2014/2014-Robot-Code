@@ -28,20 +28,12 @@ public class InputManager {
         
         
     }
-    public double[] getPureAxis() { // Gets, stores, and returns the status of the joysticks on the PS2 Controller
-        /* We will use a double dimension arry to hold the joystick data so that everything can be sent to other functions.
-         * Both of the first dimensions will hold 2 doulbes, the first is the x & y axis of the first (paning) joystick
-         * The second dimension holds the x & y for the second (pivoting) joystick
-         */
-        // double[] axis = new double[2];// Variable for storing all that data
+    public double[] getPureAxis() {
         double[] dir = new double[4];
-        dir[0] = -ps2cont.getRawAxis(1);// X
-        dir[1] = ps2cont.getRawAxis(4);// Y
-        //dir[2] = monoJoystick.getRawAxis(1);// X
-        //dir[3] = monoJoystick.getRawAxis(2);// Y
+        dir[0] = -ps2cont.getRawAxis(1);// Y1
+        dir[1] = ps2cont.getRawAxis(4);// Y2
 
         dir = deadZone(dir);
-        //dir = ramp(dir);
         return (dir); // Returns axis data to the caller.
     }
     

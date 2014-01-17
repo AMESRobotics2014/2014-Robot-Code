@@ -20,8 +20,8 @@ public class MotorControl {
         VDriveR[1] = new Victor(10);
     }
     
-        static double limit(double value, boolean locked) {
-            if(!locked){
+        static double limit(double value, boolean unlocked) {
+            if(unlocked){
         if (value < -1) {
             value = -1;
         }
@@ -29,7 +29,7 @@ public class MotorControl {
             value = 1;
         }
             }
-            else if(locked){
+            else if(!unlocked){
         if (value < -.5) {
             value = -.5;
         }
@@ -39,13 +39,13 @@ public class MotorControl {
             }
         return (value);
     }
-        void Drive(double[] cmd, boolean locked){
+        void Drive(double[] cmd, boolean unlocked){
             //left
-            VDriveL[0].set(limit(cmd[0],locked));
-            VDriveL[1].set(limit(cmd[0],locked));
+            VDriveL[0].set(limit(cmd[0],unlocked));
+            VDriveL[1].set(limit(cmd[0],unlocked));
             //Right
-            VDriveR[0].set(limit(cmd[1],locked));
-            VDriveR[1].set(limit(cmd[1],locked));
+            VDriveR[0].set(limit(cmd[1],unlocked));
+            VDriveR[1].set(limit(cmd[1],unlocked));
             
             
         }
