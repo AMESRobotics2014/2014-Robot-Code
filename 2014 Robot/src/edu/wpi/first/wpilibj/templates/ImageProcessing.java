@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.image.NIVision;
 import java.lang.Math.*;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.camera.AxisCameraException;
 import edu.wpi.first.wpilibj.image.*;
 import edu.wpi.first.wpilibj.image.NIVision.MeasurementType;
 /**
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.image.NIVision.MeasurementType;
 
 public class ImageProcessing {
     /** this is the axis camera we will use */
-    AxisCamera Fcam;
+    AxisCamera camera;
     /** our collection of criteria */
     CriteriaCollection Crit;
     /** Vertical image resolution - needs to be in compliance w/ camera. */
@@ -70,24 +71,23 @@ public class ImageProcessing {
     }
     /** Initialize camera-related variables. */
     void Init(){
-        Fcam = AxisCamera.getInstance();  // get an instance of the camera
+        camera = AxisCamera.getInstance();  // get an instance of the camera
         Crit = new CriteriaCollection();// create the criteria for the particle filter
         Crit.addCriteria(NIVision.MeasurementType.IMAQ_MT_AREA, AREA_MINIMUM, 65535, false);//sets limits for the objects we will keep track of. lower bound is AreaMinimum & upper bound is 65535 pixels^2
     }
     /** This is called periodically during autonomous mode */
-    public void autonomous() {
+    public void autonomous() throws AxisCameraException {
         Targetreport target = new Targetreport();//make a target and have all the variables in our targetreport class did
 	int verticalTargets[] = new int[MAX_PARTICLES];//make an array called verticaltargets and store 8 elements
 	int horizontalTargets[] = new int[MAX_PARTICLES];//make an array called horizontaltargets and store 8 elements
 	int verticalTargetCount, horizontalTargetCount;
         
         //while (isAutonomous() && isEnabled()) {
-        ColorImage image = camera.getImage();
-        
-        
-        
-        
-        
+            try{
+                ColorImage image = camera.getImage();
+            } catch (NIVisionException ex) {
+            ex.printStackTrace();
+        } 
     //}
 }
     }
