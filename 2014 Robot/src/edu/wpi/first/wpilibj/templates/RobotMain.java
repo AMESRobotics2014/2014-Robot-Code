@@ -50,8 +50,11 @@ public class RobotMain extends IterativeRobot {
      */
     public void teleopPeriodic() {
         //This is supposed to loop on it's own but it doesn't 
+        if(!IM.Stop.getState()){
         while(isOperatorControl() && isEnabled()){
-            MC.Drive(IM.getPureAxis());
+            //This wont be so long in final version
+            MC.Drive(IM.getPureAxis(), (IM.UnlockR1.getState()| IM.UnlockL1.getState() | IM.misc9.getState() | IM.misc10.getState()));
+        }
             
         }
         

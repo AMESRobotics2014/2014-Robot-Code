@@ -20,32 +20,36 @@ public class MotorControl {
         VDriveR[1] = new Victor(10);
     }
     
-        static double limit(double value) {
+        static double limit(double value, boolean locked) {
+            if(!locked){
         if (value < -1) {
             value = -1;
         }
         if (value > 1) {
             value = 1;
         }
+            }
+            else if(locked){
+        if (value < -.5) {
+            value = -.5;
+        }
+        if (value > .5) {
+            value = .5;
+        }
+            }
         return (value);
     }
-        
-        void Drive(double[] cmd){
+        void Drive(double[] cmd, boolean locked){
             //left
-            VDriveL[0].set(cmd[0]);
-            VDriveL[1].set(cmd[0]);
+            VDriveL[0].set(limit(cmd[0],locked));
+            VDriveL[1].set(limit(cmd[0],locked));
             //Right
-            VDriveR[0].set(cmd[1]);
-            VDriveR[1].set(cmd[1]);
+            VDriveR[0].set(limit(cmd[1],locked));
+            VDriveR[1].set(limit(cmd[1],locked));
             
             
         }
         
-        //void Prepcmd(double[] tank){
-        //   double Lcmd = limit(tank[0]);
-        //   double Rcmd = limit(tank[1]);
-            
-       // }
     
     
 }

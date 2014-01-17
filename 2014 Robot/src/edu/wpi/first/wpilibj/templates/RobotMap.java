@@ -9,5 +9,7 @@ package edu.wpi.first.wpilibj.templates;
 //An example of global values that should be stored in this class are pin assignments.
 
 public class RobotMap {
+
+    
     
 }

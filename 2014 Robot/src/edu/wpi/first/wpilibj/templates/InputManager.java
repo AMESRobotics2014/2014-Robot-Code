@@ -11,11 +11,21 @@ import edu.wpi.first.wpilibj.Joystick;
 public class InputManager {
 
     protected static Joystick ps2cont;
-    protected static button OhDearGodStop;
+    protected static button Stop;
+    protected static button UnlockR1;
+    protected static button UnlockL1;
+    protected static button misc9;
+    protected static button misc10;
     
     void init(){
         ps2cont = new Joystick(1);
-        OhDearGodStop = new button(1, true);
+        Stop = new button(4, true);
+        UnlockR1 = new button(8, true);
+        UnlockL1 = new button(7,true);
+        misc9 = new button(9,true);
+        misc10 = new button(10, true);
+        
+        
         
     }
     public double[] getPureAxis() { // Gets, stores, and returns the status of the joysticks on the PS2 Controller
@@ -45,10 +55,15 @@ public class InputManager {
         }
         return (axis);
     }
+    
+   public static void UpdateButtons(){
+       Stop.getState();
+   }
 
     public static class button {
 
         boolean state;
+        boolean laststate;
         boolean bjoystick;
         int bpin;
 
@@ -59,6 +74,7 @@ public class InputManager {
 
         public boolean getState() {
             // true: first joystick, false: second joystick
+            laststate = state;
             if (bjoystick) {
                 state = ps2cont.getRawButton(this.bpin);
             } else {
