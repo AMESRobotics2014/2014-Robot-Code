@@ -89,7 +89,23 @@ public class ImageProcessing {
                 //thresholdImage.write("/threshold.bmp");
                 BinaryImage filteredImage = thresholdImage.particleFilter(Crit);           // filter out small particles
                 //filteredImage.write("/filteredImage.bmp");
-            } catch (NIVisionException ex) {
+               Scores scores[] = new Scores[filteredImage.getNumberParticles()];//goes through each particle and scores to see if it IS a target
+                horizontalTargetCount = verticalTargetCount = 0;//setting up how many targets we have initially
+                if(filteredImage.getNumberParticles()>0)//If there are any particles detected
+                {
+                    for(int i=0; i<MAX_PARTICLES && i<filteredImage.getNumberParticles();i++)//start with an variable which starts at 0, goes up until 8 or lower,depending on particles detected, and increment by one every time
+                    {
+                        
+                    }
+                }
+            } 
+            
+            
+            
+            
+            
+            
+            catch (NIVisionException ex) {
             ex.printStackTrace();
         } 
     //}
