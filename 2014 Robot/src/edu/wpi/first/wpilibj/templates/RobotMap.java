@@ -10,6 +10,11 @@ package edu.wpi.first.wpilibj.templates;
 
 public class RobotMap {
 
+    protected static final int R1 = 8;
+    protected static final int L1 = 7;
+    protected static final int misc9 = 9;
+    protected static final int misc10 = 10;
+            
     
     
 }

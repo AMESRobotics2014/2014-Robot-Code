@@ -9,6 +9,7 @@ package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class InputManager {
+    RobotMap R;
 
     protected static Joystick ps2cont;
     protected static button Stop;
@@ -20,10 +21,10 @@ public class InputManager {
     void init(){
         ps2cont = new Joystick(1);
         Stop = new button(4, true);
-        UnlockR1 = new button(8, true);
-        UnlockL1 = new button(7,true);
-        misc9 = new button(9,true);
-        misc10 = new button(10, true);
+        UnlockR1 = new button(R.R1, true);
+        UnlockL1 = new button(R.L1,true);
+        misc9 = new button(R.misc9,true);
+        misc10 = new button(R.misc10, true);
         
         
         
