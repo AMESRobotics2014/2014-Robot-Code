@@ -113,7 +113,11 @@ public class ImageProcessing {
                               System.out.println("particle: " + i + " is a Vertical Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);//shows center values of x & y for our particle i
                                verticalTargets[verticalTargetCount++] = i;  //Add particle to target array and increment count
                               
+                        } else {
+                            System.out.println("particle: " + i + "is not a target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);//Tells us it is not a target.
                         }
+                        System.out.println("rect: " + scores[i].rectangularity + "ARHoriz: " + scores[i].aspectRatioHorizontal);
+                        System.out.println("ARVert: " + scores[i].aspectRatioVertical);
                     }
                 }
             } 
