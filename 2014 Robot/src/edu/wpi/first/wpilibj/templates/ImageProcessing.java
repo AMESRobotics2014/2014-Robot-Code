@@ -104,6 +104,11 @@ public class ImageProcessing {
                         scores[i].aspectRatioHorizontal = scoreASpectRatio(filteredImage, report, i, true);//check for it's horizontal with a function we will use later
                         
                         //Check if the particle is a horizontal target, if not, check if it's a vertical target.
+                        if(scoreCompare(scores[i],false))
+                        {
+                            System.out.println("particle: " + i + " is a Horizontal Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);//shows center values of x & y for our particle i
+                            horizontalTargets[horizontalTargetCount++] = i; //Adds particle to target array and increment count
+                        }
                     }
                 }
             } 
