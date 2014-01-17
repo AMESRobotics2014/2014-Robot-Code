@@ -26,7 +26,7 @@ public class ImageProcessing {
     public final double PI = Math.PI;//This is Pi, pretty self explanatory
         //Score limits used for target identification
     final int  RECTANGULARITY_LIMIT = 40;
-    final int ASPECT_RATIO_LIMIT = 55;
+    final int ASPECT_RATIO_LIMIT = 55;9
 
     //Score limits used for hot target determination
     final int TAPE_WIDTH_LIMIT = 50;
@@ -43,9 +43,9 @@ public class ImageProcessing {
     /** Records and reports information about the target tape. */
     public class Targetreport {
                 int verticalIndex;
-                /** Vertical Location of Tape */
+                /** Vertical Location of Tape relative to the robot*/
 		int verticalLocation;
-                /** Horizontal Location of Tape */
+                /** Horizontal Location of Tape relative to the robot*/
 		int horizontalLocation;
                 /** Is the associated goal hot?  */
 		boolean Hot;
@@ -124,6 +124,18 @@ public class ImageProcessing {
                     target.totalScore = target.leftScore = target.rightScore = target.tapeWidthScore = target.verticalScore = 0;
                     target.verticalIndex = verticalTargets[0];
                 }
+                for (int i = 0; i < verticalTargetCount; i++)//takes in account for every vertica targets found
+			{
+                            ParticleAnalysisReport verticalReport = filteredImage.getParticleAnalysisReport(verticalTargets[i]);//creates a particle analysis report of verticl target
+                            for(int j=0;j<horizontalTargetCount; j++)//takes in sccount for all horizontal targets found
+                            {
+                                
+                            }
+                
+                
+                
+                
+                        }
             } 
             
             
