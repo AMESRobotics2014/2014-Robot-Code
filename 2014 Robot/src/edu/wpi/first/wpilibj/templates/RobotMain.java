@@ -38,6 +38,7 @@ public class RobotMain extends IterativeRobot {
         MC.init();
         wd = Watchdog.getInstance();
         wd.setExpiration(.5);
+        turbo = false;
     }
 
     /**
@@ -55,15 +56,24 @@ public class RobotMain extends IterativeRobot {
 
         while (isOperatorControl() && isEnabled()) {
             //This wont be so long in final version
+            if(IM.misc10.getState());{
             chkturbo();
+        }
+            if(turbo){
+            System.out.println("Turbo is on");
+            }
             MC.Drive(IM.getFinalAxis(turbo), turbo);
         }
 
     }
 
     private static void chkturbo() {
-        turbo = (IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState() & IM.misc10.getState());
-    }
+        if(turbo){
+        turbo = !(IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
+        }
+        else
+            turbo =(IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
+        }
     
     void UpdateAll(){
         //This is a bad idea

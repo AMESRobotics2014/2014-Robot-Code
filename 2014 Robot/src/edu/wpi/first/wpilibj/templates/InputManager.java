@@ -34,12 +34,12 @@ public class InputManager {
     
     public double[] getFinalAxis(boolean turbo){
         double[] drv = new double[4];
-        ramp(getPureAxis(), turbo);
+       drv = ramp(getPureAxis(), turbo);
         return (drv);
     }
     public double[] getPureAxis() {
         double[] dir = new double[4];
-        dir[0] = -ps2cont.getRawAxis(1);// Y1
+        dir[0] = -ps2cont.getRawAxis(2);// Y1
         dir[1] = ps2cont.getRawAxis(4);// Y2
 
         dir = deadZone(dir);
