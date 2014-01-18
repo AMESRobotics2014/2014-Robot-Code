@@ -27,25 +27,28 @@ public class RobotMain extends IterativeRobot {
 
         double[] t = new double[2];
         boolean firstaccess;
-        public void Ktimer(){
+
+        public void Ktimer() {
             this.start();
             this.firstaccess = true;
             this.t[0] = 0;
             this.t[1] = 0;
         }
-        
-        public void Freset(){
+
+        public void Freset() {
             this.reset();
             this.t[1] = 0;
         }
-        public boolean firstaccess(){
+
+        public boolean firstaccess() {
             boolean b = this.firstaccess;
             this.firstaccess = false;
             return (b);
         }
+
         public double[] gettimes() {
             // First in index is the current time, second is the change in time since last check
-            this.t[1]= this.t[0];
+            this.t[1] = this.t[0];
             this.t[0] = this.get();
             return (this.t);
         }
@@ -85,9 +88,12 @@ public class RobotMain extends IterativeRobot {
         //This is supposed to loop on it's own but it doesn't 
         while (isOperatorControl() && isEnabled()) {
             //This wont be so long in final version
-            if(rt.gettimes()[1] >= 100 | rt.firstaccess()){
-            chkturbo();
-        }
+            if (rt.gettimes()[1] >= 100 | rt.firstaccess()) {
+                chkturbo();
+            }
+            if (turbo & rt.gettimes()[1] >= 2000) {
+                System.out.println("Turbo enabled, watch your toes!");
+            }
             MC.Drive(IM.getFinalAxis(turbo), turbo);
         }
 
