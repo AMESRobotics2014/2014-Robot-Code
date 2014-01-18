@@ -86,25 +86,35 @@ public class RobotMain extends IterativeRobot {
      */
     public void teleopPeriodic() {
         //This is supposed to loop on it's own but it doesn't 
+        rt.start();
         while (isOperatorControl() && isEnabled()) {
+            System.out.println("Times:" + rt.get() + " , " + rt.t[1]);
             //This wont be so long in final version
-            if (rt.gettimes()[1] >= 100 | rt.firstaccess()) {
+           // System.out.println("Times:" + rt.gettimes()[0] + "OldTime" + rt.gettimes()[1]);
+                //System.out.println("chking");
                 chkturbo();
-            }
-            if (turbo & rt.gettimes()[1] >= 2000) {
+            
+            if (turbo/* & rt.gettimes()[1] >= 2000 | rt.firstaccess()*/) {
                 System.out.println("Turbo enabled, watch your toes!");
             }
+            //turbo = false;
+            if(IM.R2.getState()){
+                turbo = true;
+            }
             MC.Drive(IM.getFinalAxis(turbo), turbo);
+            
         }
 
     }
 
     private static void chkturbo() {
-        if (turbo) {
+        rt.gettimes();
+        if (turbo & rt.t[1] >= 1 | rt.firstaccess()) {
             turbo = !(IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
-        } else {
+        } else if(!turbo & rt.t[1] >= 1 | rt.firstaccess()) {
             turbo = (IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
         }
+        
     }
 
     void UpdateAll() {

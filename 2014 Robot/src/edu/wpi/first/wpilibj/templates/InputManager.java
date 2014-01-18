@@ -18,6 +18,7 @@ public class InputManager {
     protected static button UnlockL1;
     protected static button misc9;
     protected static button misc10;
+    protected static button R2;
     
     void init(){
         ps2cont = new Joystick(1);
@@ -26,6 +27,7 @@ public class InputManager {
         UnlockL1 = new button(R.L1,true);
         misc9 = new button(R.misc9,true);
         misc10 = new button(R.misc10, true);
+        R2 = new button(6, true);
         RobotMap R = new RobotMap();
         
         
