@@ -4,18 +4,14 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-
-
 //___
 // | |_  o  _     o  _    _|_|_  _    __  _  o __     _  |  _  _  _
 // | | | | _>     | _>     |_| |(/_   |||(_| | | |   (_  | (_|_> _>
 //The main class is under control of Ali Nazzal. DO NOT EDIT WITHOUT EXPLICIT PERMISSION!
-
 package edu.wpi.first.wpilibj.templates;
 
-
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Watchdog;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,18 +21,23 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * directory.
  */
 public class RobotMain extends IterativeRobot {
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    InputManager IM;
-    MotorControl MC;
-    
+    private static InputManager IM;
+    private static MotorControl MC;
+    private static boolean turbo;
+    private static Watchdog wd;
+
     public void robotInit() {
         IM = new InputManager();
-        MC = new MotorControl();
         IM.init();
+        MC = new MotorControl();
         MC.init();
+        wd = Watchdog.getInstance();
+        wd.setExpiration(.5);
     }
 
     /**
@@ -44,7 +45,6 @@ public class RobotMain extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         //Nah
-
     }
 
     /**
@@ -52,17 +52,21 @@ public class RobotMain extends IterativeRobot {
      */
     public void teleopPeriodic() {
         //This is supposed to loop on it's own but it doesn't 
-        
-        while(isOperatorControl() && isEnabled()){
+
+        while (isOperatorControl() && isEnabled()) {
             //This wont be so long in final version
-            if(!IM.Stop.getState()){
-            MC.Drive(IM.getPureAxis(), (IM.UnlockR1.getState()& IM.UnlockL1.getState() & IM.misc9.getState() & IM.misc10.getState()));
+            chkturbo();
+            MC.Drive(IM.getFinalAxis(turbo), turbo);
         }
-            else{
-                break;
-            }
-        }
-        
+
+    }
+
+    private static void chkturbo() {
+        turbo = (IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState() & IM.misc10.getState());
     }
     
+    void UpdateAll(){
+        //This is a bad idea
+        
+    }
 }

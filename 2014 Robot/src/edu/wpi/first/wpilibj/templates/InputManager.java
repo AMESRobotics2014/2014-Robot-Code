@@ -32,9 +32,9 @@ public class InputManager {
         
     }
     
-    public double[] getFinalAxis(){
+    public double[] getFinalAxis(boolean turbo){
         double[] drv = new double[4];
-        ramp(getPureAxis());
+        ramp(getPureAxis(), turbo);
         return (drv);
     }
     public double[] getPureAxis() {
@@ -56,10 +56,15 @@ public class InputManager {
         }
         return (axis);
     }
-    protected static double[] ramp(double [] axis){
+    protected static double[] ramp(double [] axis, boolean turbo){
         for (byte ri = 0; ri < axis.length; ri++) {
             //axis[ri] = MathUtils.pow(axis[ri], rm.expo_ramp);
-            axis[ri] = (((.666) * MathUtils.pow(axis[ri], R.expo_ramp)) + ((.333) * axis[ri]))*.5;
+            if(turbo){
+            axis[ri] = (((.666) * MathUtils.pow(axis[ri], R.expo_ramp)) + ((.333) * axis[ri]))*1;
+            }
+            else{
+                axis[ri] = (((.666) * MathUtils.pow(axis[ri], R.expo_ramp)) + ((.333) * axis[ri]))*.5;
+            }
         }
         return(axis);
     }
