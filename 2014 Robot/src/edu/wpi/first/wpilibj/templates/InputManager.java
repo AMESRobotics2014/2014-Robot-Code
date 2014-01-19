@@ -69,6 +69,14 @@ public class InputManager {
         }
         return(axis);
     }
+    protected static double[] normalize(double [] axis){
+        if((Math.abs((axis[0] - axis[1])) <= .05) & (axis[0] * axis[1]) > 0){
+            double tinydbl = (axis[0] + axis[1])/2;
+            axis[0] = (tinydbl);
+            axis[1] = (tinydbl);
+        }
+        return axis;
+    }
     
     protected static class button {
 

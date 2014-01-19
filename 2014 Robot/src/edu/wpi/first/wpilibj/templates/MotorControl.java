@@ -11,8 +11,6 @@ public class MotorControl {
     static Victor[] VDriveR = new Victor[2];
     static Jaguar[] JDriveL = new Jaguar[2];
     static Jaguar[] JDriveR = new Jaguar[2];
-    
-    
     void init() {
         VDriveL[0] = new Victor(1);//Will be hard coded for this test
         VDriveL[1] = new Victor(8);
@@ -20,7 +18,7 @@ public class MotorControl {
         VDriveR[1] = new Victor(10);
     }
     
-        static double limit(double value, boolean unlocked) {
+       protected static double limit(double value, boolean unlocked) {
             if(unlocked){
         if (value < -1) {
             value = -1;
@@ -39,16 +37,20 @@ public class MotorControl {
             }
         return (value);
     }
-        void Drive(double[] cmd, boolean unlocked){
+       public void Drive(double[] cmd, boolean unlocked){
             //left
-            VDriveL[0].set(limit(cmd[0],unlocked));
-            VDriveL[1].set(limit(cmd[0],unlocked));
+            VDriveL[0].set(limit(turnboost(cmd[0]),unlocked));
+            VDriveL[1].set(limit(turnboost(cmd[0]),unlocked));
             //Right
-            VDriveR[0].set(limit(cmd[1],unlocked));
-            VDriveR[1].set(limit(cmd[1],unlocked));
+            VDriveR[0].set(limit(turnboost(cmd[1]),unlocked));
+            VDriveR[1].set(limit(turnboost(cmd[1]),unlocked));
             
             
         }
+       protected static double turnboost(double cmd){
+           
+           return cmd;
+       }
         
     
     
