@@ -39,6 +39,13 @@ public class RobotMain extends IterativeRobot {
     Joystick leftstick;
     /** Right Joystick Parameters */
     Joystick rightstick;
+    MotorControl MC;
+    Simulator Sim;
+    RobotMap RM;
+    InputManager IM;
+    ImageProcessing IP;
+    Communication Com;
+    
     
     /**
      * This function is run when the robot is first started up and should be
@@ -49,6 +56,12 @@ public class RobotMain extends IterativeRobot {
         
         leftstick = new Joystick(1);
         rightstick = new Joystick(2);
+        MC = new MotorControl();
+        Sim = new Simulator();
+        RM = new RobotMap();
+        IM = new InputManager();
+        IP = new ImageProcessing();
+        Com = new Communication();
     }
 
     /**
