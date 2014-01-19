@@ -32,7 +32,7 @@ public class RobotMain extends IterativeRobot {
     private static MotorControl MC;
     private static boolean turbo;
     private static Watchdog wd;
-    private static MasterTimer rt;
+    private static MasterTimer MT;
 
     public void robotInit() {
         IM = new InputManager();
@@ -42,7 +42,7 @@ public class RobotMain extends IterativeRobot {
         wd = Watchdog.getInstance();
         wd.setExpiration(.5);
         turbo = false;
-        rt = new MasterTimer();
+        MT = new MasterTimer();
     }
 
     /**
@@ -56,10 +56,10 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        rt.start();
+        MT.start();
         while (isOperatorControl() && isEnabled()) {
-            chkturbo();
-            if (turbo & rt.actindex[1].gdt() >= .8) {
+            TurboToggle();
+            if (turbo & MT.actindex[1].gdt() >= .8) {
                 System.out.println("Turbo enabled, watch your toes!");
             }
             MC.Drive(IM.getFinalAxis(turbo), turbo);
@@ -67,17 +67,21 @@ public class RobotMain extends IterativeRobot {
 
     }
 
-    private static void chkturbo() {
-            if(turbo & rt.actindex[0].gdt() >= .4){
-            turbo = !(IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
-            }else if((!turbo) & rt.actindex[0].gdt() >= .4){
-            turbo = (IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
+    private static void TurboToggle() {
+            if(turbo & MT.actindex[0].gdt() >= .4){
+            turbo = !(ButtonEvents.TTurboE());
+            }else if((!turbo) & MT.actindex[0].gdt() >= .4){
+            turbo = (ButtonEvents.TTurboE());
             }
-        
-
     }
-
-    void UpdateAll() {
-        //This is a bad idea
+    
+        public static class ButtonEvents{
+        static boolean b; // Used by all methods temporarily
+        public static boolean TTurboE(){
+            b = false;
+            b = (IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
+            return(b);
+        }
     }
+    
 }

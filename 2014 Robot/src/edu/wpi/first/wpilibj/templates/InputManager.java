@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class InputManager {
    protected static RobotMap R;
-
     protected static Joystick ps2cont;
     protected static button Stop;
     protected static button UnlockR1;
@@ -71,11 +70,7 @@ public class InputManager {
         return(axis);
     }
     
-   public static void UpdateButtons(){
-       Stop.getState();
-   }
-
-    public static class button {
+    protected static class button {
 
         boolean state;
         boolean laststate;
@@ -98,4 +93,6 @@ public class InputManager {
             return state;
         }
     }
+    
+    
 }
