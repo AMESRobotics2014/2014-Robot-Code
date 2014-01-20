@@ -13,20 +13,20 @@ public class InputManager {
    protected static RobotMap R;
     protected static Joystick ps2cont;
     protected static button Stop;
-    protected static button UnlockR1;
-    protected static button UnlockL1;
-    protected static button misc9;
-    protected static button misc10;
+    protected static button rb;
+    protected static button lb;
+    protected static button m9;
+    protected static button m10;
     protected static button R2;
     
     void init(){
         ps2cont = new Joystick(1);
-        Stop = new button(4, true);
-        UnlockR1 = new button(R.R1, true);
-        UnlockL1 = new button(R.L1,true);
-        misc9 = new button(R.misc9,true);
-        misc10 = new button(R.misc10, true);
-        R2 = new button(6, true);
+        Stop = new button(R.topb, true);
+        rb = new button(R.rb, true);
+        lb = new button(R.lb,true);
+        m9 = new button(R.M9,true);
+        m10 = new button(R.M10, true);
+        R2 = new button(R.rf, true);
         RobotMap R = new RobotMap();
         
         
@@ -70,7 +70,7 @@ public class InputManager {
         return(axis);
     }
     protected static double[] normalize(double [] axis){
-        if((Math.abs((axis[0] - axis[1])) <= .05) & (axis[0] * axis[1]) > 0){
+        if((Math.abs((axis[0] - axis[1])) <= R.normalThresh) & (axis[0] * axis[1]) > 0){
             double tinydbl = (axis[0] + axis[1])/2;
             axis[0] = (tinydbl);
             axis[1] = (tinydbl);

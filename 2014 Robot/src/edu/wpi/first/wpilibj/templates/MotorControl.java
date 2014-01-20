@@ -11,11 +11,13 @@ public class MotorControl {
     static Victor[] VDriveR = new Victor[2];
     static Jaguar[] JDriveL = new Jaguar[2];
     static Jaguar[] JDriveR = new Jaguar[2];
+    static RobotMap R;
     void init() {
-        VDriveL[0] = new Victor(1);//Will be hard coded for this test
-        VDriveL[1] = new Victor(8);
-        VDriveR[0] = new Victor(9);
-        VDriveR[1] = new Victor(10);
+        VDriveL[0] = new Victor(R.lm1);//Will be hard coded for this test
+        VDriveL[1] = new Victor(R.lm2);
+        VDriveR[0] = new Victor(R.rm1);
+        VDriveR[1] = new Victor(R.rm2);
+        R = new RobotMap();
     }
     
        protected static double limit(double value, boolean unlocked) {
@@ -28,11 +30,11 @@ public class MotorControl {
         }
             }
             else if(!unlocked){
-        if (value < -.5) {
-            value = -.5;
+        if (value < -R.defaultlimit) {
+            value = -R.defaultlimit;
         }
-        if (value > .5) {
-            value = .5;
+        if (value > R.defaultlimit) {
+            value = R.defaultlimit;
         }
             }
         return (value);

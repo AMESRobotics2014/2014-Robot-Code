@@ -79,7 +79,7 @@ public class RobotMain extends IterativeRobot {
         static boolean b; // Used by all methods temporarily
         public static boolean TTurboE(){
             b = false;
-            b = (IM.UnlockR1.getState() & IM.UnlockL1.getState() & IM.misc9.getState());
+            b = (IM.rb.getState() & IM.lb.getState() & IM.m9.getState());
             return(b);
         }
     }
