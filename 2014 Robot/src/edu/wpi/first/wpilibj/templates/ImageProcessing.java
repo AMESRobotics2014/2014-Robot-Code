@@ -26,7 +26,7 @@ public class ImageProcessing {
     public final double PI = Math.PI;//This is Pi, pretty self explanatory
         //Score limits used for target identification
     final int  RECTANGULARITY_LIMIT = 40;
-    final int ASPECT_RATIO_LIMIT = 55;9
+    final int ASPECT_RATIO_LIMIT = 55;
 
     //Score limits used for hot target determination
     final int TAPE_WIDTH_LIMIT = 50;
