@@ -7,16 +7,14 @@ import edu.wpi.first.wpilibj.Victor;
 
 public class MotorControl {
     
-    static Victor[] VDriveL = new Victor[2];
-    static Victor[] VDriveR = new Victor[2];
-    static Jaguar[] JDriveL = new Jaguar[2];
-    static Jaguar[] JDriveR = new Jaguar[2];
+    //static Victor[] VDriveL = new Victor[2];
+    //static Victor[] VDriveR = new Victor[2];
+    static Jaguar JDriveL;
+    static Jaguar JDriveR;
     static RobotMap R;
     void init() {
-        VDriveL[0] = new Victor(R.lm1);//Will be hard coded for this test
-        VDriveL[1] = new Victor(R.lm2);
-        VDriveR[0] = new Victor(R.rm1);
-        VDriveR[1] = new Victor(R.rm2);
+        JDriveL = new Jaguar(R.lm1);
+        JDriveR = new Jaguar(R.rm1);
         R = new RobotMap();
     }
     
@@ -41,12 +39,9 @@ public class MotorControl {
     }
        public void Drive(double[] cmd, boolean unlocked){
             //left
-            VDriveL[0].set(limit(turnboost(cmd[0]),unlocked));
-            VDriveL[1].set(limit(turnboost(cmd[0]),unlocked));
+            JDriveL.set(limit(turnboost(cmd[0]),unlocked));
+            JDriveR.set(limit(turnboost(cmd[1]),unlocked));
             //Right
-            VDriveR[0].set(limit(turnboost(cmd[1]),unlocked));
-            VDriveR[1].set(limit(turnboost(cmd[1]),unlocked));
-            
             
         }
        protected static double turnboost(double cmd){

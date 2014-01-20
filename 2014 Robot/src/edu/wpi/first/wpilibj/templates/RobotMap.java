@@ -21,9 +21,9 @@ public class RobotMap {
     protected static final int topb = 4;
     
     //Motor pins
-    protected static final int lm1 = 1;
+    protected static final int lm1 = 2;
     protected static final int lm2 = 8;
-    protected static final int rm1 = 9;
+    protected static final int rm1 = 1;
     protected static final int rm2 = 10;
     
     //Other constants
