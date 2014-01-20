@@ -41,6 +41,7 @@ public class RobotMain extends IterativeRobot {
         MC.init();
         wd = Watchdog.getInstance();
         wd.setExpiration(.5);
+        wd.setEnabled(true);
         turbo = false;
         MT = new MasterTimer();
     }
@@ -49,6 +50,7 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+        wd.feed();
         //Nah
     }
 
@@ -56,21 +58,22 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        wd.feed();
         MT.start();
         while (isOperatorControl() && isEnabled()) {
+            wd.feed();
             TurboToggle();
-            if (turbo & MT.actindex[1].gdt() >= .8) {
+            if (turbo & MT.actindex[1].gdt() >= 1.5) {
                 System.out.println("Turbo enabled, watch your toes!");
             }
             MC.Drive(IM.getFinalAxis(turbo), turbo);
+            wd.feed();
         }
     }
 
     private static void TurboToggle() {
-            if(turbo & MT.actindex[0].gdt() >= .4){
-            turbo = !(ButtonEvents.TTurboE());
-            }else if((!turbo) & MT.actindex[0].gdt() >= .4){
-            turbo = (ButtonEvents.TTurboE());
+            if(ButtonEvents.TTurboE() & MT.actindex[0].gdt() >= .4){
+            turbo = !turbo;
             }
     }
     
