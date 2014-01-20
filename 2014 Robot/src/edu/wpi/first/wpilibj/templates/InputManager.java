@@ -5,6 +5,8 @@
 
 package edu.wpi.first.wpilibj.templates;
 
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class should hold all code, classes and methods for managing all inputs into the system, this includes buttons, joysticks, and other user interface devices. 
  * <p>The class should handle, and manipulate these inputs into data to be sent to other parts of the robot. In most cases this class should only manage and create instructions for hardware, these instructions should be sent elsewhere before being fed to hardware.
@@ -14,11 +16,45 @@ package edu.wpi.first.wpilibj.templates;
  */
 
 public class InputManager {
-    public final int LEFT_X=1,LEFT_Y=2,RIGHT_X=3,RIGHT_Y=4,SHOOT=1,PASS=2; //Placeholder pin number
-    public double getAxis(int pin) {
-        return 0;
+
+    protected static Joystick ps2Controller;
+    protected static button buttonStop;
+    
+    public void init() {
+        ps2Controller = new Joystick(1);
+        buttonStop = new button(4, true);
     }
-    public boolean getButton(int pin) {
-        return false;
+    
+    public static double[] getPureAxis() {
+        double[] dir = new double[2];
+        dir[0] = -ps2Controller.getRawAxis(1);
+        dir[1] = ps2Controller.getRawAxis(2);
+        
+        dir = deadZone(dir);
+        
+        // Might need it - we'll see.
+        // dir = translate(dir);
+        
+        return dir;
+    }
+    
+    protected static double[] deadZone(double[] axis) {
+        for (byte si = 0; si < axis.length; si++) {
+            if ((axis[si] <= 0.05) && (axis[si] >= -0.05))
+                axis[si] = 0;
+        }
+        
+        return axis;
+    }
+    
+    
+    protected static class button {
+        boolean buttonState, joystickState;
+        int buttonPin;
+        
+        public button(int buttonPin, boolean joystickState) {
+            this.joystickState = joystickState;
+            this.buttonPin = buttonPin;
+        }
     }
 }
