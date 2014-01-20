@@ -6,5 +6,10 @@ package edu.wpi.first.wpilibj.templates;
  * @author kolton.yager
  */
 public class MotorControl {
-    
+    public void drive(double x, double y) {
+        
+    }
+    public void shoot(double power) {
+        
+    }
 }

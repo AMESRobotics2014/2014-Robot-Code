@@ -14,5 +14,11 @@ package edu.wpi.first.wpilibj.templates;
  */
 
 public class InputManager {
-
+    public final int LEFT_X=1,LEFT_Y=2,RIGHT_X=3,RIGHT_Y=4,SHOOT=1,PASS=2; //Placeholder pin number
+    public double getAxis(int pin) {
+        return 0;
+    }
+    public boolean getButton(int pin) {
+        return false;
+    }
 }

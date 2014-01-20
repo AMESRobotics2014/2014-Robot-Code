@@ -53,7 +53,6 @@ public class RobotMain extends IterativeRobot {
      */
     public void robotInit() {
         drive = new RobotDrive(1, 2);
-        
         leftstick = new Joystick(1);
         rightstick = new Joystick(2);
         MC = new MotorControl();
@@ -68,7 +67,7 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-
+        
     }
 
     /**
@@ -79,6 +78,19 @@ public class RobotMain extends IterativeRobot {
             drive.tankDrive(leftstick, rightstick);
             Timer.delay(.05);
         }
+        while (true && isOperatorControl() && isEnabled()) {
+            //Undefined names are placeholders
+            double driveX = IM.getAxis(IM.LEFT_X);
+            double driveY = IM.getAxis(IM.LEFT_Y);
+            double aimX = IM.getAxis(IM.RIGHT_X);
+            double aimY = IM.getAxis(IM.LEFT_Y);
+            MC.drive(driveX,driveY);
+            if (IM.getButton(IM.SHOOT)) {
+                MC.shoot(1.0); //Placeholder value
+            }
+            if (IM.getButton(IM.PASS)) {
+                MC.shoot(0.75); //Another placeholder
+            }
+        }
     }
-    
 }
