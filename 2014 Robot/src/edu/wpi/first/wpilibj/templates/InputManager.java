@@ -5,6 +5,7 @@
 
 package edu.wpi.first.wpilibj.templates;
 
+import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -38,6 +39,14 @@ public class InputManager {
         return dir;
     }
     
+    protected static double[] rampSpeed(double[] axis) {
+        for (byte si = 0; si < axis.length; si++) {
+            axis[si] = ((0.666) * MathUtils.pow(axis[si], 3)) + ((0.333) * axis[si]);
+        }
+        
+        return axis;
+    }
+    
     protected static double[] deadZone(double[] axis) {
         for (byte si = 0; si < axis.length; si++) {
             if ((axis[si] <= 0.05) && (axis[si] >= -0.05))
@@ -46,8 +55,7 @@ public class InputManager {
         
         return axis;
     }
-    
-    
+   
     protected static class button {
         boolean buttonState, joystickState;
         int buttonPin;
@@ -55,6 +63,13 @@ public class InputManager {
         public button(int buttonPin, boolean joystickState) {
             this.joystickState = joystickState;
             this.buttonPin = buttonPin;
+        }
+        
+        public boolean getState() {
+            if (joystickState)
+                buttonState = ps2Controller.getRawButton(this.buttonPin);
+            
+            return buttonState;
         }
     }
 }

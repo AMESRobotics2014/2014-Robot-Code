@@ -25,10 +25,18 @@ public class MotorControl {
     
     public void drive(double[] mv) {
         firstRightMotor.set(limit(mv[0]));
-        secondRightMotor.set(limit(mv[1]));
+        secondRightMotor.set(limit(mv[0]));
         
-        firstLeftMotor.set(limit(mv[2]));
-        secondLeftMotor.set(limit(mv[3]));
+        firstLeftMotor.set(limit(mv[1]));
+        secondLeftMotor.set(limit(mv[1]));
+    }
+    
+    public void stopDrive() {
+        firstRightMotor.set(0);
+        secondRightMotor.set(0);
+        
+        firstLeftMotor.set(0);
+        secondLeftMotor.set(0);
     }
     
     public static double limit(double val) {
