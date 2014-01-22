@@ -100,11 +100,12 @@ public class ImageProcessing {
                         scores[i] = new Scores();
                         
                         //Score each particle on rectangularity and aspect ratio.
-                        scores[i].rectangularity = scoreRectangularity(report);//check for it's rectangularity with a function we will use later
-                        scores[i].aspectRatioVertical = scoreAspectRatio(filteredImage, report, i, true);//check for it's aspect ratio vertical with a function we will use later
-                        scores[i].aspectRatioHorizontal = scoreASpectRatio(filteredImage, report, i, true);//check for it's horizontal with a function we will use later
+                        // scores[i].rectangularity = scoreRectangularity(report);//check for it's rectangularity with a function we will use later
+                        // scores[i].aspectRatioVertical = scoreAspectRatio(filteredImage, report, i, true);//check for it's aspect ratio vertical with a function we will use later
+                        // scores[i].aspectRatioHorizontal = scoreASpectRatio(filteredImage, report, i, true);//check for it's horizontal with a function we will use later
                         
                         //Check if the particle is a horizontal target, if not, check if it's a vertical target.
+                        /*
                         if(scoreCompare(scores[i],false))
                         {
                             System.out.println("particle: " + i + " is a Horizontal Target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);//shows center values of x & y for our particle i
@@ -117,6 +118,7 @@ public class ImageProcessing {
                         } else {
                             System.out.println("particle: " + i + "is not a target centerX: " + report.center_mass_x + "centerY: " + report.center_mass_y);//Tells us it is not a target.
                         }
+                        */
                         System.out.println("rect: " + scores[i].rectangularity + "ARHoriz: " + scores[i].aspectRatioHorizontal);
                         System.out.println("ARVert: " + scores[i].aspectRatioVertical);
                     }

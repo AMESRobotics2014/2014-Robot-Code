@@ -16,6 +16,8 @@ package edu.wpi.first.wpilibj.templates;
 
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Watchdog;
 
 /**
@@ -45,6 +47,13 @@ public class RobotMain extends IterativeRobot {
     // Communication Com;
     protected static Watchdog watchDog;
     
+    /** Any boxed code like this do not delete, KEEP **/
+    /*---------------------------------------*/
+    /*       RobotDrive robotDrive;          */
+    /* 
+    /* Joystick rightJoystick, leftJoystick; */
+    /*---------------------------------------*/
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -54,6 +63,7 @@ public class RobotMain extends IterativeRobot {
         // leftstick = new Joystick(1);
         // rightstick = new Joystick(2);
         MC = new MotorControl();
+        MC.init();
         
         // Here if the code before does not call it.
         // MC.init();
@@ -62,12 +72,21 @@ public class RobotMain extends IterativeRobot {
         // RM = new RobotMap();
       
         IM = new InputManager();
+        IM.init();
         
         // Here if code before does not call it.
         // IM.init();
         
         // IP = new ImageProcessing();
         // Com = new Communication();
+        
+        /*-------------------------------------------*/
+        /* robotDrive = new RobotDrive(1, 8, 9, 10); */
+        /*                                           */
+        /* rightJoystick = new Joystick(1);          */
+        /* leftJoystick = new Joystick(2);           */
+        /*-------------------------------------------*/
+        
         watchDog = Watchdog.getInstance();
         watchDog.setExpiration(0.5);
         watchDog.feed();
@@ -92,9 +111,18 @@ public class RobotMain extends IterativeRobot {
         */
         while (true && isOperatorControl() && isEnabled()) {
             //Undefined names are placeholders
+            
+            /*----------------------------------------------------*/
+            /* robotDrive.tankDrive(leftJoystick, rightJoystick); */
+            /*----------------------------------------------------*/
+            
             watchDog.feed();
-            MC.drive(IM.rampSpeed(IM.getPureAxis()));
-
+            System.out.println("FED.");
+            
+            // Start driving.
+            MC.drive(IM.getPureAxis());
+           // MC.drive(IM.rampSpeed(IM.getPureAxis()));
+    
             // If robot is running out of control.
             if (IM.buttonStop.getState()) {
                 MC.stopDrive();

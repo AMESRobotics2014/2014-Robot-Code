@@ -21,6 +21,7 @@ public class InputManager {
     protected static Joystick ps2Controller;
     protected static button buttonStop;
     
+    
     public void init() {
         ps2Controller = new Joystick(1);
         buttonStop = new button(4, true);
@@ -28,15 +29,27 @@ public class InputManager {
     
     public static double[] getPureAxis() {
         double[] dir = new double[2];
-        dir[0] = -ps2Controller.getRawAxis(1);
-        dir[1] = ps2Controller.getRawAxis(2);
+        dir[0] = -ps2Controller.getRawAxis(2);
+        dir[1] = ps2Controller.getRawAxis(4);
         
         dir = deadZone(dir);
+        dir = scaleValues(dir);
+        
+        System.out.println(dir[0] + ":" + dir[1]);
         
         // Might need it - we'll see.
         // dir = translate(dir);
         
         return dir;
+    }
+    
+    public static double[] scaleValues(double[] values) {
+        // values = new double[4];
+        double oldRange = 2, newRange = 1.4, newMin = newRange / -2;
+        values[0] = (((values[0] + 1) * newRange) / oldRange) + newMin;
+        values[1] = (((values[1] + 1) * newRange) / oldRange) + newMin;
+        
+        return values;
     }
     
     protected static double[] rampSpeed(double[] axis) {
