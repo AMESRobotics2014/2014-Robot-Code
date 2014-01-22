@@ -9,13 +9,10 @@ package edu.wpi.first.wpilibj.templates;
  * @author AliNazzal
  */
 public class RobotMap {
-    /** Pi (~3.14), as defined by the Math class */
-     private static final double PI= Math.PI;
-     /** Viewing angle of camera */
-     private static final double View_Angle=43.5;
-     /** Vertical image resolution */
-     private static final int Image_Res_Y= 480;
-          
-     
+    // Motor pins //
+    protected static final int firstRightMotor = 9;
+    protected static final int secondRightMotor = 10;
     
+    protected static final int firstLeftMotor = 1;
+    protected static final int secondLeftMotor = 8;
 }

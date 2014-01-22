@@ -1,9 +1,11 @@
 /*
  */
 
-//Blarg
 
 package edu.wpi.first.wpilibj.templates;
+
+import com.sun.squawk.util.MathUtils;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class should hold all code, classes and methods for managing all inputs into the system, this includes buttons, joysticks, and other user interface devices. 
@@ -14,11 +16,72 @@ package edu.wpi.first.wpilibj.templates;
  */
 
 public class InputManager {
-    public final int LEFT_X=1,LEFT_Y=2,RIGHT_X=3,RIGHT_Y=4,SHOOT=1,PASS=2; //Placeholder pin number
-    public double getAxis(int pin) {
-        return 0;
+
+    protected static Joystick ps2Controller;
+    protected static button buttonStop;
+    
+    
+    public void init() {
+        ps2Controller = new Joystick(1);
+        buttonStop = new button(4, true);
     }
-    public boolean getButton(int pin) {
-        return false;
+    
+    public static double[] getPureAxis() {
+        double[] dir = new double[2];
+        dir[0] = -ps2Controller.getRawAxis(2);
+        dir[1] = ps2Controller.getRawAxis(4);
+        
+        dir = deadZone(dir);
+        dir = scaleValues(dir);
+        
+        System.out.println(dir[0] + ":" + dir[1]);
+        
+        // Might need it - we'll see.
+        // dir = translate(dir);
+        
+        return dir;
+    }
+    
+    public static double[] scaleValues(double[] values) {
+        // values = new double[4];
+        double oldRange = 2, newRange = 1.4, newMin = newRange / -2;
+        values[0] = (((values[0] + 1) * newRange) / oldRange) + newMin;
+        values[1] = (((values[1] + 1) * newRange) / oldRange) + newMin;
+        
+        return values;
+    }
+    
+    protected static double[] rampSpeed(double[] axis) {
+        for (byte si = 0; si < axis.length; si++) {
+            axis[si] = ((0.666) * MathUtils.pow(axis[si], 3)) + ((0.333) * axis[si]);
+        }
+        
+        return axis;
+    }
+    
+    protected static double[] deadZone(double[] axis) {
+        for (byte si = 0; si < axis.length; si++) {
+            if ((axis[si] <= 0.05) && (axis[si] >= -0.05))
+                axis[si] = 0;
+        }
+        
+        return axis;
+    }
+   
+    protected static class button {
+        boolean buttonState, joystickState;
+        int buttonPin;
+        
+        public button(int buttonPin, boolean joystickState) {
+            this.joystickState = joystickState;
+            this.buttonPin = buttonPin;
+        }
+        
+        public boolean getState() {
+            if (joystickState)
+                buttonState = ps2Controller.getRawButton(this.buttonPin);
+            
+            return buttonState;
+        }
     }
 }

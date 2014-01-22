@@ -18,7 +18,7 @@ package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Watchdog;
 
 /**
  * This class connects the data from all the other classes and defines the overall flow of the robot program.
@@ -34,33 +34,62 @@ import edu.wpi.first.wpilibj.Timer;
 public class RobotMain extends IterativeRobot {
     
     /** Drive Settings */
-    RobotDrive drive;
+    // RobotDrive drive;
     /** Left Joystick Parameters */
-    Joystick leftstick;
+    // Joystick leftstick;
     /** Right Joystick Parameters */
-    Joystick rightstick;
+    // Joystick rightstick;
     MotorControl MC;
-    Simulator Sim;
-    RobotMap RM;
+    // Simulator Sim;
+    // RobotMap RM;
     InputManager IM;
-    ImageProcessing IP;
-    Communication Com;
+    // ImageProcessing IP;
+    // Communication Com;
+    protected static Watchdog watchDog;
     
+    /** Any boxed code like this do not delete, KEEP **/
+    /*---------------------------------------*/
+    /*       RobotDrive robotDrive;          */
+    /* 
+    /* Joystick rightJoystick, leftJoystick; */
+    /*---------------------------------------*/
     
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-        drive = new RobotDrive(1, 2);
-        leftstick = new Joystick(1);
-        rightstick = new Joystick(2);
+        // drive = new RobotDrive(1, 2);
+        // leftstick = new Joystick(1);
+        // rightstick = new Joystick(2);
         MC = new MotorControl();
-        Sim = new Simulator();
-        RM = new RobotMap();
+        MC.init();
+        
+        // Here if the code before does not call it.
+        // MC.init();
+        
+        // Sim = new Simulator();
+        // RM = new RobotMap();
+      
         IM = new InputManager();
-        IP = new ImageProcessing();
-        Com = new Communication();
+        IM.init();
+        
+        // Here if code before does not call it.
+        // IM.init();
+        
+        // IP = new ImageProcessing();
+        // Com = new Communication();
+        
+        /*-------------------------------------------*/
+        /* robotDrive = new RobotDrive(1, 8, 9, 10); */
+        /*                                           */
+        /* rightJoystick = new Joystick(1);          */
+        /* leftJoystick = new Joystick(2);           */
+        /*-------------------------------------------*/
+        
+        watchDog = Watchdog.getInstance();
+        watchDog.setExpiration(0.5);
+        watchDog.feed();
     }
 
     /**
@@ -74,12 +103,32 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+        /*
         while(true && isOperatorControl() && isEnabled()) {
             drive.tankDrive(leftstick, rightstick);
             Timer.delay(.05);
         }
+        */
         while (true && isOperatorControl() && isEnabled()) {
             //Undefined names are placeholders
+            
+            /*----------------------------------------------------*/
+            /* robotDrive.tankDrive(leftJoystick, rightJoystick); */
+            /*----------------------------------------------------*/
+            
+            watchDog.feed();
+            System.out.println("FED.");
+            
+            // This is the driving, might get changed.
+            MC.drive(IM.getPureAxis());
+           // MC.drive(IM.rampSpeed(IM.getPureAxis()));
+    
+            // If robot is running out of control.
+            if (IM.buttonStop.getState()) {
+                MC.stopDrive();
+                System.out.println("Stopped.");
+            }
+            /*
             double driveX = IM.getAxis(IM.LEFT_X);
             double driveY = IM.getAxis(IM.LEFT_Y);
             double aimX = IM.getAxis(IM.RIGHT_X);
@@ -91,6 +140,7 @@ public class RobotMain extends IterativeRobot {
             if (IM.getButton(IM.PASS)) {
                 MC.shoot(0.75); //Another placeholder
             }
+            */
         }
     }
 }
