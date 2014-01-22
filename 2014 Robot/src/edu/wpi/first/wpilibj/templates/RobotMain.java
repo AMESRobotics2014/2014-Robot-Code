@@ -119,7 +119,7 @@ public class RobotMain extends IterativeRobot {
             watchDog.feed();
             System.out.println("FED.");
             
-            // Start driving.
+            // This is the driving, might get changed.
             MC.drive(IM.getPureAxis());
            // MC.drive(IM.rampSpeed(IM.getPureAxis()));
     
