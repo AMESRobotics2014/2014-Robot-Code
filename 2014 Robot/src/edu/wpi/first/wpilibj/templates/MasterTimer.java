@@ -2,25 +2,35 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Timer;
 
-class MasterTimer extends Timer {
+public class MasterTimer extends Timer {
 
     accessdata[] actindex;
     int lstadd;
 
-    public void Ktimer() {
+    public void MasterTimer() {
+        actindex = new accessdata[20];
+        lstadd = 0;
+        addEventTimer("TurboTimer");
+        addEventTimer("DEBUGprints");
+    }
+    
+      public void Init() {
+        actindex = new accessdata[20];
         lstadd = 0;
         addEventTimer("TurboTimer");
         addEventTimer("DEBUGprints");
     }
 
     public void addEventTimer(String tid) {
-        actindex[this.lstadd] = new accessdata(tid);
-        this.lstadd++;
+        System.out.println(lstadd);
+        actindex[lstadd] = new accessdata(tid);
+       lstadd++;
     }
 
     public void listIndicesDEBUG() {
         int i;
-        for (i = 0; i < actindex.length; i++) {
+        System.out.println("Test" + actindex.length);
+        for (i = 0; i < actindex.length - 1; i++) {
             System.out.println("Name: " + actindex[i].id + " at index location:[" + i + "]");
         }
     }
@@ -55,26 +65,26 @@ class MasterTimer extends Timer {
 
     public class accessdata {
 
-        double ot;
-        double dt;
-        String id;
+         double ot;
+         double dt;
+         String id;
 
         accessdata(String tid) {
-            this.id = tid;
-            this.ot = get();
-            this.dt = -10;//Just Cause 2
+            id = tid;
+            ot = get();
+            dt = -10;//Just Cause 2
         }
 
         public double gdt() {
-            this.dt = get() - this.ot;
-            this.ot = get();
-            return this.dt;
+            dt = get() - this.ot;
+            ot = get();
+            return dt;
         }
 
-        public void wipe() {
-            this.ot = 0;
-            this.dt = 0;
-            this.id = null;
+        public  void wipe() {
+            ot = 0;
+            dt = 0;
+            id = null;
         }
     }
 }

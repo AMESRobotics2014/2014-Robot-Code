@@ -12,6 +12,7 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Watchdog;
+import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -44,6 +45,13 @@ public class RobotMain extends IterativeRobot {
         wd.setEnabled(true);
         turbo = false;
         MT = new MasterTimer();
+        MT.Init();
+        //MT = new MasterTimer();
+       //MT.Init();
+       //System.out.println(MT.actindex.length);
+       //MT.lstadd = 0;
+       //MT.addEventTimer("TurboTimer");
+       //MT.addEventTimer("DEBUGprints");
     }
 
     /**
@@ -60,6 +68,7 @@ public class RobotMain extends IterativeRobot {
     public void teleopPeriodic() {
         wd.feed();
         MT.start();
+        //MT.listIndicesDEBUG();
         while (isOperatorControl() && isEnabled()) {
             wd.feed();
             TurboToggle();
@@ -72,7 +81,7 @@ public class RobotMain extends IterativeRobot {
     }
 
     private static void TurboToggle() {
-            if(ButtonEvents.TTurboE() & MT.actindex[0].gdt() >= .4){
+            if(ButtonEvents.TTurboE() /*& MT.actindex[0].gdt() >= .4*/){
             turbo = !turbo;
             }
     }
