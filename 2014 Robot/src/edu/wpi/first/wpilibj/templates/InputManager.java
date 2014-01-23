@@ -63,7 +63,9 @@ public class InputManager {
         
         dir[0] = (((dir[0] + 1) * newRange) / oldRange) + newMin;
         dir[1] = (((dir[1] + 1) * newRange) / oldRange) + newMin;
-       
+        
+        System.out.println(dir[0] + ":" + dir[1]);
+        
         /*
         if (upDownDPad == 1)
             System.out.println("1");
