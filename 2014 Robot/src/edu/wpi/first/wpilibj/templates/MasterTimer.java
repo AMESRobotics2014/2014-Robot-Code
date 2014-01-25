@@ -1,56 +1,60 @@
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Timer;
+import java.util.Vector;
 
 public class MasterTimer extends Timer {
 
-    accessdata[] actindex;
-    int lstadd;
-
+    Vector actindex;
+    accessdata use;
     public void MasterTimer() {
-        actindex = new accessdata[20];
-        lstadd = 0;
+        actindex = new Vector();
         addEventTimer("TurboTimer");
         addEventTimer("DEBUGprints");
     }
     
-      public void Init() {
+    /*  public void Init() {
         actindex = new accessdata[20];
-        lstadd = 0;
         addEventTimer("TurboTimer");
         addEventTimer("DEBUGprints");
-    }
+    }*/
 
     public void addEventTimer(String tid) {
-        System.out.println(lstadd);
-        actindex[lstadd] = new accessdata(tid);
-       lstadd++;
+        actindex.addElement(new accessdata(tid));
     }
 
     public void listIndicesDEBUG() {
         int i;
-        System.out.println("Test" + actindex.length);
-        for (i = 0; i < actindex.length - 1; i++) {
-            System.out.println("Name: " + actindex[i].id + " at index location:[" + i + "]");
+        System.out.println("Test" + actindex.size());
+        for (i = 0; i < actindex.size(); i++) {
+           use = (accessdata)actindex.elementAt(i);
+            System.out.println("Name: " + use.id + " at index location:[" + i + "]");
         }
+    }
+    
+    public double gdt(int loc){
+        use = (accessdata)actindex.elementAt(loc);
+        return use.gdt();
     }
 
     public void Freset() {//Full reset!!!
         this.reset();
         int i;
-        for (i = 0; i < actindex.length; i++) {
-            actindex[i].wipe();
+        for (i = 0; i < actindex.size(); i++) {
+            use = (accessdata)actindex.elementAt(i);
+            use.wipe();
         }
     }
 
     public void Ereset(int[] exclude) {//Exclusion reset!!!
         int i;
-        for (i = 0; i < actindex.length; i++) {
+        for (i = 0; i < actindex.size()-1; i++) {
+            use = (accessdata)actindex.elementAt(i);
             for (int k = 0; k < exclude.length; k++) {
                 if (i == exclude[k]) {
                     break;
                 } else {
-                    actindex[i].wipe();
+                    use.wipe();
                 }
             }
         }
@@ -59,7 +63,8 @@ public class MasterTimer extends Timer {
     public void Sreset(int[] include) {//Selective reset
         int i;
         for (i = 0; i < include.length; i++) {
-            actindex[include[1]].wipe();
+            use = (accessdata)actindex.elementAt(i);
+            use.wipe();
         }
     }
 

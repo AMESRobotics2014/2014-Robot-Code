@@ -45,7 +45,6 @@ public class RobotMain extends IterativeRobot {
         wd.setEnabled(true);
         turbo = false;
         MT = new MasterTimer();
-        MT.Init();
         //MT = new MasterTimer();
        //MT.Init();
        //System.out.println(MT.actindex.length);
@@ -72,7 +71,7 @@ public class RobotMain extends IterativeRobot {
         while (isOperatorControl() && isEnabled()) {
             wd.feed();
             TurboToggle();
-            if (turbo & MT.actindex[1].gdt() >= 1.5) {
+            if (turbo & MT.gdt(0) >= 1.5) {
                 System.out.println("Turbo enabled, watch your toes!");
             }
             MC.Drive(IM.getFinalAxis(turbo), turbo);
