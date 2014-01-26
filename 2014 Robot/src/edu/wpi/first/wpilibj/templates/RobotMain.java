@@ -22,17 +22,17 @@ import edu.wpi.first.wpilibj.Watchdog;
 
 /**
  * This class connects the data from all the other classes and defines the overall flow of the robot program.
- * 
+ *
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
- * 
+ *
  * @author AliNazzal, BenRose
  */
 public class RobotMain extends IterativeRobot {
-    
+   
     /** Drive Settings */
     // RobotDrive drive;
     /** Left Joystick Parameters */
@@ -46,14 +46,14 @@ public class RobotMain extends IterativeRobot {
     // ImageProcessing IP;
     // Communication Com;
     protected static Watchdog watchDog;
-    
+   
     /** Any boxed code like this do not delete, KEEP **/
     /*---------------------------------------*/
     /*       RobotDrive robotDrive;          */
-    /* 
+    /*
     /* Joystick rightJoystick, leftJoystick; */
     /*---------------------------------------*/
-    
+   
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -64,29 +64,29 @@ public class RobotMain extends IterativeRobot {
         // rightstick = new Joystick(2);
         MC = new MotorControl();
         MC.init();
-        
+       
         // Here if the code before does not call it.
         // MC.init();
-        
+       
         // Sim = new Simulator();
         // RM = new RobotMap();
-      
+     
         IM = new InputManager();
         IM.init();
-        
+       
         // Here if code before does not call it.
         // IM.init();
-        
+       
         // IP = new ImageProcessing();
         // Com = new Communication();
-        
+       
         /*-------------------------------------------*/
         /* robotDrive = new RobotDrive(1, 8, 9, 10); */
         /*                                           */
         /* rightJoystick = new Joystick(1);          */
         /* leftJoystick = new Joystick(2);           */
         /*-------------------------------------------*/
-        
+       
         watchDog = Watchdog.getInstance();
         watchDog.setExpiration(0.5);
         watchDog.feed();
@@ -96,7 +96,7 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        
+       
     }
 
     /**
@@ -111,18 +111,20 @@ public class RobotMain extends IterativeRobot {
         */
         while (true && isOperatorControl() && isEnabled()) {
             //Undefined names are placeholders
-            
+           
             /*----------------------------------------------------*/
             /* robotDrive.tankDrive(leftJoystick, rightJoystick); */
             /*----------------------------------------------------*/
-            
+           
             watchDog.feed();
             System.out.println("FED.");
-            
+           
+            IM.dPadValue();
+           
             // This is the driving, might get changed.
             MC.drive(IM.getPureAxis());
            // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-    
+   
             // If robot is running out of control.
             if (IM.buttonStop.getState()) {
                 MC.stopDrive();
