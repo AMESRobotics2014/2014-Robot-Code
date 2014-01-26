@@ -17,7 +17,8 @@ public class InputManager {
     protected static button lb;
     protected static button m9;
     protected static button m10;
-    protected static button R2;
+    protected static button rf;
+    protected static button lf;
     
     void init(){
         ps2cont = new Joystick(1);
@@ -26,7 +27,8 @@ public class InputManager {
         lb = new button(R.lb,true);
         m9 = new button(R.M9,true);
         m10 = new button(R.M10, true);
-        R2 = new button(R.rf, true);
+        rf = new button(R.rf, true);
+        lf = new button(R.lf, true);
         RobotMap R = new RobotMap();
         
         

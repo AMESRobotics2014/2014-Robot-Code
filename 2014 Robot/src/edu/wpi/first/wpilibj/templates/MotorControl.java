@@ -49,6 +49,9 @@ public class MotorControl {
             
             
         }
+       public void Shift(boolean shift){
+           
+       }
        protected static double turnboost(double cmd){
            
            return cmd;

@@ -12,7 +12,7 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Watchdog;
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -32,6 +32,7 @@ public class RobotMain extends IterativeRobot {
     private static InputManager IM;
     private static MotorControl MC;
     private static boolean turbo;
+    private static boolean shiftSTR;//False is speed, true is strenght
     private static Watchdog wd;
     private static MasterTimer MT;
 
@@ -44,6 +45,7 @@ public class RobotMain extends IterativeRobot {
         wd.setExpiration(.5);
         wd.setEnabled(true);
         turbo = false;
+        shiftSTR = false;
         MT = new MasterTimer();
         //MT = new MasterTimer();
        //MT.Init();
@@ -67,29 +69,51 @@ public class RobotMain extends IterativeRobot {
     public void teleopPeriodic() {
         wd.feed();
         MT.start();
-        //MT.listIndicesDEBUG();
+        MT.listIndicesDEBUG();
         while (isOperatorControl() && isEnabled()) {
             wd.feed();
             TurboToggle();
-            if (turbo & MT.gdt(0) >= 1.5) {
+            Shift();
+            if (turbo /*& MT.gdt(2) >= 1.5*/) {
                 System.out.println("Turbo enabled, watch your toes!");
             }
+            MC.Shift(shiftSTR);
+            System.out.println(IM.getFinalAxis(turbo));
             MC.Drive(IM.getFinalAxis(turbo), turbo);
             wd.feed();
         }
+        System.out.println("Watchdognotfed");
     }
 
     private static void TurboToggle() {
-            if(ButtonEvents.TTurboE() /*& MT.actindex[0].gdt() >= .4*/){
+            if(ButtonEvents.TTurboE() /*& MT.gdt(1) >= .4*/){
             turbo = !turbo;
             }
+    }
+    private static void Shift(){
+        if(ButtonEvents.MaxSpeed() /*& MT.gdt(3) >= .4*/){
+            shiftSTR = false;
+        }
+        else if(ButtonEvents.MaxStrenth() /*& MT.gdt(3) >= .4*/){
+            shiftSTR = true;
+        }
     }
     
         public static class ButtonEvents{
         static boolean b; // Used by all methods temporarily
         public static boolean TTurboE(){
             b = false;
-            b = (IM.rb.getState() & IM.lb.getState() & IM.m9.getState());
+            b = (IM.rb.getState() & IM.m9.getState());
+            return(b);
+        }
+        public static boolean MaxStrenth(){
+            b= false;
+            b = (IM.lb.getState());
+            return(b);
+        }
+        public static boolean MaxSpeed(){
+            b = false;
+            b = (IM.lf.getState());
             return(b);
         }
     }
