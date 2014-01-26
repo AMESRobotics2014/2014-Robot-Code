@@ -11,28 +11,35 @@ public class MasterTimer extends Timer {
         actindex = new Vector();
         addEventTimer("TurboTimer");
         addEventTimer("DEBUGprints");
+        addEventTimer("ShiftTimer");
     }
     
-    /*  public void Init() {
-        actindex = new accessdata[20];
+      public void Init() {
+        actindex = new Vector();
         addEventTimer("TurboTimer");
         addEventTimer("DEBUGprints");
-    }*/
+        addEventTimer("ShiftTimer");
+    }
 
     public void addEventTimer(String tid) {
         actindex.addElement(new accessdata(tid));
     }
 
     public void listIndicesDEBUG() {
+        try{
         int i;
         System.out.println("Test" + actindex.size());
         for (i = 0; i < actindex.size(); i++) {
            use = (accessdata)actindex.elementAt(i);
             System.out.println("Name: " + use.id + " at index location:[" + i + "]");
         }
+        }catch(NullPointerException ex){
+            System.out.println("This index doesn't exist D:");
+        }
     }
     
     public double gdt(int loc){
+        System.out.println(loc);
         use = (accessdata)actindex.elementAt(loc);
         return use.gdt();
     }
