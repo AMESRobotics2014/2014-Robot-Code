@@ -19,7 +19,12 @@ import edu.wpi.first.wpilibj.Watchdog;
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
+ * crprivate static InputManager IM;
+    private static MotorControl MC;
+    private static boolean turbo;
+    private static boolean shiftSTR;//False is speed, true is strenght
+    private static Watchdog wd;
+    private static MasterTimer MT;eating this project, you must also update the manifest file in the resource
  * directory.
  */
 public class RobotMain extends IterativeRobot {
@@ -47,25 +52,12 @@ public class RobotMain extends IterativeRobot {
         turbo = false;
         shiftSTR = false;
         MT = new MasterTimer();
-        //MT = new MasterTimer();
-       //MT.Init();
-       //System.out.println(MT.actindex.length);
-       //MT.lstadd = 0;
-       //MT.addEventTimer("TurboTimer");
-       //MT.addEventTimer("DEBUGprints");
     }
-
-    /**
-     * This function is called periodically during autonomous
-     */
     public void autonomousPeriodic() {
         wd.feed();
         //Nah
     }
 
-    /**
-     * This function is called periodically during operator control
-     */
     public void teleopPeriodic() {
         wd.feed();
         MT.start();
