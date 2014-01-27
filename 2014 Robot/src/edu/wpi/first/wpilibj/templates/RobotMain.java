@@ -52,6 +52,7 @@ public class RobotMain extends IterativeRobot {
         turbo = false;
         shiftSTR = false;
         MT = new MasterTimer();
+        MT.Init();
     }
     public void autonomousPeriodic() {
         wd.feed();
@@ -66,27 +67,28 @@ public class RobotMain extends IterativeRobot {
             wd.feed();
             TurboToggle();
             Shift();
-            if (turbo /*& MT.gdt(2) >= 1.5*/) {
+            if (turbo & MT.gdt(1) >= 50) {
                 System.out.println("Turbo enabled, watch your toes!");
+                System.out.println(IM.getFinalAxis(turbo)[0] + IM.getFinalAxis(turbo)[1]);
             }
             MC.Shift(shiftSTR);
-            System.out.println(IM.getFinalAxis(turbo));
+           
             MC.Drive(IM.getFinalAxis(turbo), turbo);
             wd.feed();
         }
-        System.out.println("Watchdognotfed");
+        System.out.println("Watch-dog-not-fed");
     }
 
     private static void TurboToggle() {
-            if(ButtonEvents.TTurboE() /*& MT.gdt(1) >= .4*/){
+            if(ButtonEvents.TTurboE() & MT.gdt(0) >= .4){
             turbo = !turbo;
             }
     }
     private static void Shift(){
-        if(ButtonEvents.MaxSpeed() /*& MT.gdt(3) >= .4*/){
+        if(ButtonEvents.MaxSpeed() & MT.gdt(2) >= .4){
             shiftSTR = false;
         }
-        else if(ButtonEvents.MaxStrenth() /*& MT.gdt(3) >= .4*/){
+        else if(ButtonEvents.MaxStrenth() & MT.gdt(2) >= .4){
             shiftSTR = true;
         }
     }
