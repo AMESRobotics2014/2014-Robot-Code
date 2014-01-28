@@ -118,7 +118,7 @@ public abstract class ThrowingTools {
         double b=0;
         double c=distance*distance*193.06/Math.cos(angle*180/Math.PI)*Math.cos(angle*180/Math.PI);
         double speed=(-b+Math.sqrt(b*b-4*a*c))/2/a;
-        if(b*b-4*a*c<0) throw new AngleException();
+       // if(b*b-4*a*c<0) throw new AngleException();
         if((speed/286.12*Math.sin(angle*180/Math.PI))*(speed/286.12*Math.sin(angle/180*Math.PI))/2>=ceilingHeight)    {
             throw new HitCeilingException();
         }
@@ -161,7 +161,6 @@ public abstract class ThrowingTools {
      * thrown if more speed is necessary.
      */
     public static class NotEnoughSpeedException extends Exception {
-        @Override 
         public String getMessage()   {
             return "the speed givin is not able to hit the target";
         }
@@ -171,7 +170,6 @@ public abstract class ThrowingTools {
      * thrown if the angle is not able to hit the target.
      */
     public static class AngleException extends Exception {
-        @Override 
         public String getMessage()   {
             return "the angle givin is not able to hit the target";
         }
@@ -180,7 +178,6 @@ public abstract class ThrowingTools {
      * thrown if the ball will hit the ceiling
      */
     public static class HitCeilingException extends Exception {
-        @Override 
         public String getMessage()   {
             return "if thrown the projectile will hit the ceiling";
         }
@@ -195,7 +192,6 @@ public abstract class ThrowingTools {
             super();
             
         }
-        @Override 
         public String getMessage()   {
             if(hitTruss) return "if thrown the ball will hit the truss.";
             else if(netHeight>0) return "the ball will go above the truss. this is not an error.";

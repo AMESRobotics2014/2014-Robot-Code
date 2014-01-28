@@ -40,13 +40,11 @@ public class RobotMain extends IterativeRobot {
     /** Right Joystick Parameters */
     // Joystick rightstick;
     MotorControl MC;
-    // Simulator Sim;
-    // RobotMap RM;
+    RobotMap R;
     InputManager IM;
-    // ImageProcessing IP;
-    // Communication Com;
-    protected static Watchdog watchDog;
-   
+    protected static Watchdog wd;
+    boolean turbo;
+    boolean shiftSTR;
     /** Any boxed code like this do not delete, KEEP **/
     /*---------------------------------------*/
     /*       RobotDrive robotDrive;          */
@@ -64,7 +62,10 @@ public class RobotMain extends IterativeRobot {
         // rightstick = new Joystick(2);
         MC = new MotorControl();
         MC.init();
-       
+        wd.setExpiration(.5);
+        wd.setEnabled(true);
+        turbo = false;
+        shiftSTR = false;
         // Here if the code before does not call it.
         // MC.init();
        
@@ -87,9 +88,9 @@ public class RobotMain extends IterativeRobot {
         /* leftJoystick = new Joystick(2);           */
         /*-------------------------------------------*/
        
-        watchDog = Watchdog.getInstance();
-        watchDog.setExpiration(0.5);
-        watchDog.feed();
+        wd = Watchdog.getInstance();
+        wd.setExpiration(0.5);
+        wd.feed();
     }
 
     /**
@@ -116,7 +117,7 @@ public class RobotMain extends IterativeRobot {
             /* robotDrive.tankDrive(leftJoystick, rightJoystick); */
             /*----------------------------------------------------*/
            
-            watchDog.feed();
+            wd.feed();
             System.out.println("FED.");
            
             IM.dPadValue();
