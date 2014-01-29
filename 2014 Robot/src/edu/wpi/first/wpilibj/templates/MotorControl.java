@@ -1,6 +1,7 @@
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Jaguar;
 
 /**
  * This class is where all calls to the actual motor hardware should occur. 
@@ -9,11 +10,19 @@ import edu.wpi.first.wpilibj.Victor;
  */
 
 public class MotorControl {
+    
     protected static Victor firstRightMotor;
     protected static Victor secondRightMotor;
     
     protected static Victor firstLeftMotor;
     protected static Victor secondLeftMotor;
+    
+    protected static Jaguar shooterLeftMotor;
+    protected static Jaguar shooterRightMotor;
+    
+    protected static Victor grabberMotor;
+    
+    protected static Victor elevatorMotor;
     
     public void init() {
         firstRightMotor = new Victor(RobotMap.firstRightMotor);
@@ -21,6 +30,13 @@ public class MotorControl {
         
         firstLeftMotor = new Victor(RobotMap.firstLeftMotor);
         secondLeftMotor = new Victor(RobotMap.secondLeftMotor);
+        
+        shooterLeftMotor = new Jaguar(RobotMap.shooterLeftMotor);
+        shooterRightMotor = new Jaguar(RobotMap.shooterRightMotor);
+        
+        grabberMotor = new Victor(RobotMap.grabberMotor);
+        
+        elevatorMotor = new Victor(RobotMap.elevatorMotor);
     }
     
     public void drive(double[] mv) {
@@ -47,5 +63,24 @@ public class MotorControl {
             val = 1;
         
         return val;
+    }
+    
+    public void shooter(){
+        
+    }
+    
+    public void grabber(){
+        
+    }
+    
+    public void elivator(double val){
+        if(val = 0){
+           elevatorMotor = 1;
+            System.out.println(val);
+        }else{
+            if(elevatorMotor = 1){
+                elevatorMotor = 0;
+            }
+        }
     }
 }
