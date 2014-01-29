@@ -73,13 +73,13 @@ public class MotorControl {
         
     }
     
-    public void elivator(double val){
-        if(val = 0){
-           elevatorMotor = 1;
+    public void elevator(double val){
+        if(val == 0){
+           elevatorMotor.set(1);
             System.out.println(val);
         }else{
-            if(elevatorMotor = 1){
-                elevatorMotor = 0;
+            if(elevatorMotor.get() == 1){
+                elevatorMotor.set(0);
             }
         }
     }
