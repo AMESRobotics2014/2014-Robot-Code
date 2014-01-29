@@ -73,14 +73,18 @@ public class MotorControl {
         
     }
     
-    public void elivator(double val){
-        if(val = 0){
-           elevatorMotor = 1;
-            System.out.println(val);
-        }else{
-            if(elevatorMotor = 1){
-                elevatorMotor = 0;
-            }
-        }
+    public void elevator(double val, boolean Button1, boolean Button2, boolean autoAim){
+       if(val == 0){
+           while(autoAim = false){
+           elevatorMotor.set(1);
+           if(Button1 = true){
+               elevatorMotor.set(-1);
+           }
+           }
+       }else{
+           while(Button2 = false){
+           elevatorMotor.set(-1);
+         }
+       }
     }
 }
