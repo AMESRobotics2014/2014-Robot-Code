@@ -4,16 +4,11 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
-
-
 //___
 // | |_  o  _     o  _    _|_|_  _    __  _  o __     _  |  _  _  _
 // | | | | _>     | _>     |_| |(/_   |||(_| | | |   (_  | (_|_> _>
 //The main class is under control of Ali Nazzal & Ben Rose. DO NOT EDIT WITHOUT EXPLICIT PERMISSION!
-
 package edu.wpi.first.wpilibj.templates;
-
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -21,7 +16,8 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Watchdog;
 
 /**
- * This class connects the data from all the other classes and defines the overall flow of the robot program.
+ * This class connects the data from all the other classes and defines the
+ * overall flow of the robot program.
  *
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -32,26 +28,35 @@ import edu.wpi.first.wpilibj.Watchdog;
  * @author AliNazzal, BenRose
  */
 public class RobotMain extends IterativeRobot {
-   
-    /** Drive Settings */
+
+    /**
+     * Drive Settings
+     */
     // RobotDrive drive;
-    /** Left Joystick Parameters */
+    /**
+     * Left Joystick Parameters
+     */
     // Joystick leftstick;
-    /** Right Joystick Parameters */
+    /**
+     * Right Joystick Parameters
+     */
     // Joystick rightstick;
     MotorControl MC;
     RobotMap R;
+    ImageProcessing IP;
     InputManager IM;
     protected static Watchdog wd;
     boolean turbo;
     boolean shiftSTR;
-    /** Any boxed code like this do not delete, KEEP **/
+
+    /**
+     * Any boxed code like this do not delete, KEEP *
+     */
     /*---------------------------------------*/
     /*       RobotDrive robotDrive;          */
     /*
-    /* Joystick rightJoystick, leftJoystick; */
+     /* Joystick rightJoystick, leftJoystick; */
     /*---------------------------------------*/
-   
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -68,26 +73,26 @@ public class RobotMain extends IterativeRobot {
         shiftSTR = false;
         // Here if the code before does not call it.
         // MC.init();
-       
+
         // Sim = new Simulator();
         // RM = new RobotMap();
-     
+
         IM = new InputManager();
         IM.init();
-       
+
         // Here if code before does not call it.
         // IM.init();
-       
-        // IP = new ImageProcessing();
+
+        IP = new ImageProcessing();
         // Com = new Communication();
-       
+
         /*-------------------------------------------*/
         /* robotDrive = new RobotDrive(1, 8, 9, 10); */
         /*                                           */
         /* rightJoystick = new Joystick(1);          */
         /* leftJoystick = new Joystick(2);           */
         /*-------------------------------------------*/
-       
+
         wd = Watchdog.getInstance();
         wd.setExpiration(0.5);
         wd.feed();
@@ -97,7 +102,12 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-       
+        MC.drive(new double[]{1, 1});
+        MC.elevator(1, false, false, true);//What booleans should be used?
+        MC.elevator(0, false, false, true);
+        if (IP.target.hot) {//If the goal is hot, fire
+            MC.shooter();
+        }
     }
 
     /**
@@ -105,45 +115,45 @@ public class RobotMain extends IterativeRobot {
      */
     public void teleopPeriodic() {
         /*
-        while(true && isOperatorControl() && isEnabled()) {
-            drive.tankDrive(leftstick, rightstick);
-            Timer.delay(.05);
-        }
-        */
+         while(true && isOperatorControl() && isEnabled()) {
+         drive.tankDrive(leftstick, rightstick);
+         Timer.delay(.05);
+         }
+         */
         while (true && isOperatorControl() && isEnabled()) {
             //Undefined names are placeholders
-           
+
             /*----------------------------------------------------*/
             /* robotDrive.tankDrive(leftJoystick, rightJoystick); */
             /*----------------------------------------------------*/
-           
+
             wd.feed();
             System.out.println("FED.");
-           
+
             IM.dPadValue();
-           
+
             // This is the driving, might get changed.
             MC.drive(IM.getPureAxis());
-           // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-   
+            // MC.drive(IM.rampSpeed(IM.getPureAxis()));
+
             // If robot is running out of control.
             /*if (IM.buttonStop.getState()) {
-                MC.stopDrive();
-                System.out.println("Stopped.");
-            }*/
+             MC.stopDrive();
+             System.out.println("Stopped.");
+             }*/
             /*
-            double driveX = IM.getAxis(IM.LEFT_X);
-            double driveY = IM.getAxis(IM.LEFT_Y);
-            double aimX = IM.getAxis(IM.RIGHT_X);
-            double aimY = IM.getAxis(IM.LEFT_Y);
-            MC.drive(driveX,driveY);
-            if (IM.getButton(IM.SHOOT)) {
-                MC.shoot(1.0); //Placeholder value
-            }
-            if (IM.getButton(IM.PASS)) {
-                MC.shoot(0.75); //Another placeholder
-            }
-            */
+             double driveX = IM.getAxis(IM.LEFT_X);
+             double driveY = IM.getAxis(IM.LEFT_Y);
+             double aimX = IM.getAxis(IM.RIGHT_X);
+             double aimY = IM.getAxis(IM.LEFT_Y);
+             MC.drive(driveX,driveY);
+             if (IM.getButton(IM.SHOOT)) {
+             MC.shoot(1.0); //Placeholder value
+             }
+             if (IM.getButton(IM.PASS)) {
+             MC.shoot(0.75); //Another placeholder
+             }
+             */
         }
     }
 }
