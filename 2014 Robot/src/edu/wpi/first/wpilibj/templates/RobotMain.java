@@ -105,9 +105,9 @@ public class RobotMain extends IterativeRobot {
         MC.drive(new double[]{1, 1});
         MC.elevator(1, false, false, true);//What booleans should be used?
         MC.elevator(0, false, false, true);
-        if (IP.target.hot) {//If the goal is hot, fire
-            MC.shooter();
-        }
+        //if (IP.target.hot) {//If the goal is hot, fire
+            //MC.shooter();
+        //}
     }
 
     /**
@@ -135,7 +135,7 @@ public class RobotMain extends IterativeRobot {
             // This is the driving, might get changed.
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-
+            
             // If robot is running out of control.
             /*if (IM.buttonStop.getState()) {
              MC.stopDrive();

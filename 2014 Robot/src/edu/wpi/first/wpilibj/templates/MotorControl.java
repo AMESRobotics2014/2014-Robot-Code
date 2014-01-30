@@ -17,7 +17,7 @@ public class MotorControl {
     protected static Victor secondLeftMotor;
     protected static Jaguar shooterLeftMotor;
     protected static Jaguar shooterRightMotor;
-    protected static Victor grabberMotor;
+    //rotected static Victor grabberMotorRaise, grabberMotorLower;
     protected static Victor elevatorMotor;
 
     public void init() {
@@ -30,7 +30,8 @@ public class MotorControl {
         shooterLeftMotor = new Jaguar(RobotMap.shooterLeftMotor);
         shooterRightMotor = new Jaguar(RobotMap.shooterRightMotor);
 
-        grabberMotor = new Victor(RobotMap.grabberMotor);
+        //grabberMotorRaise = new Victor(RobotMap.grabberMotorRaise);
+        //grabberMotorLower = new Victor(RobotMap.grabberMotorLower);
 
         elevatorMotor = new Victor(RobotMap.elevatorMotor);
     }
