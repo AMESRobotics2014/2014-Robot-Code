@@ -17,9 +17,11 @@ public class MotorControl {
     protected static Victor secondLeftMotor;
     protected static Jaguar shooterLeftMotor;
     protected static Jaguar shooterRightMotor;
-    //rotected static Victor grabberMotorRaise, grabberMotorLower;
+    protected static Victor grabberMotor, densoMotor;
     protected static Victor elevatorMotor;
 
+    InputManager IM;
+    
     public void init() {
         firstRightMotor = new Victor(RobotMap.firstRightMotor);
         secondRightMotor = new Victor(RobotMap.secondRightMotor);
@@ -30,10 +32,12 @@ public class MotorControl {
         shooterLeftMotor = new Jaguar(RobotMap.shooterLeftMotor);
         shooterRightMotor = new Jaguar(RobotMap.shooterRightMotor);
 
-        //grabberMotorRaise = new Victor(RobotMap.grabberMotorRaise);
-        //grabberMotorLower = new Victor(RobotMap.grabberMotorLower);
+        grabberMotor = new Victor(RobotMap.grabberMotor);
+        densoMotor = new Victor(RobotMap.densoMotor);
 
         elevatorMotor = new Victor(RobotMap.elevatorMotor);
+        
+        IM = new InputManager();
     }
 
     public void drive(double[] mv) {
@@ -65,9 +69,28 @@ public class MotorControl {
     }
 
     public void shooter() {
+        float cir = 4.25f;
+        float lenght;
     }
 
-    public void grabber() {
+    public void grabber(boolean Switch1, boolean Switch2) {
+        if(IM.raiseGrabber.getState()){
+            grabberMotor.set(-1);
+        }else{
+            grabberMotor.set(0);
+        }
+        if(IM.lowerGrabber.getState()){
+            grabberMotor.set(1);
+            if(Switch2 == true){
+            densoMotor.set(1);
+            //shooter cant shoot
+            }
+        }else{
+            grabberMotor.set(0);
+        }
+        if(Switch1 == true){
+            grabberMotor.set(0);
+        }
     }
 
     public void elevator(double val, boolean Button1, boolean Button2, boolean autoAim) {
@@ -79,9 +102,12 @@ public class MotorControl {
                 }
             }
         } else {
-            while (Button2 = false) {
+            while (Button2 == false) {
                 elevatorMotor.set(-1);
             }
         }
+    }
+
+    void shooter(boolean state) {
     }
 }
