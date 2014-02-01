@@ -20,8 +20,8 @@ public class RobotMap {
     /*protected static final int shooterLeftMotor = l;
     protected static final int shooterRightMotor = r;
     */
-    protected static final int grabberMotor = 1;
-    protected static final int densoMotor = 7;
+    protected static final int grabberMotor = 2;
+    protected static final int densoMotor = 3;
     /*
     protected static final int elevatorMotor = e;
     */

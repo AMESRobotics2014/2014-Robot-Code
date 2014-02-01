@@ -67,6 +67,7 @@ public class RobotMain extends IterativeRobot {
         // rightstick = new Joystick(2);
         MC = new MotorControl();
         MC.init();
+        wd = Watchdog.getInstance();
         wd.setExpiration(.5);
         wd.setEnabled(true);
         turbo = false;
