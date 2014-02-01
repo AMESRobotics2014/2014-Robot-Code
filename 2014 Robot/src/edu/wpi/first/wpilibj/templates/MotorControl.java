@@ -83,15 +83,15 @@ public class MotorControl {
             grabberMotor.set(Relay.Value.kOff);
         }
         if(IM.lowerGrabber.getState()){
-            float circ = 4.625f;
-            float length = 29.25f;
-            //float rev = 1rev/2sec;
-            float revCount = 0;
+            
             //rev = 
             grabberMotor.set(Relay.Value.kReverse);
-            if(revCount == 3){
-            densoMotor.set(Relay.Value.kForward);
-            //shooter cant shoot
+            int sec = 0;
+            if(sec == 6){
+            for(int rev = 0; rev <= 10000; rev++){
+                grabberMotor.set(Relay.Value.kForward);
+                densoMotor.set(Relay.Value.kForward);
+            }
             }
         }else{
             grabberMotor.set(Relay.Value.kOff);
@@ -117,22 +117,24 @@ public class MotorControl {
     }
     public void transmission(){        
         if(IM.power.getState()){
-            for(int y = 0; y <= 1000; y++){
+            /*for(int y = 0; y <= 1000; y++){
                 if(y % 2 == 0){
                     low.set(Relay.Value.kOn);
                 }else{
                     low.set(Relay.Value.kOff);
                 }
-            }
+            }*/
+            low.set(Relay.Value.kOn);
            high.set(Relay.Value.kOff);
-        }else{
+        }else{/*
             for(int x = 0; x <= 1000; x++){
             if(x % 2 == 0){
                 high.set(Relay.Value.kOn);
             }else{
                 high.set(Relay.Value.kOff);
             }
-        }
+        }*/
+         high.set(Relay.Value.kOn);
          low.set(Relay.Value.kOff);   
         }
     }
