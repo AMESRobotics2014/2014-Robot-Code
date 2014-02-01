@@ -137,8 +137,9 @@ public class RobotMain extends IterativeRobot {
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
             MC.shooter(IM.raiseGrabber.getState());
             MC.transmission();
+            //MC.grabber(Switch1);
             // If robot is running out of control.
-            /*if (IM.buttonStop.getState()) {
+            /*if (IM.buttonStop.getState()) { 
              MC.stopDrive();
              System.out.println("Stopped.");
              }*/

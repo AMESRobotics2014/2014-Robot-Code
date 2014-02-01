@@ -16,7 +16,7 @@ public class MotorControl {
     protected static Victor secondLeftMotor;
     protected static Jaguar shooterLeftMotor;
     protected static Jaguar shooterRightMotor;
-    protected static Victor grabberMotor, densoMotor;
+    protected static Relay densoMotor, grabberMotor;
     protected static Victor elevatorMotor;
     protected static Relay high, low;
 
@@ -32,8 +32,8 @@ public class MotorControl {
         shooterLeftMotor = new Jaguar(RobotMap.shooterLeftMotor);
         shooterRightMotor = new Jaguar(RobotMap.shooterRightMotor);
 */
-        grabberMotor = new Victor(RobotMap.grabberMotor);
-        densoMotor = new Victor(RobotMap.densoMotor);
+        grabberMotor = new Relay(RobotMap.grabberMotor);
+        densoMotor = new Relay(RobotMap.densoMotor);
 /*
         elevatorMotor = new Victor(RobotMap.elevatorMotor);
         */
@@ -76,27 +76,28 @@ public class MotorControl {
         float lenght;
     }
 
-    public void grabber(boolean Switch1, boolean Switch2) {
+    public void grabber(boolean Switch1) {
         if(IM.raiseGrabber.getState()){
-            grabberMotor.set(-1);
+            grabberMotor.set(Relay.Value.kReverse);
         }else{
-            grabberMotor.set(0);
+            grabberMotor.set(Relay.Value.kOff);
         }
         if(IM.lowerGrabber.getState()){
-            float circ = 9.424777961f;
-            float rev;
+            float circ = 4.625f;
+            float length = 29.25f;
+            //float rev = 1rev/2sec;
+            float revCount = 0;
             //rev = 
-            grabberMotor.set(1);
-            if(Switch2
-                    == true){
-            densoMotor.set(1);
+            grabberMotor.set(Relay.Value.kReverse);
+            if(revCount == 3){
+            densoMotor.set(Relay.Value.kForward);
             //shooter cant shoot
             }
         }else{
-            grabberMotor.set(0);
+            grabberMotor.set(Relay.Value.kOff);
         }
         if(Switch1 == true){
-            grabberMotor.set(0);
+            grabberMotor.set(Relay.Value.kOff);
         }
     }
 
@@ -116,11 +117,23 @@ public class MotorControl {
     }
     public void transmission(){        
         if(IM.power.getState()){
-           low.set(Relay.Value.kOn);
+            for(int y = 0; y <= 1000; y++){
+                if(y % 2 == 0){
+                    low.set(Relay.Value.kOn);
+                }else{
+                    low.set(Relay.Value.kOff);
+                }
+            }
            high.set(Relay.Value.kOff);
         }else{
-            high.set(Relay.Value.kOn);
-            low.set(Relay.Value.kOff);
+            for(int x = 0; x <= 1000; x++){
+            if(x % 2 == 0){
+                high.set(Relay.Value.kOn);
+            }else{
+                high.set(Relay.Value.kOff);
+            }
+        }
+         low.set(Relay.Value.kOff);   
         }
     }
 
