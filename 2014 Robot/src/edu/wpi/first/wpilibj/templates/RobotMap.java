@@ -26,5 +26,5 @@ public class RobotMap {
     protected static final int elevatorMotor = e;
     */
     protected static final int high = 4;
-    protected static final int low = 5;
+    protected static final int low = 6;
 }

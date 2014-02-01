@@ -48,6 +48,11 @@ public class MasterTimer extends Timer {
         System.out.println("GDT is :" + use.gdt());
         return use.gdt();
     }
+            public void sc(int loc){
+            use = (accessdata)actindex.elementAt(loc);
+            use.sc();
+            actindex.insertElementAt(use, loc);
+        }
 
     public void Freset() {//Full reset!!!
         this.reset();
@@ -97,8 +102,11 @@ public class MasterTimer extends Timer {
 
         public double gdt() {
             dt = get() - ot;
-            ot = get();
+            //ot = get();
             return dt;
+        }
+        public void sc(){
+            ot = get();
         }
 
         public  void wipe() {

@@ -59,6 +59,7 @@ public class RobotMain extends IterativeRobot {
         turbo = false;
         shiftSTR = false;
         MT = new MasterTimer();
+        MT.start();
         MT.Init();
         IM = new InputManager();
         IM.init();
@@ -110,14 +111,15 @@ public class RobotMain extends IterativeRobot {
             // This is the driving, might get changed.
             System.out.println("Current time of Mt is:" + MT.get());
             if (MT.gdt(1) >= 1.0) {
+                MT.sc(1);
                 System.out.println("I am a debug print, should happen every half second");
             }
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
             MC.shooter(IM.raiseGrabber.getState());
-            if(MT.gdt(3) < .02){//adsf
+           // if(MT.gdt(3) < .02){//adsf
             MC.transmission();
-            }
+            //}
             class block{
              /*MC.grabber(Switch1);
              If robot is running out of control.
