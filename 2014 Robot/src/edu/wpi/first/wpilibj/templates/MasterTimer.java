@@ -22,7 +22,9 @@ public class MasterTimer extends Timer {
     }
 
     public void addEventTimer(String tid) {
-        actindex.addElement(new accessdata(tid));
+        use = new accessdata(tid);
+        use.Init(tid);
+        actindex.addElement(use);
     }
 
     public void listIndicesDEBUG() {
@@ -39,8 +41,9 @@ public class MasterTimer extends Timer {
     }
     
     public double gdt(int loc){
-        System.out.println(loc);
+        System.out.println("Getting gdt at location:" +loc);
         use = (accessdata)actindex.elementAt(loc);
+        System.out.println(use.gdt());
         return use.gdt();
     }
 
@@ -82,13 +85,16 @@ public class MasterTimer extends Timer {
          String id;
 
         accessdata(String tid) {
+        }
+        
+        public void Init(String tid){
             id = tid;
             ot = get();
-            dt = -10;//Just Cause 2
+            dt = -10;//Just Cause 2  
         }
 
         public double gdt() {
-            dt = get() - this.ot;
+            dt = get() - ot;
             ot = get();
             return dt;
         }

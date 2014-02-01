@@ -67,9 +67,12 @@ public class RobotMain extends IterativeRobot {
             wd.feed();
             TurboToggle();
             Shift();
-            if (turbo & MT.gdt(1) >= 50) {
-                System.out.println("Turbo enabled, watch your toes!");
+            if(MT.gdt(1) >= 10){
                 System.out.println(IM.getFinalAxis(turbo)[0] + IM.getFinalAxis(turbo)[1]);
+                System.out.println(MT.get());
+            }
+            if (turbo & MT.gdt(1) >= 5) {
+                System.out.println("Turbo enabled, watch your toes!");
             }
             MC.Shift(shiftSTR);
            
