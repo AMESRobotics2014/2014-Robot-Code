@@ -10,8 +10,8 @@ package edu.wpi.first.wpilibj.templates;
  */
 public class RobotMap {
     // Motor pins //
-    protected static final int firstRightMotor = 9;
-    protected static final int secondRightMotor = 10;
+    protected static final int firstRightMotor = 5;
+    protected static final int secondRightMotor = 6;
     
     protected static final int firstLeftMotor = 1;
     protected static final int secondLeftMotor = 8;
@@ -19,6 +19,7 @@ public class RobotMap {
     //Placeholders
     /*protected static final int shooterLeftMotor = l;
     protected static final int shooterRightMotor = r;
+    protected static final int release = s;
     */
     protected static final int grabberMotor = 2;
     protected static final int densoMotor = 3;

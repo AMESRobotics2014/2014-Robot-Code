@@ -31,9 +31,15 @@ public class MotorControl {
 /*
         shooterLeftMotor = new Jaguar(RobotMap.shooterLeftMotor);
         shooterRightMotor = new Jaguar(RobotMap.shooterRightMotor);
+        release = new Relay(RobotMap.release);
+        
+        release.setDirection(Relay.Direction.kForward);
 */
         grabberMotor = new Relay(RobotMap.grabberMotor);
         densoMotor = new Relay(RobotMap.densoMotor);
+        
+        grabberMotor.setDirection(Relay.Direction.kBoth);
+        densoMotor.setDirection(Relay.Direction.kForward);
 /*
         elevatorMotor = new Victor(RobotMap.elevatorMotor);
         */
@@ -75,11 +81,19 @@ public class MotorControl {
     }
 
     public void shooter() {
-        float cir = 4.25f;
-        float lenght;
+        int time = 6000;
+        if(IM.shoot.getState()){      
+            
+            for(int pos = 0; pos <= 12; pos++){
+            
+            if(pos >= time){
+                //release.set(Relay.Value.kOn);
+            }
+            }
     }
-
+}
     public void grabber(boolean Switch1) {
+        int time = 6000;
         if(IM.raiseGrabber.getState()){
             grabberMotor.set(Relay.Value.kReverse);
         }else{
@@ -87,15 +101,9 @@ public class MotorControl {
         }
         if(IM.lowerGrabber.getState()){
             
-            //rev = 
-            grabberMotor.set(Relay.Value.kReverse);
-            int sec = 0;
-            if(sec == 6){
-            for(int rev = 0; rev <= 10000; rev++){
-                grabberMotor.set(Relay.Value.kForward);
-                densoMotor.set(Relay.Value.kForward);
-            }
-            }
+            grabberMotor.set(Relay.Value.kForward);
+            delay(time);
+                densoMotor.set(Relay.Value.kForward);               
         }else{
             grabberMotor.set(Relay.Value.kOff);
         }
@@ -143,5 +151,8 @@ public class MotorControl {
     }
 
     void shooter(boolean state) {
+    }
+
+    private void delay(int i) {
     }
 }
