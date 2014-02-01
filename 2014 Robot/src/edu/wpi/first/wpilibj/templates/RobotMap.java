@@ -17,11 +17,14 @@ public class RobotMap {
     protected static final int secondLeftMotor = 8;
     
     //Placeholders
-    protected static final int shooterLeftMotor = 11;
-    protected static final int shooterRightMotor = 12;
-    
-    //protected static final int grabberMotorRaise = 13;
-    //protected static final int grabberMotorLower = 13;
-    
-    protected static final int elevatorMotor = 14;
+    /*protected static final int shooterLeftMotor = l;
+    protected static final int shooterRightMotor = r;
+    */
+    protected static final int grabberMotor = 1;
+    protected static final int densoMotor = 7;
+    /*
+    protected static final int elevatorMotor = e;
+    */
+    protected static final int high = 4;
+    protected static final int low = 5;
 }

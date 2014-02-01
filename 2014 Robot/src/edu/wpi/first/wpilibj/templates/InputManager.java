@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class InputManager {
 
     protected static Joystick ps2Controller;
-    protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber;
+    protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber, shoot, power;
     
     static double[] dir = new double[2];
   
@@ -27,6 +27,8 @@ public class InputManager {
         buttonStop = new InputManager.button(4, true);
         raiseGrabber = new InputManager.button(5, true);
         lowerGrabber = new InputManager.button(6, true);
+        shoot = new InputManager.button(8, true);
+        power = new InputManager.button(7, true);
     }
    
     public static double[] getPureAxis() {
@@ -123,8 +125,8 @@ public class InputManager {
     }
   
     protected static class button {
-        boolean buttonState, otherState, otherState2, joystickState;
-        int buttonPin, lowerGrabber, upperGrabber;
+        boolean buttonState, otherState, otherState2, joystickState, powerS;
+        int buttonPin, lowerGrabber, upperGrabber, power;
        
         public button(int buttonPin, boolean joystickState) {
             this.joystickState = joystickState;
@@ -136,6 +138,7 @@ public class InputManager {
                 buttonState = ps2Controller.getRawButton(this.buttonPin);
                 otherState = ps2Controller.getRawButton(this.lowerGrabber);
                 otherState2 = ps2Controller.getRawButton(this.upperGrabber);
+                powerS = ps2Controller.getRawButton(this.power);
                 // System.out.println(buttonState);
             }
            
