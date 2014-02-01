@@ -40,6 +40,9 @@ public class MotorControl {
         high = new Relay(RobotMap.high);
         low = new Relay(RobotMap.low);
         
+        high.setDirection(Relay.Direction.kForward);
+        low.setDirection(Relay.Direction.kForward);
+        
         IM = new InputManager();
     }
 
@@ -124,7 +127,7 @@ public class MotorControl {
                     low.set(Relay.Value.kOff);
                 }
             }*/
-            low.set(Relay.Value.kOn);
+            low.set(Relay.Value.kForward);
            high.set(Relay.Value.kOff);
         }else{/*
             for(int x = 0; x <= 1000; x++){
@@ -134,7 +137,7 @@ public class MotorControl {
                 high.set(Relay.Value.kOff);
             }
         }*/
-         high.set(Relay.Value.kOn);
+         high.set(Relay.Value.kForward);
          low.set(Relay.Value.kOff);   
         }
     }
