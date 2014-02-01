@@ -1,7 +1,6 @@
 package edu.wpi.first.wpilibj.templates;
 
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.*;
 
 /**
  * This class is where all calls to the actual motor hardware should occur. They
@@ -19,6 +18,7 @@ public class MotorControl {
     protected static Jaguar shooterRightMotor;
     protected static Victor grabberMotor, densoMotor;
     protected static Victor elevatorMotor;
+    protected static Relay high, low;
 
     InputManager IM;
     
@@ -28,14 +28,17 @@ public class MotorControl {
 
         firstLeftMotor = new Victor(RobotMap.firstLeftMotor);
         secondLeftMotor = new Victor(RobotMap.secondLeftMotor);
-
+/*
         shooterLeftMotor = new Jaguar(RobotMap.shooterLeftMotor);
         shooterRightMotor = new Jaguar(RobotMap.shooterRightMotor);
-
+*/
         grabberMotor = new Victor(RobotMap.grabberMotor);
         densoMotor = new Victor(RobotMap.densoMotor);
-
+/*
         elevatorMotor = new Victor(RobotMap.elevatorMotor);
+        */
+        high = new Relay(RobotMap.high);
+        low = new Relay(RobotMap.low);
         
         IM = new InputManager();
     }
@@ -80,8 +83,12 @@ public class MotorControl {
             grabberMotor.set(0);
         }
         if(IM.lowerGrabber.getState()){
+            float circ = 9.424777961f;
+            float rev;
+            //rev = 
             grabberMotor.set(1);
-            if(Switch2 == true){
+            if(Switch2
+                    == true){
             densoMotor.set(1);
             //shooter cant shoot
             }
@@ -105,6 +112,15 @@ public class MotorControl {
             while (Button2 == false) {
                 elevatorMotor.set(-1);
             }
+        }
+    }
+    public void transmission(){        
+        if(IM.power.getState()){
+           low.set(Relay.Value.kOn);
+           high.set(Relay.Value.kOff);
+        }else{
+            high.set(Relay.Value.kOn);
+            low.set(Relay.Value.kOff);
         }
     }
 
