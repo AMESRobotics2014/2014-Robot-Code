@@ -29,22 +29,11 @@ import edu.wpi.first.wpilibj.Watchdog;
  */
 public class RobotMain extends IterativeRobot {
 
-    /**
-     * Drive Settings
-     */
-    // RobotDrive drive;
-    /**
-     * Left Joystick Parameters
-     */
-    // Joystick leftstick;
-    /**
-     * Right Joystick Parameters
-     */
-    // Joystick rightstick;
     MotorControl MC;
     RobotMap R;
     ImageProcessing IP;
     InputManager IM;
+    MasterTimer MT;
     protected static Watchdog wd;
     boolean turbo;
     boolean shiftSTR;
@@ -62,9 +51,6 @@ public class RobotMain extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        // drive = new RobotDrive(1, 2);
-        // leftstick = new Joystick(1);
-        // rightstick = new Joystick(2);
         MC = new MotorControl();
         MC.init();
         wd = Watchdog.getInstance();
@@ -72,12 +58,8 @@ public class RobotMain extends IterativeRobot {
         wd.setEnabled(true);
         turbo = false;
         shiftSTR = false;
-        // Here if the code before does not call it.
-        // MC.init();
-
-        // Sim = new Simulator();
-        // RM = new RobotMap();
-
+        MT = new MasterTimer();
+        MT.Init();
         IM = new InputManager();
         IM.init();
 
@@ -106,21 +88,13 @@ public class RobotMain extends IterativeRobot {
         MC.drive(new double[]{1, 1});
         MC.elevator(1, false, false, true);//What booleans should be used?
         MC.elevator(0, false, false, true);
-        //if (IP.target.hot) {//If the goal is hot, fire
-            //MC.shooter();
-        //}
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        /*
-         while(true && isOperatorControl() && isEnabled()) {
-         drive.tankDrive(leftstick, rightstick);
-         Timer.delay(.05);
-         }
-         */
+        MT.listIndicesDEBUG();
         while (true && isOperatorControl() && isEnabled()) {
             //Undefined names are placeholders
 
@@ -134,17 +108,23 @@ public class RobotMain extends IterativeRobot {
             IM.dPadValue();
 
             // This is the driving, might get changed.
+            System.out.println("Current time of Mt is:" + MT.get());
+            if (MT.gdt(1) >= 1.0) {
+                System.out.println("I am a debug print, should happen every half second");
+            }
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
             MC.shooter(IM.raiseGrabber.getState());
+            if(MT.gdt(3) < .02){//adsf
             MC.transmission();
-            //MC.grabber(Switch1);
-            // If robot is running out of control.
-            /*if (IM.buttonStop.getState()) { 
+            }
+            class block{
+             /*MC.grabber(Switch1);
+             If robot is running out of control.
+             if (IM.buttonStop.getState()) { 
              MC.stopDrive();
              System.out.println("Stopped.");
-             }*/
-            /*
+             }
              double driveX = IM.getAxis(IM.LEFT_X);
              double driveY = IM.getAxis(IM.LEFT_Y);
              double aimX = IM.getAxis(IM.RIGHT_X);
@@ -155,8 +135,9 @@ public class RobotMain extends IterativeRobot {
              }
              if (IM.getButton(IM.PASS)) {
              MC.shoot(0.75); //Another placeholder
-             }
-             */
+             }*/
+            }
+            
         }
     }
 }

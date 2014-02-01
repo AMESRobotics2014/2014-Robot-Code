@@ -19,6 +19,7 @@ public class MasterTimer extends Timer {
         addEventTimer("TurboTimer");
         addEventTimer("DEBUGprints");
         addEventTimer("ShiftTimer");
+        addEventTimer("Pulse");
     }
 
     public void addEventTimer(String tid) {
@@ -34,6 +35,7 @@ public class MasterTimer extends Timer {
         for (i = 0; i < actindex.size(); i++) {
            use = (accessdata)actindex.elementAt(i);
             System.out.println("Name: " + use.id + " at index location:[" + i + "]");
+            System.out.println("Has gdt val of: " + use.gdt());
         }
         }catch(NullPointerException ex){
             System.out.println("This index doesn't exist D:");
@@ -43,7 +45,7 @@ public class MasterTimer extends Timer {
     public double gdt(int loc){
         System.out.println("Getting gdt at location:" +loc);
         use = (accessdata)actindex.elementAt(loc);
-        System.out.println(use.gdt());
+        System.out.println("GDT is :" + use.gdt());
         return use.gdt();
     }
 
