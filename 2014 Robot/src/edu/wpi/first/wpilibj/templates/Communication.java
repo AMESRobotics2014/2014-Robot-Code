@@ -7,14 +7,19 @@ import java.io.*;
  * cameras, and anything else external.
  * @author Alex, Evan
  */
+//=================================================================================================================
+
 public class Communication {
     
     public void RobotSpeed(double getPureAxis){
          String RSpeed = Double.toString(getPureAxis);
          
          if (!RSpeed.equals(" ")){
-             String Speed = ""
+             String Speed = "";
              SmartDashboard.putString(RSpeed, RSpeed);
+             
+ //=================================================================================================================
+ //            public void RobotDirection(double )
          }
     }
 }
