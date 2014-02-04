@@ -1,4 +1,5 @@
 package edu.wpi.first.wpilibj.templates;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.io.*;
 
 /**
@@ -7,7 +8,13 @@ import java.io.*;
  * @author Alex, Evan
  */
 public class Communication {
-    public void RobotSpeed(){
+    
+    public void RobotSpeed(double getPureAxis){
+         String RSpeed = Double.toString(getPureAxis);
          
+         if (!RSpeed.equals(" ")){
+             String Speed = ""
+             SmartDashboard.putString(RSpeed, RSpeed);
+         }
     }
 }
