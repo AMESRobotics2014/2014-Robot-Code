@@ -15,11 +15,27 @@ public class Communication {
          String RSpeed = Double.toString(getPureAxis);
          
          if (!RSpeed.equals(" ")){
-             String Speed = "";
-             SmartDashboard.putString(RSpeed, RSpeed);
-             
+             String Speed = " ";
+             SmartDashboard.putString(Speed, RSpeed);
+                   }
+    }   
  //=================================================================================================================
- //            public void RobotDirection(double )
-         }
+    public void RobotDirection(double UNKNOWN){
+        String RDirection = Double.toString(UNKNOWN);
+        
+        if(!RDirection.equals(" ")){
+            String Direction = " ";
+            SmartDashboard.putString(Direction, RDirection);
+        }
     }
+//================================================================================================================
+    public void RobotAngle(double UNKNOWN){
+        String RAngle = Double.toString(UNKNOWN);
+        
+        if(!RAngle.equals(" ")){
+            String Angle = " ";
+            SmartDashboard.putString(Angle, RAngle);
+        }
+    }
+//==================================================================================================================
 }
