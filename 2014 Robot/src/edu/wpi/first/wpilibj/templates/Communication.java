@@ -75,5 +75,23 @@ public class Communication {
                 SmartDashboard.putString("Check Numbers", "Numbers Are Wrong");
             }
         }
+//===============================================================================
+        public void Error4(double UNKNOWN){
+            String ER4 = " ";
+            ER4 = Double.toString(UNKNOWN);
+            if(!ER4.equals(" ")){
+                
+                SmartDashboard.putNumber(ER4, UNKNOWN);
+            }
+        }
+//===============================================================================
+        public void Error5(double UNKNOWN){
+            String ER5 = " ";
+            ER5 = Double.toString(UNKNOWN);
+            if(!ER5.equals(" ")){
+                SmartDashboard.putNumber(ER5, UNKNOWN);
+        }
+        }
+//===============================================================================
     }
 }
