@@ -7,7 +7,7 @@ import javax.microedition.io.SocketConnection;
 /**
  * This class is responsible for all communication with other devices such as the Raspberry pie, the driver's station, some 
  * cameras, and anything else external.
- * @author Alex, Evan
+ * @author Alex, Evan, Devon(rasepie), Collin, Erin
  */
 //=================================================================================================================
 
@@ -40,6 +40,31 @@ public class Communication {
         }
     }
 //==================================================================================================================
+    public void ErrorOne(String EOne){
+        
+        if(!EOne.equals(" ")){
+            String One = " ";
+            SmartDashboard.putString("Error: ", EOne);
+        }
+    }
+    //================================================================================================================
+    // This class is acessing .equals and then using an if else statement
+    public void ErrorTwo(String ETwo){
+        
+        if(!ETwo.equals(ETwo)){
+            String Two = " ";
+            SmartDashboard.putString("Error: ", Two);
+        }
+    }
+    //======================================================================================================================
+    public void ErrorThree(String EThree){
+        
+        if(!EThree.equals(" ")){
+            String Two = " ";
+            SmartDashboard.putString("Error: ", Two);
+        }
+    }
+    //===================================================================================================================
     public class PISocket{
         boolean active;
         SocketConnection psock = null;
