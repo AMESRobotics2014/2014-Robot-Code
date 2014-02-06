@@ -121,7 +121,7 @@ public class MotorControl {
                 }
             }
         } else {
-            while (Button2 == false) {
+            if (Button2 == false) {
                 elevatorMotor.set(-1);
             }
         }

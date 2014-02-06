@@ -116,7 +116,8 @@ public class RobotMain extends IterativeRobot {
             }
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-            MC.shooter(IM.raiseGrabber.getState());
+            MC.shooter(IM.shoot.getState());
+            MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
            // if(MT.gdt(3) < .02){//adsf
             MC.transmission();
             //}
