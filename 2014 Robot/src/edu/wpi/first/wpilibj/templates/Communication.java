@@ -62,7 +62,7 @@ public class Communication {
             SmartDashboard.putString("Error: ", EThree);
         }
     }
-    //===================================================================================================================//===============================================================================
+    //===================================================================================================================
         public void ErrorFour(String EFour){
 
             if(!EFour.equals(" ")){
@@ -83,6 +83,14 @@ public class Communication {
                 SmartDashboard.putString("Error: ", ESix);
             }
         }
+//=====================================================================================================
+        public void ErrorSeven(String ESeven){
+            
+            if(ESeven.equals(" ")){
+                SmartDashboard.putString("Error: ", ESeven);
+            }
+        }
+//=========================================================================================
     public class PISocket{
         boolean active;
         SocketConnection psock = null;
