@@ -43,7 +43,6 @@ public class Communication {
     public void ErrorOne(String EOne){
         
         if(!EOne.equals(" ")){
-            String One = " ";
             SmartDashboard.putString("Error: ", EOne);
         }
     }
