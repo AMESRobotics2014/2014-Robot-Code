@@ -35,6 +35,7 @@ public class MotorControl {
         
         release.setDirection(Relay.Direction.kForward);
 */
+        
         grabberMotor = new Relay(RobotMap.grabberMotor);
         densoMotor = new Relay(RobotMap.densoMotor);
         
@@ -103,9 +104,10 @@ public class MotorControl {
             
             grabberMotor.set(Relay.Value.kForward);
             delay(time);
-                densoMotor.set(Relay.Value.kForward);               
+            densoMotor.set(Relay.Value.kForward);               
         }else{
             grabberMotor.set(Relay.Value.kOff);
+            densoMotor.set(Relay.Value.kOff);
         }
         if(Switch1 == true){
             grabberMotor.set(Relay.Value.kOff);
