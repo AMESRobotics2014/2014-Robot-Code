@@ -17,7 +17,7 @@ public class Communication {
          String RSpeed = Double.toString(getPureAxis);
          
          if (!RSpeed.equals(" ")){
-             String Speed = " ";
+             String Speed = "Robot Speed: ";
              SmartDashboard.putString(Speed, RSpeed);
                    }
     }   
@@ -26,7 +26,7 @@ public class Communication {
         String RDirection = Double.toString(UNKNOWN);
         
         if(!RDirection.equals(" ")){
-            String Direction = " ";
+            String Direction = "Robot Direction: ";
             SmartDashboard.putString(Direction, RDirection);
         }
     }
@@ -35,7 +35,7 @@ public class Communication {
         String RAngle = Double.toString(UNKNOWN);
         
         if(!RAngle.equals(" ")){
-            String Angle = " ";
+            String Angle = "Robot Angle: ";
             SmartDashboard.putString(Angle, RAngle);
         }
     }
@@ -52,19 +52,37 @@ public class Communication {
     public void ErrorTwo(String ETwo){
         
         if(!ETwo.equals(ETwo)){
-            String Two = " ";
-            SmartDashboard.putString("Error: ", Two);
+            SmartDashboard.putString("Error: ", ETwo);
         }
     }
     //======================================================================================================================
     public void ErrorThree(String EThree){
         
         if(!EThree.equals(" ")){
-            String Two = " ";
-            SmartDashboard.putString("Error: ", Two);
+            SmartDashboard.putString("Error: ", EThree);
         }
     }
-    //===================================================================================================================
+    //===================================================================================================================//===============================================================================
+        public void ErrorFour(String EFour){
+
+            if(!EFour.equals(" ")){
+                SmartDashboard.putString("Error: ", EFour);
+            }
+        }
+//===============================================================================
+        public void ErrorFive(String EFive){
+
+            if(!EFive.equals(" ")){
+                SmartDashboard.putString("Error: ", EFive);
+        }
+        }
+//===============================================================================
+        public void ErrorSix(String ESix){
+            
+            if(ESix.equals(" ")){
+                SmartDashboard.putString("Error: ", ESix);
+            }
+        }
     public class PISocket{
         boolean active;
         SocketConnection psock = null;
@@ -99,23 +117,6 @@ public class Communication {
             } else {
                 SmartDashboard.putString("Check Numbers", "Numbers Are Wrong");
             }
-        }
-//===============================================================================
-        public void Error4(double UNKNOWN){
-            String ER4 = " ";
-            ER4 = Double.toString(UNKNOWN);
-            if(!ER4.equals(" ")){
-                
-                SmartDashboard.putNumber(ER4, UNKNOWN);
-            }
-        }
-//===============================================================================
-        public void Error5(double UNKNOWN){
-            String ER5 = " ";
-            ER5 = Double.toString(UNKNOWN);
-            if(!ER5.equals(" ")){
-                SmartDashboard.putNumber(ER5, UNKNOWN);
-        }
         }
 //===============================================================================
     }
