@@ -85,8 +85,10 @@ public class RobotMain extends IterativeRobot {
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {
-        MC.drive(new double[]{1, 1});
+    public void autonomousPeriodic() {        
+        /*if(IM.possition = -1){
+            MC.drive(new double[]{1, -1});
+        }/*/        MC.drive(new double[]{1, 1});
         MC.elevator(1, false, false, true);//What booleans should be used?
         MC.elevator(0, false, false, true);
     }
