@@ -46,6 +46,7 @@ public class MotorControl {
         */
         high = new Relay(RobotMap.high);
         low = new Relay(RobotMap.low);
+        //pSwitch = new Analog(RobotMap.pSwitch);
         
         high.setDirection(Relay.Direction.kForward);
         low.setDirection(Relay.Direction.kForward);
@@ -128,7 +129,10 @@ public class MotorControl {
             }
         }
     }
-    public void transmission(){        
+    public void transmission(int pSwitch){   
+        /*if(pSwitch >= 125){
+            pSwitch.set(off);
+        }*/
         if(IM.power.getState()){
             /*for(int y = 0; y <= 1000; y++){
                 if(y % 2 == 0){
