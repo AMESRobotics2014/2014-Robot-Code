@@ -83,6 +83,11 @@ public class MotorControl {
 
     public void shooter() {
         int time = 6000;
+        shooterMotor1.set(1);
+        shooterMotor2.set(1);
+        delay(time);
+        shooterMotor1.set(0);
+        shooterMotor2.set(0);
         if(IM.shoot.getState()){      
             clutch.set(Relay.Value.kForward);
             ratchet.set(Relay.Value.kReverse);
