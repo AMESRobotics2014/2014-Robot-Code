@@ -14,7 +14,7 @@ public class MotorControl {
     protected static Victor secondRightMotor;
     protected static Victor firstLeftMotor;
     protected static Victor secondLeftMotor;
-    protected static Jaguar shooterMotor;
+    protected static Victor shooterMotor1, shooterMotor2;
     protected static Relay densoMotor, grabberMotor;
     protected static Victor elevatorMotor;
     protected static Relay high, low, ratchet, clutch;
@@ -28,7 +28,8 @@ public class MotorControl {
         firstLeftMotor = new Victor(RobotMap.firstLeftMotor);
         secondLeftMotor = new Victor(RobotMap.secondLeftMotor);
 
-        shooterMotor = new Jaguar(RobotMap.shooterMotor);
+        shooterMotor1 = new Victor(RobotMap.shooterMotor1);
+        shooterMotor2 = new Victor(RobotMap.shooterMotor2);
         ratchet = new Relay(RobotMap.ratchet);
      /*   
         release.setDirection(Relay.Direction.kForward);
@@ -85,7 +86,8 @@ public class MotorControl {
         if(IM.shoot.getState()){      
             clutch.set(Relay.Value.kForward);
             ratchet.set(Relay.Value.kReverse);
-            shooterMotor.set(0);
+            shooterMotor1.set(0);
+            shooterMotor2.set(0);
         }
     }
 

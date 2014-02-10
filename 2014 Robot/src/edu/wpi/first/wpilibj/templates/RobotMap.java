@@ -17,7 +17,8 @@ public class RobotMap {
     protected static final int secondLeftMotor = 5;
     
     //Placeholders
-    protected static final int shooterMotor = 10;
+    protected static final int shooterMotor1 = 10;
+    protected static final int shooterMotor2 = 10;
     
     protected static final int ratchet = yolo;
     
