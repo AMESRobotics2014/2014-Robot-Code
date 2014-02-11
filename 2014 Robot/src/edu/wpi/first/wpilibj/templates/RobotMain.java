@@ -123,7 +123,7 @@ public class RobotMain extends IterativeRobot {
             MC.grabber(false);
             MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
            // if(MT.gdt(3) < .02){//adsf
-            MC.transmission(RobotMap.high);
+            MC.transmission();
             //}
             class block{
              /*MC.grabber(Switch1);

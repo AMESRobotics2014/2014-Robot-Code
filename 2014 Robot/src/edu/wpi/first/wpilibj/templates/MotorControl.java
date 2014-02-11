@@ -165,7 +165,7 @@ public class MotorControl {
         }
         */
     }
-    public void transmission(int pSwitch){   
+    public void transmission(){   
         /*if(pSwitch >= 125){
             pSwitch.set(off);
         }*/
