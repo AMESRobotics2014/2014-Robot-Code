@@ -97,7 +97,7 @@ public class RobotMain extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        MT.listIndicesDEBUG();
+        //MT.listIndicesDEBUG();
         while (true && isOperatorControl() && isEnabled()) {
             //Undefined names are placeholders
 
@@ -106,19 +106,21 @@ public class RobotMain extends IterativeRobot {
             /*----------------------------------------------------*/
 
             wd.feed();
-            System.out.println("FED.");
+            //System.out.println("FED.");
 
             IM.dPadValue();
 
             // This is the driving, might get changed.
-            System.out.println("Current time of Mt is:" + MT.get());
+           /* System.out.println("Current time of Mt is:" + MT.get());
             if (MT.gdt(1) >= 1.0) {
                 MT.sc(1);
                 System.out.println("I am a debug print, should happen every half second");
             }
+            */
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-            MC.shooter(IM.shoot.getState());
+            MC.shooter();
+            MC.grabber(false);
             MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
            // if(MT.gdt(3) < .02){//adsf
             MC.transmission(RobotMap.high);
