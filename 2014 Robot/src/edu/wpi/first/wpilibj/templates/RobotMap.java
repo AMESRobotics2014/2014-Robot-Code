@@ -20,12 +20,12 @@ public class RobotMap {
     protected static final int shooterMotor1 = 10;
     protected static final int shooterMotor2 = 10;
     
-    protected static final int ratchet = yolo;
+    protected static final int ratchet = 3;
     
-    protected static final int clutch = c;
+    protected static final int clutch = 4;
     
-    protected static final int grabberMotor = 2;
-    protected static final int densoMotor = 3;
+    protected static final int grabberMotor = 1;
+    protected static final int densoMotor = 7;
     /*
     protected static final int elevatorMotor = e;
     */
