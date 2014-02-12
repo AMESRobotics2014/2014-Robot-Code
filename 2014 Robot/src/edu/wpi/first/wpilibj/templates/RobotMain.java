@@ -107,7 +107,11 @@ public class RobotMain extends IterativeRobot {
 
             wd.feed();
             //System.out.println("FED.");
-
+            
+           // System.out.println(IM.PotVal());
+            if(IM.readpt.getState()){
+                System.out.println(IM.PotVal());
+            }
             IM.dPadValue();
 
             // This is the driving, might get changed.
