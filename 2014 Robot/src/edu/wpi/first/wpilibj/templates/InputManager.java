@@ -3,7 +3,7 @@
 
 
 package edu.wpi.first.wpilibj.templates;
-
+import edu.wpi.first.wpilibj.AnalogChannel;
 import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -18,17 +18,19 @@ import edu.wpi.first.wpilibj.Joystick;
 public class InputManager {
 
     protected static Joystick ps2Controller;
-    protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber, shoot, power;
-    
+    protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber, shoot, power, readpt;
+    protected static AnalogChannel elevpot;
     static double[] dir = new double[2];
   
     public void init() {
+        elevpot = new AnalogChannel(-5); 
         ps2Controller = new Joystick(1);
         buttonStop = new InputManager.button(4, true);
         raiseGrabber = new InputManager.button(5, true);
         lowerGrabber = new InputManager.button(6, true);
         shoot = new InputManager.button(8, true);
         power = new InputManager.button(7, true);
+        readpt = new button(2,true);
     }
    
     public static double[] getPureAxis() {
@@ -79,7 +81,14 @@ public class InputManager {
         return dir;
     }
    
-    /*
+    public static double PotVal () {
+       double CurrentValue = elevpot.getVoltage();
+       return CurrentValue;
+    }
+        
+    
+    
+    
     public static double[] scaleValues(double[] values, double buttonDPadValue) {
         // values = new double[4];
         double upDownDPad = -ps2Controller.getRawAxis(6);
@@ -88,7 +97,9 @@ public class InputManager {
        
         if ((buttonDPadValue == -1) && (oldRange >= 1)) {
             newRange = oldRange - 0.2;
-        } else if ((buttonDPadValue == 0))
+        } else if ((buttonDPadValue == 0)){
+            
+        }
         else if ((buttonDPadValue == 1) && (oldRange <= 2)) {
             newRange = oldRange + 0.2;
         }
@@ -103,7 +114,7 @@ public class InputManager {
        
         return values;
     }
-    */
+    
    
     /*
     protected static double[] rampSpeed(double[] axis) {
