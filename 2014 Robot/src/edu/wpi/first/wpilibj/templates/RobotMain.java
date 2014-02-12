@@ -111,15 +111,16 @@ public class RobotMain extends IterativeRobot {
             IM.dPadValue();
 
             // This is the driving, might get changed.
-           /* System.out.println("Current time of Mt is:" + MT.get());
+           // System.out.println("Current time of Mt is:" + MT.get());
             if (MT.gdt(1) >= 1.0) {
                 MT.sc(1);
                 System.out.println("I am a debug print, should happen every half second");
             }
-            */
+      
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-            MC.shooter();
+            //MC.shooter();
+            //MC.moveR();
             MC.grabber(false);
             MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
            // if(MT.gdt(3) < .02){//adsf

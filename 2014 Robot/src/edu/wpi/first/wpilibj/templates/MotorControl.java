@@ -1,7 +1,6 @@
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.*;
-
 /**
  * This class is where all calls to the actual motor hardware should occur. They
  * should be methods callable from the main function.
@@ -17,7 +16,8 @@ public class MotorControl {
     protected static Victor shooterMotor1, shooterMotor2;
     protected static Relay densoMotor, grabberMotor;
     protected static Jaguar elevatorMotor;
-    protected static Relay high, low, ratchet, clutch;
+    protected static Relay low, ratchet, clutch;
+    protected static Relay high;
 
     InputManager IM;
     
@@ -31,7 +31,11 @@ public class MotorControl {
         shooterMotor1 = new Victor(RobotMap.shooterMotor1);
         shooterMotor2 = new Victor(RobotMap.shooterMotor2);
         //clutch = new Relay(RobotMap.clutch);
-        ratchet = new Relay(RobotMap.ratchet);
+        //System.out.println("");
+        //System.out.println(Relay.kRelayChannels);
+        //System.out.println(Module.kDigitalChannels);
+        //System.out.println(DigitalModule.kRelayChannels);
+        ratchet = new Relay(4);
      /*   
         release.setDirection(Relay.Direction.kForward);
 */
@@ -44,11 +48,14 @@ public class MotorControl {
 
         elevatorMotor = new Jaguar(RobotMap.elevatorMotor);
         
-        high = new Relay(RobotMap.high);
+        //clutch.setDirection(Relay.Direction.kBoth);
+        
+        //high = new Relay(RobotMap.high);
+        //high = new Relay(4);
         //low = new Relay(RobotMap.low);
         //pSwitch = new Analog(RobotMap.pSwitch);
         
-        high.setDirection(Relay.Direction.kForward);
+        
         //low.setDirection(Relay.Direction.kForward);
         
         IM = new InputManager();
@@ -81,16 +88,31 @@ public class MotorControl {
 
         return val;
     }
+    
+    public void moveR() {
+       /* PWM xds = new PWM(4);
+        if (IM.shoot.getState()) {
+            xds.setRaw(20);
+            delay(2000);
+            xds.setRaw(0);
+        } else
+            xds.setRaw(0);
+            */
+           
+    }
 
     public void shooter() {
         if (IM.shoot.getState()) {
             //int time = 6000;
             shooterMotor1.set(1);
             shooterMotor2.set(1);
-        //    elevatorMotor.set(0.2);
+            //elevatorMotor.set(0.2);
             System.out.println("Shooting");
-            delay(4000);
+            //delay(4000);
             //clutch.set(Relay.Value.kForward);
+            ratchet.set(Relay.Value.kOff);
+            /*ratchet.set(Relay.Value.kForward);
+            delay(100);
             ratchet.set(Relay.Value.kReverse);
             delay(100);
             ratchet.set(Relay.Value.kOff);
@@ -104,12 +126,12 @@ public class MotorControl {
                 //ratchet.set(Relay.Value.kReverse);
                 //shooterMotor1.set(0);
                 //shooterMotor2.set(0);
-            //}
+            //}*/
         }
         else {
             shooterMotor1.set(0);
             shooterMotor2.set(0);
-            elevatorMotor.set(0);
+            //elevatorMotor.set(0);
             //clutch.set(Relay.Value.kOff);
             ratchet.set(Relay.Value.kOff);
         }
