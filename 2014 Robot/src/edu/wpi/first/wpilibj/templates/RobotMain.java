@@ -53,6 +53,7 @@ public class RobotMain extends IterativeRobot {
     public void robotInit() {
         MC = new MotorControl();
         MC.init();
+        //MC.test();
         wd = Watchdog.getInstance();
         wd.setExpiration(.5);
         wd.setEnabled(true);
@@ -110,7 +111,7 @@ public class RobotMain extends IterativeRobot {
             
            // System.out.println(IM.PotVal());
             if(IM.readpt.getState()){
-                System.out.println(IM.PotVal());
+    //            System.out.println(IM.PotVal());
             }
             IM.dPadValue();
 
@@ -118,13 +119,14 @@ public class RobotMain extends IterativeRobot {
            // System.out.println("Current time of Mt is:" + MT.get());
             if (MT.gdt(1) >= 1.0) {
                 MT.sc(1);
-                System.out.println("I am a debug print, should happen every half second");
+                //System.out.println("I am a debug print, should happen every half second");
             }
       
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-            //MC.shooter();
+            MC.shooter();
             //MC.moveR();
+            MC.test();
             MC.grabber(false);
             MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
            // if(MT.gdt(3) < .02){//adsf

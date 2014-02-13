@@ -18,12 +18,12 @@ import edu.wpi.first.wpilibj.Joystick;
 public class InputManager {
 
     protected static Joystick ps2Controller;
-    protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber, shoot, power, readpt;
-    protected static AnalogChannel elevpot;
+    protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber, shoot, power, readpt, test ;
+   // protected static AnalogChannel elevpot;
     static double[] dir = new double[2];
   
     public void init() {
-        elevpot = new AnalogChannel(-5); 
+      //  elevpot = new AnalogChannel(-5); 
         ps2Controller = new Joystick(1);
         buttonStop = new InputManager.button(4, true);
         raiseGrabber = new InputManager.button(5, true);
@@ -31,7 +31,8 @@ public class InputManager {
         shoot = new InputManager.button(8, true);
         power = new InputManager.button(7, true);
         readpt = new button(2,true);
-    }
+        test = new InputManager.button(10, true);
+        }
    
     public static double[] getPureAxis() {
         // double[] dir = new double[2];
@@ -81,10 +82,10 @@ public class InputManager {
         return dir;
     }
    
-    public static double PotVal () {
-       double CurrentValue = elevpot.getVoltage();
-       return CurrentValue;
-    }
+ //   public static double PotVal () {
+   //    double CurrentValue = elevpot.getVoltage();
+     //  return CurrentValue;
+    //}
         
     
     

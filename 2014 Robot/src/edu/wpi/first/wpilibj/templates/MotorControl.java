@@ -28,29 +28,30 @@ public class MotorControl {
         firstLeftMotor = new Victor(RobotMap.firstLeftMotor);
         //secondLeftMotor = new Victor(RobotMap.secondLeftMotor);
 
-        shooterMotor1 = new Victor(RobotMap.shooterMotor1);
-        shooterMotor2 = new Victor(RobotMap.shooterMotor2);
-        //clutch = new Relay(RobotMap.clutch);
+        shooterMotor1 = new Victor(RobotMap.shooterMotor2);
+        //shooterMotor2 = new Victor(RobotMap.shooterMotor2);
+        clutch = new Relay(RobotMap.clutch);
         //System.out.println("");
         //System.out.println(Relay.kRelayChannels);
         //System.out.println(Module.kDigitalChannels);
         //System.out.println(DigitalModule.kRelayChannels);
-        ratchet = new Relay(4);
-     /*   
-        release.setDirection(Relay.Direction.kForward);
-*/
+        ratchet = new Relay(RobotMap.ratchet);
+        
+        ratchet.setDirection(Relay.Direction.kForward);
+        clutch.setDirection(Relay.Direction.kForward);
+
         
         grabberMotor = new Relay(RobotMap.grabberMotor);
         densoMotor = new Relay(RobotMap.densoMotor);
         
         grabberMotor.setDirection(Relay.Direction.kBoth);
-        densoMotor.setDirection(Relay.Direction.kForward);
+        densoMotor.setDirection(Relay.Direction.kReverse);
 
         elevatorMotor = new Jaguar(RobotMap.elevatorMotor);
         
         //clutch.setDirection(Relay.Direction.kBoth);
         
-        //high = new Relay(RobotMap.high);
+        high = new Relay(RobotMap.high);
         //high = new Relay(4);
         //low = new Relay(RobotMap.low);
         //pSwitch = new Analog(RobotMap.pSwitch);
@@ -67,6 +68,7 @@ public class MotorControl {
 
         firstLeftMotor.set(limit(mv[1]));
         //secondLeftMotor.set(limit(mv[1]));
+        System.out.println("Driving");
     }
 
     public void stopDrive() {
@@ -105,11 +107,11 @@ public class MotorControl {
         if (IM.shoot.getState()) {
             //int time = 6000;
             shooterMotor1.set(1);
-            shooterMotor2.set(1);
+            //shooterMotor2.set(1);
             //elevatorMotor.set(0.2);
             System.out.println("Shooting");
             //delay(4000);
-            //clutch.set(Relay.Value.kForward);
+            clutch.set(Relay.Value.kForward);
             ratchet.set(Relay.Value.kOff);
             /*ratchet.set(Relay.Value.kForward);
             delay(100);
@@ -130,9 +132,9 @@ public class MotorControl {
         }
         else {
             shooterMotor1.set(0);
-            shooterMotor2.set(0);
-            //elevatorMotor.set(0);
-            //clutch.set(Relay.Value.kOff);
+            //shooterMotor2.set(0);
+            elevatorMotor.set(0);
+            clutch.set(Relay.Value.kOff);
             ratchet.set(Relay.Value.kOff);
         }
         
@@ -143,15 +145,18 @@ public class MotorControl {
         if(IM.raiseGrabber.getState()){
             grabberMotor.set(Relay.Value.kReverse);
             densoMotor.set(Relay.Value.kOff);
+            elevatorMotor.set(0.4);
+            delay(4000);
+            elevatorMotor.set(0.0);
             System.out.println("Grabber Motor Reverse: " + (Relay.Value.kReverse));
         }else{
-            //grabberMotor.set(Relay.Value.kOff);
+            grabberMotor.set(Relay.Value.kOff);
         }
         if(IM.lowerGrabber.getState()){
             System.out.println("LowerGrabberif");
             grabberMotor.set(Relay.Value.kForward);
             //delay(time);
-            densoMotor.set(Relay.Value.kForward);               
+            densoMotor.set(Relay.Value.kReverse);               
         }else{
             grabberMotor.set(Relay.Value.kOff);
             densoMotor.set(Relay.Value.kOff);
@@ -211,6 +216,16 @@ public class MotorControl {
         }*/
          high.set(Relay.Value.kForward);
          //low.set(Relay.Value.kOff);   
+        }
+    }
+    public void test(){
+        if(IM.test.getState()){
+        ratchet.set(Relay.Value.kForward);
+        clutch.set(Relay.Value.kForward);
+        //shooterMotor1.set(1);
+        //shooterMotor2.set(1);
+    } else {
+            clutch.set(Relay.Value.kOff);
         }
     }
 
