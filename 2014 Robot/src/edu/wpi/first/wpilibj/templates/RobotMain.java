@@ -35,7 +35,7 @@ public class RobotMain extends IterativeRobot {
     InputManager IM;
     MasterTimer MT;
     protected static Watchdog wd;
-    boolean turbo;
+    boolean turbo,manualControl;
     boolean shiftSTR;
 
     /**
@@ -90,8 +90,8 @@ public class RobotMain extends IterativeRobot {
         /*if(IM.possition = -1){
             MC.drive(new double[]{1, -1});
         }/*/MC.drive(new double[]{1, 1});
-        MC.elevator(1, false, false, true);//What booleans should be used?
-        MC.elevator(0, false, false, true);
+        MC.elevator(1, false, false, true, 1);//What booleans should be used?
+        MC.elevator(0, false, false, true, -1);
     }
 
     /**
@@ -124,13 +124,13 @@ public class RobotMain extends IterativeRobot {
       
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-            MC.shooter();
+            MC.shooter(IM.shoot.getState());
             //MC.moveR();
-            MC.test();
-            MC.grabber(false);
-            MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
+            MC.test(IM.test.getState());
+            MC.grabber(false,IM.raiseGrabber.getState(),IM.lowerGrabber.getState());
+            MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false,IM.ps2Controller.getRawAxis(5));
            // if(MT.gdt(3) < .02){//adsf
-            MC.transmission();
+            MC.transmission(IM.power.getState());
             //}
             class block{
              /*MC.grabber(Switch1);

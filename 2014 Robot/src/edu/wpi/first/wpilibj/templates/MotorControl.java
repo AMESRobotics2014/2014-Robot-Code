@@ -19,7 +19,7 @@ public class MotorControl {
     protected static Relay low, ratchet, clutch;
     protected static Relay high;
     boolean TopElevator, LowerElevator,ElevatronPosition, PullbackLimit, GrabberLiftLimit;
-    InputManager IM;
+    //InputManager IM;
     
     public void init() {
         firstRightMotor = new Victor(RobotMap.firstRightMotor);
@@ -59,7 +59,7 @@ public class MotorControl {
         
         //low.setDirection(Relay.Direction.kForward);
         
-        IM = new InputManager();
+        //IM = new InputManager();
     }
 
     public void drive(double[] mv) {
@@ -103,8 +103,8 @@ public class MotorControl {
            
     }
 
-    public void shooter() {
-        if (IM.shoot.getState()) {
+    public void shooter(boolean Switch1) {
+        if (Switch1) {
             //int time = 6000;
             shooterMotor1.set(0.2);
             //shooterMotor2.set(1);
@@ -145,9 +145,9 @@ public class MotorControl {
         
     }
 
-    public void grabber(boolean Switch1) {
+    public void grabber(boolean Switch1,boolean raiseSwitch,boolean lowerSwitch) {
         int time = 6000;
-        if(IM.raiseGrabber.getState()){
+        if(raiseSwitch){
             grabberMotor.set(Relay.Value.kReverse);
             densoMotor.set(Relay.Value.kOff);
             elevatorMotor.set(0.4);
@@ -157,7 +157,7 @@ public class MotorControl {
         }else{
             grabberMotor.set(Relay.Value.kOff);
         }
-        if(IM.lowerGrabber.getState()){
+        if(lowerSwitch){
             System.out.println("LowerGrabberif");
             grabberMotor.set(Relay.Value.kForward);
             //delay(time);
@@ -178,8 +178,8 @@ public class MotorControl {
         
     
 
-    public void elevator(double val, boolean Button1, boolean Button2, boolean autoAim) {
-        double vals = IM.ps2Controller.getRawAxis(5);
+    public void elevator(double val, boolean Button1, boolean Button2, boolean autoAim, double axis) {
+        double vals = axis;
         
         if (vals == 0){
             elevatorMotor.set(0);
@@ -217,11 +217,11 @@ public class MotorControl {
         }
         */
     }
-    public void transmission(){   
+    public void transmission(boolean power){   
         /*if(pSwitch >= 125){
             pSwitch.set(off);
         }*/
-        if(IM.power.getState()){
+        if(power){
             /*for(int y = 0; y <= 1000; y++){
                 if(y % 2 == 0){
                     low.set(Relay.Value.kOn);
@@ -243,8 +243,8 @@ public class MotorControl {
          //low.set(Relay.Value.kOff);   
         }
     }
-    public void test(){
-        if(IM.test.getState()){
+    public void test(boolean test){
+        if(test) {
         ratchet.set(Relay.Value.kForward);
         clutch.set(Relay.Value.kForward);
         //shooterMotor1.set(1);
