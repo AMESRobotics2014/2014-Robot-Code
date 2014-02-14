@@ -21,7 +21,9 @@ public abstract class Simulator {
      * @param shaftLength the length of the shaft
      * @return the appropriate length of the base
      */
-    public double getBaseDistance(double angle, double shooterLength, double shaftLength) {
+    static final double shooterLength=18;
+    static final double shaftLength=17;
+    public double getBaseDistance(double angle) {
         return Math.sqrt(shooterLength*shooterLength+shaftLength*shaftLength-
                 2*shooterLength*shaftLength*Math.cos(Math.toRadians(angle)));
     }
