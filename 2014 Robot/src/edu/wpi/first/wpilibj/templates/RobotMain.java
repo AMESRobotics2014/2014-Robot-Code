@@ -74,6 +74,12 @@ public class RobotMain extends IterativeRobot {
       
             MC.drive(IM.getPureAxis());
             MC.shooter();
+            if(IM.manual.getState()){
+                IM.manual.buttonState = !IM.manual.buttonState;
+            }
+            if(IM.manual.buttonState){
+            MC.manualMode();
+            }
             MC.grabber(false);
             MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
             MC.transmission();

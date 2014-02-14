@@ -147,7 +147,7 @@ public class MotorControl {
     }
     public void manualMode(){
     if(IM.manual.getState()){
-        this.IM.manual.buttonState = !this.IM.manual.buttonState;
+        
         if(IM.shoot.getState()){
             shooterMotor1.set(0.2);
         }
