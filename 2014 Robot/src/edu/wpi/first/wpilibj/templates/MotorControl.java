@@ -161,24 +161,24 @@ public class MotorControl {
         }
     }
     public void manualMode(){
-    if(IM.manual.getState()){
+    if(IM.SettingsR.getState()){
         
-        if(IM.shoot.getState()){
+        if(IM.R2.getState()){
             shooterMotor1.set(0.2);
         }
-        if(IM.raiseGrabber.getState()){
+        if(IM.L1.getState()){
             grabberMotor.set(Relay.Value.kForward);
         }
-        if(IM.lowerGrabber.getState()){
+        if(IM.R1.getState()){
             grabberMotor.set(Relay.Value.kReverse);
         }
-        if(IM.power.getState()){
-            densoMotor.set(Relay.Value.kForward);
+        if(IM.R2.getState()){
+            GrabWheel.set(Relay.Value.kForward);
         }
-        if(IM.buttonStop.getState()){
+        if(IM.FaceTop.getState()){
             ratchet.set(Relay.Value.kForward);
         }
-        if(IM.readpt.getState()){
+        if(IM.FaceBott.getState()){
             clutch.set(Relay.Value.kForward);
         }
     }
