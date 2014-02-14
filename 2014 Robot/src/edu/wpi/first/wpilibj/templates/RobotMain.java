@@ -90,8 +90,8 @@ public class RobotMain extends IterativeRobot {
         /*if(IM.possition = -1){
             MC.drive(new double[]{1, -1});
         }/*/MC.drive(new double[]{1, 1});
-        MC.elevator(1, false, false, true, 1);//What booleans should be used?
-        MC.elevator(0, false, false, true, -1);
+        MC.elevator(1, false, false, true);//What booleans should be used?
+        MC.elevator(0, false, false, true);
     }
 
     /**
