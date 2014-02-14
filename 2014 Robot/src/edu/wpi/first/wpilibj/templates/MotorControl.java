@@ -27,7 +27,7 @@ public class MotorControl {
         shooterMotor1 = new Victor(RobotMap.shooterMotor2);
         clutch = new Relay(RobotMap.clutch);
         ratchet = new Relay(RobotMap.ratchet);
-        ratchet.setDirection(Relay.Direction.kForward);
+        ratchet.setDirection(Relay.Direction.kReverse);
         clutch.setDirection(Relay.Direction.kForward);
         grabberMotor = new Relay(RobotMap.grabberMotor);
         GrabWheel = new Relay(RobotMap.densoMotor);
@@ -161,26 +161,38 @@ public class MotorControl {
         }
     }
     public void manualMode(){
-    if(IM.SettingsR.getState()){
+  //  if(IM.SettingsR.getState()){
         
         if(IM.R2.getState()){
-            shooterMotor1.set(0.2);
+            shooterMotor1.set(1);
+        }else{
+            shooterMotor1.set(0);
         }
         if(IM.L1.getState()){
             grabberMotor.set(Relay.Value.kForward);
+        }else{
+            grabberMotor.set(Relay.Value.kOff);
         }
         if(IM.R1.getState()){
             grabberMotor.set(Relay.Value.kReverse);
+        }else{
+            grabberMotor.set(Relay.Value.kOff);
         }
-        if(IM.R2.getState()){
-            GrabWheel.set(Relay.Value.kForward);
+        if(IM.L2.getState()){
+            GrabWheel.set(Relay.Value.kReverse);
+        }else{
+            GrabWheel.set(Relay.Value.kOff);
         }
         if(IM.FaceTop.getState()){
-            ratchet.set(Relay.Value.kForward);
+            ratchet.set(Relay.Value.kReverse);
+        }else{
+            ratchet.set(Relay.Value.kOff);
         }
         if(IM.FaceBott.getState()){
             clutch.set(Relay.Value.kForward);
+        }else{
+            clutch.set(Relay.Value.kOff);
         }
     }
-}
+//}
 }

@@ -73,11 +73,13 @@ public class RobotMain extends IterativeRobot {
             }
       
             MC.drive(IM.getPureAxis());
-            MC.shooter();
+            //MC.shooter();
             if(IM.SettingsR.getState()){
+                System.out.println("Toggling");
                 IM.SettingsR.buttonState = !IM.SettingsR.buttonState;
             }
-            if(IM.SettingsR.buttonState){
+            if(/*IM.SettingsR.buttonState*/ true){
+                System.out.println("Manual++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=");
             MC.manualMode();
             }
             //MC.grabber(false);
