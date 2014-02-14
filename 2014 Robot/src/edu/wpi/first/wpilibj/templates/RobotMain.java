@@ -74,7 +74,6 @@ public class RobotMain extends IterativeRobot {
       
             MC.drive(IM.getPureAxis());
             MC.shooter();
-            MC.test();
             MC.grabber(false);
             MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
             MC.transmission();

@@ -145,12 +145,27 @@ public class MotorControl {
          high.set(Relay.Value.kForward);  
         }
     }
-    public void test(){
-        if(IM.test.getState()) {
-        ratchet.set(Relay.Value.kForward);
-        clutch.set(Relay.Value.kForward);
-    } else {
-            clutch.set(Relay.Value.kOff);
+    public void manualMode(){
+    if(IM.manual.getState()){
+        this.IM.manual.buttonState = !this.IM.manual.buttonState;
+        if(IM.shoot.getState()){
+            shooterMotor1.set(0.2);
+        }
+        if(IM.raiseGrabber.getState()){
+            grabberMotor.set(Relay.Value.kForward);
+        }
+        if(IM.lowerGrabber.getState()){
+            grabberMotor.set(Relay.Value.kReverse);
+        }
+        if(IM.power.getState()){
+            densoMotor.set(Relay.Value.kForward);
+        }
+        if(IM.buttonStop.getState()){
+            ratchet.set(Relay.Value.kForward);
+        }
+        if(IM.readpt.getState()){
+            clutch.set(Relay.Value.kForward);
         }
     }
+}
 }
