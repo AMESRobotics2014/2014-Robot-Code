@@ -124,13 +124,13 @@ public class RobotMain extends IterativeRobot {
       
             MC.drive(IM.getPureAxis());
             // MC.drive(IM.rampSpeed(IM.getPureAxis()));
-            MC.shooter(IM.shoot.getState());
+            MC.shooter();
             //MC.moveR();
-            MC.test(IM.test.getState());
-            MC.grabber(false,IM.raiseGrabber.getState(),IM.lowerGrabber.getState());
-            MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false,IM.ps2Controller.getRawAxis(5));
+            MC.test();
+            MC.grabber(false);
+            MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
            // if(MT.gdt(3) < .02){//adsf
-            MC.transmission(IM.power.getState());
+            MC.transmission();
             //}
             class block{
              /*MC.grabber(Switch1);
