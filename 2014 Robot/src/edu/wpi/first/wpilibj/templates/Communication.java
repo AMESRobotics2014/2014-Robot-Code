@@ -41,6 +41,10 @@ public class Communication {
         }
     }
 //==================================================================================================================
+    /*
+     * all of the errors will check using an if then statement where if something is wrong with the Robot then it will
+     * check witch error it is and then print whatever error that malfunction is defined under
+     */
     public void ErrorOne(String EOne){
         
         if(!EOne.equals(" ")){
@@ -126,6 +130,6 @@ public class Communication {
                 SmartDashboard.putString("Check Numbers", "Numbers Are Wrong");
             }
         }
-//===============================================================================
+//============================================================================================================
     }
 }
