@@ -19,11 +19,9 @@ public class InputManager {
 
     protected static Joystick ps2Controller;
     protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber, shoot, power, readpt, test ;
-   // protected static AnalogChannel elevpot;
     static double[] dir = new double[2];
   
     public void init() {
-      //  elevpot = new AnalogChannel(-5); 
         ps2Controller = new Joystick(1);
         buttonStop = new InputManager.button(4, true);
         raiseGrabber = new InputManager.button(5, true);
@@ -35,22 +33,11 @@ public class InputManager {
         }
    
     public static double[] getPureAxis() {
-        // double[] dir = new double[2];
         dir[0] = -ps2Controller.getRawAxis(2);
         dir[1] = ps2Controller.getRawAxis(4);
        
        
-       
-        // System.out.println(upDownDPad);
-       
         dir = deadZone(dir);
-        // dir = scaleValues(dir, dPadValue());
-       
-        // System.out.println(dir[0] + ":" + dir[1]);
-       
-        // Might need it - we'll see.
-        // dir = translate(dir);
-       
         return dir;
     }
    
@@ -69,29 +56,10 @@ public class InputManager {
         
         dir[0] = (((dir[0] + 1) * newRange) / oldRange) + newMin;
         dir[1] = (((dir[1] + 1) * newRange) / oldRange) + newMin;
-        
-        //System.out.println(dir[0] + ":" + dir[1]);
-        
-        /*
-        if (upDownDPad == 1)
-            System.out.println("1");
-        else if (upDownDPad == -1)
-            System.out.println("-1");
-         */
        
         return dir;
     }
-   
- //   public static double PotVal () {
-   //    double CurrentValue = elevpot.getVoltage();
-     //  return CurrentValue;
-    //}
-        
-    
-    
-    
     public static double[] scaleValues(double[] values, double buttonDPadValue) {
-        // values = new double[4];
         double upDownDPad = -ps2Controller.getRawAxis(6);
        
         double oldRange = 2, newRange = 0;
@@ -106,26 +74,12 @@ public class InputManager {
         }
        
         double newMin = (newRange / -2);
-        // double oldRange = 2, newRange = 1.4, newMin = (newRange / -2);
        
         values[0] = (((values[0] + 1) * newRange) / oldRange) + newMin;
         values[1] = (((values[1] + 1) * newRange) / oldRange) + newMin;
        
-        //System.out.println(values[0] + ":" + values[1]);
-       
         return values;
     }
-    
-   
-    /*
-    protected static double[] rampSpeed(double[] axis) {
-        for (byte si = 0; si < axis.length; si++) {
-            axis[si] = ((0.666) * MathUtils.pow(axis[si], 3)) + ((0.333) * axis[si]);
-        }
-       
-        return axis;
-    }
-    */
    
     protected static double[] deadZone(double[] axis) {
         for (byte si = 0; si < axis.length; si++) {
@@ -137,23 +91,15 @@ public class InputManager {
     }
   
     protected static class button {
-        boolean buttonState/*, otherState, otherState2, joystickState, powerS, shooter, up, down*/;
-        int buttonPin/*, lowerGrabber, upperGrabber, power, shoot*/;
+        boolean buttonState;
+        int buttonPin;
        
         public button(int buttonPin, boolean joystickState) {
-          //  this.joystickState = joystickState;
             this.buttonPin = buttonPin;
         }
        
         public boolean getState() {
-          //  if (joystickState) {
                 buttonState = ps2Controller.getRawButton(this.buttonPin);
-                //otherState = ps2Controller.getRawButton(this.lowerGrabber);
-                //otherState2 = ps2Controller.getRawButton(this.upperGrabber);
-                //powerS = ps2Controller.getRawButton(this.power);
-                //shooter = ps2Controller.getRawButton(this.shoot);
-                //System.out.println("State " + buttonState);
-       //     }
            
             return buttonState;
         }
