@@ -18,18 +18,18 @@ import edu.wpi.first.wpilibj.Joystick;
 public class InputManager {
 
     protected static Joystick ps2Controller;
-    protected static InputManager.button buttonStop, raiseGrabber, lowerGrabber, shoot, power, readpt, test ;
+    protected button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR ;
     static double[] dir = new double[2];
   
     public void init() {
         ps2Controller = new Joystick(1);
-        buttonStop = new InputManager.button(4, true);
-        raiseGrabber = new InputManager.button(5, true);
-        lowerGrabber = new InputManager.button(6, true);
-        shoot = new InputManager.button(8, true);
-        power = new InputManager.button(7, true);
-        readpt = new button(2,true);
-        test = new InputManager.button(10, true);
+        FaceTop = new button(4, true);
+        L1 = new button(5, true);
+        R1 = new button(6, true);
+        R2 = new button(8, true);
+        L2 = new button(7, true);
+        FaceBott = new button(2,true);
+        SettingsR = new button(10, true);
         }
    
     public static double[] getPureAxis() {
@@ -89,6 +89,7 @@ public class InputManager {
        
         return axis;
     }
+    
   
     protected static class button {
         boolean buttonState;

@@ -29,11 +29,11 @@ import edu.wpi.first.wpilibj.Watchdog;
  */
 public class RobotMain extends IterativeRobot {
 
-    MotorControl MC;
-    RobotMap R;
-    ImageProcessing IP;
-    InputManager IM;
-    MasterTimer MT;
+    private static MotorControl MC;
+    private static RobotMap R;
+    private static ImageProcessing IP;
+    private static InputManager IM;
+    private static MasterTimer MT;
     protected static Watchdog wd;
     boolean turbo,manualControl;
     boolean shiftSTR;
@@ -65,7 +65,7 @@ public class RobotMain extends IterativeRobot {
             /*----------------------------------------------------*/
 
             wd.feed();
-            if(IM.readpt.getState()){
+            if(IM.FaceBott.getState()){
             }
             IM.dPadValue();
             if (MT.gdt(1) >= 1.0) {
@@ -75,20 +75,44 @@ public class RobotMain extends IterativeRobot {
             MC.drive(IM.getPureAxis());
             MC.shooter();
             MC.test();
-            MC.grabber(false);
-            MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
+            Event.mGrabarm();
+           // MC.grabberOLD(false);
+            MC.elevator(1.0,IM.L1.getState(),IM.R2.getState(),false);
             MC.transmission();
         }
     }
     
-            public static class Events{
+            public static class Event{
                 //Sorted into scripted events and manual events by prefix s and m
                 public static void mGrabarm(){
+                    //Manually apply from input
+                    if(IM.R1.getState()){MC.grabber((byte)1);}
+                    if(IM.L1.getState()){MC.grabber((byte)2);}
+                    else{MC.grabber((byte)3);}
+                }
+                public static void sGrabarm(){
+                    //Use scripted event
+                    MC.grabber((byte) 1);
                     
                 }
             }
-    
-            public static class ButtonEvents{
-        static boolean b;
-    }
+            
+        //Not sure if I want to keep this or not, will be good for complex button combos but I'm not sure we need it
+        public static class ButtonEvents{
+         static boolean b;
+            public static boolean R1(){
+                return IM.R1.getState();
+            }
+            public static boolean R2(){
+                return IM.R2.getState();
+            }
+            public static boolean L1(){
+                return IM.L1.getState();
+            }
+            public static boolean L2(){
+                return IM.L2.getState();
+            }
+            
+ 
+}
 }
