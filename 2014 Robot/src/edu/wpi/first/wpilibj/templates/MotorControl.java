@@ -18,7 +18,7 @@ public class MotorControl {
     protected static Jaguar elevatorMotor;
     protected static Relay low, ratchet, clutch;
     protected static Relay high;
-
+    boolean TopElevator, LowerElevator,ElevatronPosition, PullbackLimit, GrabberLiftLimit;
     InputManager IM;
     
     public void init() {
@@ -106,7 +106,7 @@ public class MotorControl {
     public void shooter() {
         if (IM.shoot.getState()) {
             //int time = 6000;
-            shooterMotor1.set(1);
+            shooterMotor1.set(0.2);
             //shooterMotor2.set(1);
             //elevatorMotor.set(0.2);
             System.out.println("Shooting");
@@ -129,7 +129,12 @@ public class MotorControl {
                 //shooterMotor1.set(0);
                 //shooterMotor2.set(0);
             //}*/
+                    }
+        if (PullbackLimit == true) {
+            elevatorMotor.set(0);
         }
+        
+    
         else {
             shooterMotor1.set(0);
             //shooterMotor2.set(0);
@@ -165,17 +170,37 @@ public class MotorControl {
             grabberMotor.set(Relay.Value.kOff);
         }
         
-    }
+                if (GrabberLiftLimit == true) {
+            grabberMotor.set(Relay.Value.kOff);
+        }
+                }
+
+        
+    
 
     public void elevator(double val, boolean Button1, boolean Button2, boolean autoAim) {
         double vals = IM.ps2Controller.getRawAxis(5);
         
-        if (vals == 0)
+        if (vals == 0){
             elevatorMotor.set(0);
-        if (vals == 1)
+        }
+        if (vals == 1){
             elevatorMotor.set(0.5);
-        if (vals == -1)
+        }
+        if (vals == -1){
             elevatorMotor.set(-0.5);
+        }
+        //if evevator button is true then yo gets all the sweg
+        if (TopElevator == true){
+            elevatorMotor.set(0);
+        }
+        if (LowerElevator == true){
+            elevatorMotor.set(0);
+        }
+        if (ElevatronPosition == true) {
+            elevatorMotor.set(0);
+        }
+            
         
         /*
         if (val == 0) {

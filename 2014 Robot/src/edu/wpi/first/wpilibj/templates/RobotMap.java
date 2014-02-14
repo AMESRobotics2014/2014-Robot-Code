@@ -19,16 +19,23 @@ public class RobotMap {
     //Placeholders
     //protected static final int shooterMotor1 = 9;
     protected static final int shooterMotor2 = 10;
+    protected static final int PullbackLimit = 7;//=================== +
+    protected static final int GrabberLiftLimit = 9;//================ +
     
     protected static final int ratchet = 3;
+    protected static final int RachetLimit = 15;//=====================
     
     protected static final int clutch = 8;
+    protected static final int ClutchEngaged = 11;//=====================
+    protected static final int ClutchReleased = 13;//=====================
     
     protected static final int grabberMotor = 1;
     protected static final int densoMotor = 7;
     
     protected static final int elevatorMotor = 2;
-    
+    protected static final int TopElevator = 1;//==================== +
+    protected static final int LowerElevator = 3;//============== +
+    protected static final int ElevatronPosition = 5;//========= +
     protected static final int high = 4;
     //protected static final int low = 4;
     //protected static final int pSwitch = p;
