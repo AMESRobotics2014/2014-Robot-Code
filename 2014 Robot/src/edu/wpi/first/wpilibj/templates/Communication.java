@@ -10,9 +10,8 @@ import javax.microedition.io.SocketConnection;
  * @author Alex, Evan, Devon(raspie), Collin, Erin
  */
 //=================================================================================================================
-
 public class Communication {
-    
+    //Creates a new void to access the robot speed which is located in the main class getPure access int. Then it will project the speed on a moniter using the Dashboard.
     public void RobotSpeed(double getPureAxis){
          String RSpeed = Double.toString(getPureAxis);
          
@@ -22,6 +21,7 @@ public class Communication {
                    }
     }   
  //=================================================================================================================
+    //Creates new void to access the robot direction, the direction is accessed under the main class in UNKNOWN. Then it will be presented on the Dashboard.
     public void RobotDirection(double UNKNOWN){
         String RDirection = Double.toString(UNKNOWN);
         
@@ -31,6 +31,7 @@ public class Communication {
         }
     }
 //================================================================================================================
+    //Creates new viod to access the Robot angle and then like the other voids it prints it to the Dashboard.
     public void RobotAngle(double UNKNOWN){
         String RAngle = Double.toString(UNKNOWN);
         
@@ -40,6 +41,10 @@ public class Communication {
         }
     }
 //==================================================================================================================
+    /*
+     * all of the errors will check using an if then statement where if something is wrong with the Robot then it will
+     * check witch error it is and then print whatever error that malfunction is defined under
+     */
     public void ErrorOne(String EOne){
         
         if(!EOne.equals(" ")){
@@ -125,6 +130,6 @@ public class Communication {
                 SmartDashboard.putString("Check Numbers", "Numbers Are Wrong");
             }
         }
-//===============================================================================
+//============================================================================================================
     }
 }

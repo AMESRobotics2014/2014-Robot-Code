@@ -38,8 +38,14 @@ public class ImageProcessing {
 
     //Maximum number of particles to process
     final int MAX_PARTICLES = 8;
-
     
+    final double TAPEHEIGHT=12.5;
+    public double getDistance(double height, double size)   {
+        return height/size*100;
+    }
+    public double getDistanceFromArea(double area, double size)   {
+        return area*area/size/size*100;
+    }
     /** Records and reports information about the target tape. */
     public class Targetreport {
                 int verticalIndex;
