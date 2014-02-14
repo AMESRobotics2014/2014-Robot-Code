@@ -231,7 +231,9 @@ public class MotorControl {
 
     //void shooter(boolean state) {
     //}
-
+    
+    
+//Wut is this even?
     private void delay(int i) {
     }
 }

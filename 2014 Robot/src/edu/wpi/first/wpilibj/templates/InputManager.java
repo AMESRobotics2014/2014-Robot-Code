@@ -137,23 +137,23 @@ public class InputManager {
     }
   
     protected static class button {
-        boolean buttonState, otherState, otherState2, joystickState, powerS, shooter, up, down;
-        int buttonPin, lowerGrabber, upperGrabber, power, shoot;
+        boolean buttonState/*, otherState, otherState2, joystickState, powerS, shooter, up, down*/;
+        int buttonPin/*, lowerGrabber, upperGrabber, power, shoot*/;
        
         public button(int buttonPin, boolean joystickState) {
-            this.joystickState = joystickState;
+          //  this.joystickState = joystickState;
             this.buttonPin = buttonPin;
         }
        
         public boolean getState() {
-            if (joystickState) {
+          //  if (joystickState) {
                 buttonState = ps2Controller.getRawButton(this.buttonPin);
                 //otherState = ps2Controller.getRawButton(this.lowerGrabber);
                 //otherState2 = ps2Controller.getRawButton(this.upperGrabber);
                 //powerS = ps2Controller.getRawButton(this.power);
                 //shooter = ps2Controller.getRawButton(this.shoot);
                 //System.out.println("State " + buttonState);
-            }
+       //     }
            
             return buttonState;
         }
