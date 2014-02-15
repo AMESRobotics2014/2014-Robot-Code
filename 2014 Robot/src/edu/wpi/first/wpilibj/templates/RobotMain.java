@@ -74,8 +74,8 @@ public class RobotMain extends IterativeRobot {
             if (MT.gdt(1) >= 1.0) {
                 MT.sc(1);
             }
-            /*
-            // Second position - robot is lowering grabber pick up ball.
+
+            /*0// Second position - robot is lowering grabber pick up ball.
             if (someButtonIsPressed && elevatorIsFlat && grabberIsUp) {
                 //Event.sGrabarm();
 
@@ -105,9 +105,7 @@ public class RobotMain extends IterativeRobot {
                 // Set elevator flat.
                 // Make sure grabber is up.
                 MC.grabber((byte) 2);
-            }
-            */
-            
+            }*/
 
             MC.drive(IM.getPureAxis());
             //MC.shooter();

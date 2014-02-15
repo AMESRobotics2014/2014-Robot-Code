@@ -9,6 +9,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 //=================================================================================================================
 public class Communication {
+    NetworkTable infoTable;
+    MasterTimer MT;
+    
+    public void init() {
+        MT = new MasterTimer();
+        MT.Init();
+        
+        infoTable.setClientMode();
+        infoTable.setIPAddress("10.32.43.2");
+        infoTable = NetworkTable.getTable("Info");
+    }
+    
+    public void processTable() {
+        //while ((true) && (MT.gdt(0) <= 1)) {
+        double dist = infoTable.getNumber("Distance", 0.0);
+        double angle = infoTable.getNumber("Angle", 0.0);
+            
+        System.out.println("Dist: " + dist + "Angle: " + angle);
+        
+        MT.sc(1);
+        //}
+    }
     //Creates a new void to access the robot speed which is located in the main class getPure access int. Then it will project the speed on a moniter using the Dashboard.
     public void RobotSpeed(double getPureAxis){
          String RSpeed = Double.toString(getPureAxis);
