@@ -128,10 +128,10 @@ public class RobotMain extends IterativeRobot {
 
         public static void mGrabarm() {
             //Manually apply from input
-            if (IM.R1.getState()) {
+            if (IM.R1.getState() & !IM.GrabberLowerLimit.get()) {
                 MC.grabber((byte) 1);
             }
-            if (IM.L1.getState()) {
+            if (IM.L1.getState() & !IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
             } else {
                 MC.grabber((byte) 3);
