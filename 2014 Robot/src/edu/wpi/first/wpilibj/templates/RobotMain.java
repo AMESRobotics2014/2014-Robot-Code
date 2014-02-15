@@ -119,14 +119,14 @@ public class RobotMain extends IterativeRobot {
             }
             //MC.grabber(false);
             //  MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
-            MC.transmission();
+            MC.transmissionOLD();
         }
+        
     }
 
     public static class Event {
         //Sorted into scripted events and manual events by prefix s and m
-
-        public static void mGrabarm() {
+        public static void m_Grab() {
             //Manually apply from input
             if (IM.R1.getState() & !IM.GrabberLowerLimit.get()) {
                 MC.grabber((byte) 1);
@@ -134,14 +134,31 @@ public class RobotMain extends IterativeRobot {
             if (IM.L1.getState() & !IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
             } else {
-                MC.grabber((byte) 3);
+                MC.grabber((byte) 0);
             }
         }
-
-        public static void sGrabarm() {
+        public static void m_Shoot(){
+            
+        }
+        public static void s_GrabSustain() {
             //Use scripted event
+            if(!IM.GrabberLowerLimit.get()){
             MC.grabber((byte) 1);
-
+            }
+            else{
+                MC.grabber((byte) 0);
+            }
+        }
+        public static void s_GrabRetract(){
+            if(!IM.GrabberLiftLimit.get()){
+            MC.grabber((byte) 2);
+            }
+            else{
+                MC.grabber((byte) 0);
+            }
+        }
+        public static void s_XwingAttackMode(){
+            UsetheForce(9001);
         }
     }
 
@@ -165,5 +182,16 @@ public class RobotMain extends IterativeRobot {
         public static boolean L2() {
             return IM.L2.getState();
         }
+        
+        public static boolean EnterAttackMode(){
+            return IM.FaceTop.getState();
+        }
+        public static boolean EnterPickupMode(){
+            return IM.FaceRight.getState();
+    }
+        
+    }
+    public static void UsetheForce(int mitichlorians){
+        System.out.println("Feel don't think");
     }
 }

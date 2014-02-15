@@ -134,7 +134,8 @@ public class MotorControl {
     
     
         public void grabber(byte dir) {
-            //True forward, false backwards
+            //0 Is off, 1 is foreward , 2 is backwards
+            
             if(dir == 1){
                 if (IM.GrabberLowerLimit.get()) {
                     grabberMotor.set(Relay.Value.kOff);
@@ -151,7 +152,7 @@ public class MotorControl {
                     grabberMotor.set(Relay.Value.kReverse);
                 }
             }
-            else if(dir == 3){
+            else if(dir == 0){
                 grabberMotor.set(Relay.Value.kOff);
             }
         }
@@ -177,13 +178,22 @@ public class MotorControl {
             }
         }
     }
-    public void transmission(){   
+    public void transmissionOLD(){   
         if(IM.L2.getState()){
 
            high.set(Relay.Value.kOff);
         }else{
          high.set(Relay.Value.kForward);  
         }
+    }
+    public void transmission(boolean fast){
+        if(!fast){
+            high.set(Relay.Value.kOff);
+        }
+        else if (fast){
+            high.set(Relay.Value.kForward);
+        }
+        
     }
     public void manualMode(){
   //  if(IM.SettingsR.getState()){
