@@ -22,10 +22,12 @@ public class InputManager {
     protected button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR, FaceRight;
     protected DigitalInput TopElevatorLimit, LowerElevatorLimit, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
     static double[] dir = new double[2];
+    protected AnalogChannel Poten;
   
     public void init() {
         ps2Controller = new Joystick(1);
         FaceTop = new button(4, true);
+        Poten = new AnalogChannel(RobotMap.PotenPin);
         L1 = new button(5, true);
         R1 = new button(6, true);
         R2 = new button(8, true);

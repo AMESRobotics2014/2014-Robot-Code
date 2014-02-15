@@ -77,7 +77,10 @@ public class RobotMain extends IterativeRobot {
                 System.out.println("Does the robot even lift????");
             }
             Event.s_Testlimits();
-
+            if(IM.FaceRight.getState()){
+            System.out.println("Voltage: " + IM.Poten.getVoltage());
+            System.out.println("Value: " + IM.Poten.getValue());
+            }
             /*0// Second position - robot is lowering grabber pick up ball.
             if (someButtonIsPressed && elevatorIsFlat && grabberIsUp) {
                 //Event.sGrabarm();
