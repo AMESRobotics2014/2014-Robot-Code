@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import com.sun.squawk.util.MathUtils;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -19,6 +20,7 @@ public class InputManager {
 
     protected static Joystick ps2Controller;
     protected static button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR;
+    protected static DigitalInput TopElevator, LowerElevator, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
     static double[] dir = new double[2];
   
     public void init() {
@@ -30,7 +32,18 @@ public class InputManager {
         L2 = new button(7, true);
         FaceBott = new button(2,true);
         SettingsR = new button(10, true);
-        }
+        
+        
+        TopElevator = new DigitalInput(1);
+        LowerElevator = new DigitalInput(3);
+        PullbackLimit = new DigitalInput(7);
+        GrabberLowerLimit = new DigitalInput(9);
+        clutchEngagedLimit = new DigitalInput(11);
+        GrabberLiftLimit = new DigitalInput(10);
+        clutchReleasedLimit = new DigitalInput(13);
+        ratchetLimit = new DigitalInput(14);
+        ratchetDownLimit = new DigitalInput(12);
+    }
    
     public static double[] getPureAxis() {
         dir[0] = -ps2Controller.getRawAxis(2);

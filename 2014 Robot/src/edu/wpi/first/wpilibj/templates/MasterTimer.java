@@ -16,10 +16,9 @@ public class MasterTimer extends Timer {
     
       public void Init() {
         actindex = new Vector();
-        addEventTimer("TurboTimer");
+        addEventTimer("asdf");
         addEventTimer("DEBUGprints");
         addEventTimer("ShiftTimer");
-        addEventTimer("Pulse");
     }
 
     public void addEventTimer(String tid) {

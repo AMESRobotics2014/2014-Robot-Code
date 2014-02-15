@@ -114,7 +114,7 @@ public class RobotMain extends IterativeRobot {
                 IM.SettingsR.buttonState = !IM.SettingsR.buttonState;
             }
             if (/*IM.SettingsR.buttonState*/true) {
-                System.out.println("Manual++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=");
+                System.out.println("Manual");
                 MC.manualMode();
             }
             //MC.grabber(false);

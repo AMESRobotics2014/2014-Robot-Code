@@ -18,7 +18,6 @@ public class MotorControl {
     protected static Jaguar elevatorMotor;
     protected static Relay low, ratchet, clutch;
     protected static Relay high;
-    protected static DigitalInput TopElevator, LowerElevator, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
     InputManager IM;
     
     public void init() {
@@ -35,16 +34,7 @@ public class MotorControl {
         GrabWheel.setDirection(Relay.Direction.kReverse);
         elevatorMotor = new Jaguar(RobotMap.elevatorMotor);
         high = new Relay(RobotMap.high);
-        
-        TopElevator = new DigitalInput(1);
-        LowerElevator = new DigitalInput(3);
-        PullbackLimit = new DigitalInput(7);
-        GrabberLowerLimit = new DigitalInput(9);
-        clutchEngagedLimit = new DigitalInput(11);
-        GrabberLiftLimit = new DigitalInput(10);
-        clutchReleasedLimit = new DigitalInput(13);
-        ratchetLimit = new DigitalInput(14);
-        ratchetDownLimit = new DigitalInput(12);
+
         IM = new InputManager();
     }
 
@@ -76,26 +66,26 @@ public class MotorControl {
             //shooterMotor1.set(1);
             System.out.println("Shooting");
             
-            if (PullbackLimit.get()) {
+            if (IM.PullbackLimit.get()) {
                 shooterMotor1.set(0);
             } else {
                 shooterMotor1.set(1);
             }
             
-            if (clutchReleasedLimit.get()) {
+            if (IM.clutchReleasedLimit.get()) {
                 clutch.set(Relay.Value.kOff);
             } else {
                 clutch.set(Relay.Value.kForward);
             }
             
-            if (clutchEngagedLimit.get()) {
+            if (IM.clutchEngagedLimit.get()) {
                 clutch.set(Relay.Value.kOff);
             } else {
                 clutch.set(Relay.Value.kForward);
             }
             
-            if (ratchetLimit.get()) {
-                if (ratchetDownLimit.get()) {
+            if (IM.ratchetLimit.get()) {
+                if (IM.ratchetDownLimit.get()) {
                     ratchet.set(Relay.Value.kOff);
                 } else {
                     ratchet.set(Relay.Value.kForward);
@@ -137,7 +127,7 @@ public class MotorControl {
             grabberMotor.set(Relay.Value.kOff);
         }
         
-                if (GrabberLiftLimit.get()) {
+                if (IM.GrabberLiftLimit.get()) {
             grabberMotor.set(Relay.Value.kOff);
         }
                 }
@@ -146,7 +136,7 @@ public class MotorControl {
         public void grabber(byte dir) {
             //True forward, false backwards
             if(dir == 1){
-                if (GrabberLowerLimit.get()) {
+                if (IM.GrabberLowerLimit.get()) {
                     grabberMotor.set(Relay.Value.kOff);
                     GrabWheel.set(Relay.Value.kReverse);
                 } else {
@@ -155,7 +145,7 @@ public class MotorControl {
                 }
             }
             else if(dir == 2){
-                if (GrabberLiftLimit.get()) {
+                if (IM.GrabberLiftLimit.get()) {
                     grabberMotor.set(Relay.Value.kOff);
                 } else {
                     grabberMotor.set(Relay.Value.kReverse);
@@ -173,14 +163,14 @@ public class MotorControl {
             elevatorMotor.set(0);
         }
         if (vals == 1){
-            if (TopElevator.get()) {
+            if (IM.TopElevator.get()) {
                 elevatorMotor.set(0);
             } else {
                 elevatorMotor.set(0.5);
             }
         }
         if (vals == -1){
-            if (LowerElevator.get()) {
+            if (IM.LowerElevator.get()) {
                 elevatorMotor.set(0);
             } else {
                 elevatorMotor.set(-0.5);
