@@ -96,17 +96,38 @@ public class MotorControl {
             
          } else {
             PullBack.set(0);
-            //shooterMotor2.set(0);
             elevatorMotor.set(0);
             clutch.set(Relay.Value.kOff);
             ratchet.set(Relay.Value.kOff);
         }
         
     }
-    public void pullback(boolean rel/**/){
-        
+    public void pullback(boolean rel, boolean pull){
+        if(rel){
+            PullBack.set(0);
+        }else if(!rel){
+            PullBack.set(-0.5);
+        }
+        if(pull){
+            PullBack.set(0);
+        }else if(!pull){
+            PullBack.set(1);
+        }
     }
-
+    public void clutch(boolean in){
+        if(!in){
+            clutch.set(Relay.Value.kForward);
+        } else if(in){
+            clutch.set(Relay.Value.kOff);
+        }
+    }
+    public void ratchet(boolean down){
+        if(!down){
+            ratchet.set(Relay.Value.kForward);
+        }else if(down){
+            ratchet.set(Relay.Value.kOff);
+        }
+    }
     public void grabberOLD(boolean Switch1) {
         if(IM.L1.getState()){
             grabberMotor.set(Relay.Value.kReverse);
@@ -148,6 +169,7 @@ public class MotorControl {
             }
             else if(dir == 0){
                 grabberMotor.set(Relay.Value.kOff);
+                GrabWheel.set(Relay.Value.kOff);
             }
             else{
                 System.out.println("This shouldn't happen fix your grabber call");
