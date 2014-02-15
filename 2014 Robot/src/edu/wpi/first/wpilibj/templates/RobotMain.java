@@ -35,8 +35,9 @@ public class RobotMain extends IterativeRobot {
     private static InputManager IM;
     private static MasterTimer MT;
     protected static Watchdog wd;
-    boolean turbo,manualControl;
+    boolean turbo, manualControl;
     boolean shiftSTR;
+
     public void robotInit() {
         MC = new MotorControl();
         MC.init();
@@ -56,8 +57,10 @@ public class RobotMain extends IterativeRobot {
         wd.setExpiration(0.5);
         wd.feed();
     }
-    public void autonomousPeriodic() {        
+
+    public void autonomousPeriodic() {
     }
+
     public void teleopPeriodic() {
         while (true && isOperatorControl() && isEnabled()) {
             /*----------------------------------------------------*/
@@ -65,60 +68,102 @@ public class RobotMain extends IterativeRobot {
             /*----------------------------------------------------*/
 
             wd.feed();
-            if(IM.FaceBott.getState()){
+            if (IM.FaceBott.getState()) {
             }
             IM.dPadValue();
             if (MT.gdt(1) >= 1.0) {
                 MT.sc(1);
             }
-      
+
+            // Second position - robot is lowering grabber pick up ball.
+            if (someButtonIsPressed && elevatorIsFlat && grabberIsUp) {
+                //Event.sGrabarm();
+
+                MC.grabber((byte) 1);
+            }
+            
+            // Lift grabber
+            else if (someOtherOtherOtherButton && grabberIsDown && elevatorIsFlat) {
+                MC.grabber((byte) 2);
+                
+                // After arm picks up ball elevate the elevator to the fixed angle.
+                // 123 is a dummy number. It signifies the potentiometer value that raises the elevator to the magic angle.
+                MC.elevator(123, turbo, turbo, turbo);
+            }
+            
+            // Third position - robot is getting ready to shoot.
+            else if (someOtherButtonIsPressed && elevatorIsAtFixedAngle && grabberIsUp && robotSpeedIsZero) {
+                // Get angle at which to set the elevator to.
+                // Get distance.
+                
+                // Release clutch, ratchet, and shoot.
+                MC.shooter();
+            }
+            
+            // Get back to default position.
+            else if (someOtherOtherButtonIsPressed && noBallIsInRobot) {
+                // Set elevator flat.
+                // Make sure grabber is up.
+                MC.grabber((byte) 2);
+            }
+
             MC.drive(IM.getPureAxis());
             //MC.shooter();
-            if(IM.SettingsR.getState()){
+            if (IM.SettingsR.getState()) {
                 System.out.println("Toggling");
                 IM.SettingsR.buttonState = !IM.SettingsR.buttonState;
             }
-            if(/*IM.SettingsR.buttonState*/ true){
+            if (/*IM.SettingsR.buttonState*/true) {
                 System.out.println("Manual++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=");
-            MC.manualMode();
+                MC.manualMode();
             }
             //MC.grabber(false);
-          //  MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
+            //  MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
             MC.transmission();
         }
     }
-    
-            public static class Event{
-                //Sorted into scripted events and manual events by prefix s and m
-                public static void mGrabarm(){
-                    //Manually apply from input
-                    if(IM.R1.getState()){MC.grabber((byte)1);}
-                    if(IM.L1.getState()){MC.grabber((byte)2);}
-                    else{MC.grabber((byte)3);}
-                }
-                public static void sGrabarm(){
-                    //Use scripted event
-                    MC.grabber((byte) 1);
-                    
-                }
+
+    public static class Event {
+        //Sorted into scripted events and manual events by prefix s and m
+
+        public static void mGrabarm() {
+            //Manually apply from input
+            if (IM.R1.getState()) {
+                MC.grabber((byte) 1);
             }
-            
-        //Not sure if I want to keep this or not, will be good for complex button combos but I'm not sure we need it
-        public static class ButtonEvents{
-         static boolean b;
-            public static boolean R1(){
-                return IM.R1.getState();
+            if (IM.L1.getState()) {
+                MC.grabber((byte) 2);
+            } else {
+                MC.grabber((byte) 3);
             }
-            public static boolean R2(){
-                return IM.R2.getState();
-            }
-            public static boolean L1(){
-                return IM.L1.getState();
-            }
-            public static boolean L2(){
-                return IM.L2.getState();
-            }
-            
- 
-}
+        }
+
+        public static void sGrabarm() {
+            //Use scripted event
+            MC.grabber((byte) 1);
+
+        }
+    }
+
+    //Not sure if I want to keep this or not, will be good for complex button combos but I'm not sure we need it
+    public static class ButtonEvents {
+
+        static boolean b;
+
+        public static boolean R1() {
+            return IM.R1.getState();
+        }
+
+        public static boolean R2() {
+            return IM.R2.getState();
+        }
+
+        public static boolean L1() {
+            return IM.L1.getState();
+        }
+
+        public static boolean L2() {
+            return IM.L2.getState();
+        }
+    }
 }

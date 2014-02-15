@@ -11,13 +11,9 @@ package edu.wpi.first.wpilibj.templates;
 public class RobotMap {
     // Motor pins //
     protected static final int firstRightMotor = 6;
-    //protected static final int secondRightMotor = 6;
     
     protected static final int firstLeftMotor = 5;
-    //protected static final int secondLeftMotor = 5;
     
-    //Placeholders
-    //protected static final int shooterMotor1 = 9;
     protected static final int shooterMotor2 = 10;
     protected static final int PullbackLimit = 7;//=================== +
     protected static final int GrabberLiftLimit = 9;//================ +
