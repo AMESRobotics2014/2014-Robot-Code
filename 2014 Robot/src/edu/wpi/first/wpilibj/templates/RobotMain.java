@@ -97,7 +97,7 @@ public class RobotMain extends IterativeRobot {
                 // Get distance.
                 
                 // Release clutch, ratchet, and shoot.
-                MC.shooter();
+                MC.shooterOLD();
             }
             
             // Get back to default position.

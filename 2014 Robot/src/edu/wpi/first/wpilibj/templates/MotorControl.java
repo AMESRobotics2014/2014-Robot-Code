@@ -61,7 +61,7 @@ public class MotorControl {
         return val;
     }
 
-    public void shooter() {
+    public void shooterOLD() {
         if (IM.R2.getState()) {
             //shooterMotor1.set(1);
             System.out.println("Shooting");
