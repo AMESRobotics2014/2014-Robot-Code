@@ -137,23 +137,18 @@ public class MotorControl {
             //0 Is off, 1 is foreward , 2 is backwards
             
             if(dir == 1){
-                if (IM.GrabberLowerLimit.get()) {
-                    grabberMotor.set(Relay.Value.kOff);
-                    GrabWheel.set(Relay.Value.kReverse);
-                } else {
                     grabberMotor.set(Relay.Value.kForward);
                     GrabWheel.set(Relay.Value.kOff);
-                }
             }
             else if(dir == 2){
-                if (IM.GrabberLiftLimit.get()) {
-                    grabberMotor.set(Relay.Value.kOff);
-                } else {
                     grabberMotor.set(Relay.Value.kReverse);
-                }
             }
             else if(dir == 0){
                 grabberMotor.set(Relay.Value.kOff);
+            }
+            else{
+                System.out.println("This shouldn't happen fix your grabber call");
+                grabberMotor.set(Relay.Value.kOff); 
             }
         }
         
