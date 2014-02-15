@@ -18,7 +18,7 @@ public class MasterTimer extends Timer {
         actindex = new Vector();
         addEventTimer("LimitDEBUG");
         addEventTimer("printsDEBUG");
-        addEventTimer("ShiftTimer");
+        addEventTimer("potential");
     }
 
     public void addEventTimer(String tid) {

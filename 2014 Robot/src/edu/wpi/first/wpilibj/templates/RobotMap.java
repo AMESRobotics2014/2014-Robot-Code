@@ -33,7 +33,7 @@ public class RobotMap {
     protected static final int LowerElevator = 3;//============== +
     protected static final int ElevatronPosition = 5;//========= +
     protected static final int high = 4;
-    protected static final int PotenPin = 0;
+    protected static final int PotenPin = 1;
     //protected static final int low = 4;
     //protected static final int pSwitch = p;
 }

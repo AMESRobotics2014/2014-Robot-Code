@@ -40,12 +40,12 @@ public class InputManager {
         TopElevatorLimit = new DigitalInput(1);
         LowerElevatorLimit = new DigitalInput(3);
         PullbackLimit = new DigitalInput(7);
-        GrabberLowerLimit = new DigitalInput(9);
-        clutchEngagedLimit = new DigitalInput(11);
-        GrabberLiftLimit = new DigitalInput(10);
+        GrabberLowerLimit = new DigitalInput(10);
+        clutchEngagedLimit = new DigitalInput(12);
+        GrabberLiftLimit = new DigitalInput(9);
         clutchReleasedLimit = new DigitalInput(13);
         ratchetLimit = new DigitalInput(14);
-        ratchetDownLimit = new DigitalInput(12);
+        ratchetDownLimit = new DigitalInput(11);
     }
    
     public static double[] getPureAxis() {

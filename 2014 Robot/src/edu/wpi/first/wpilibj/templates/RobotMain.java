@@ -76,8 +76,11 @@ public class RobotMain extends IterativeRobot {
                 MT.sc(1);
                 System.out.println("Does the robot even lift????");
             }
+            
             Event.s_Testlimits();
-            if(IM.FaceRight.getState()){
+            System.out.println(MT.gdt(2));
+            if(IM.FaceRight.getState() & (MT.gdt(2) >= .6 )){
+                MT.sc(2);
             System.out.println("Voltage: " + IM.Poten.getVoltage());
             System.out.println("Value: " + IM.Poten.getValue());
             }
@@ -116,16 +119,16 @@ public class RobotMain extends IterativeRobot {
             MC.drive(IM.getPureAxis());
             //MC.shooter();
             if (IM.SettingsR.getState()) {
-                System.out.println("Toggling");
+              //  System.out.println("Toggling");
                 IM.SettingsR.buttonState = !IM.SettingsR.buttonState;
             }
             if (/*IM.SettingsR.buttonState*/true) {
-                System.out.println("Manual");
-                MC.manualMode();
+               // System.out.println("Manual");
+            //    MC.manualMode();
             }
             //MC.grabber(false);
             //  MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
-            MC.transmissionOLD();
+          //  MC.transmissionOLD();
         }
         
     }
@@ -164,8 +167,9 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_Testlimits(){
-            if(MT.gdt(0) >= .6){
+            if(MT.gdt(0) >= .6 & IM.FaceRight.getState()){
                 MT.sc(0);
+                System.out.println("Checking limits");
                 System.out.println("Clutch Engage"+": "+IM.clutchEngagedLimit.get());
                 System.out.println("Clutch Released"+": "+IM.clutchReleasedLimit.get());
                 System.out.println("Ratchet down"+": "+IM.ratchetDownLimit.get());
