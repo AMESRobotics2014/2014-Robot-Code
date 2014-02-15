@@ -16,8 +16,8 @@ public class MasterTimer extends Timer {
     
       public void Init() {
         actindex = new Vector();
-        addEventTimer("asdf");
-        addEventTimer("DEBUGprints");
+        addEventTimer("LimitDEBUG");
+        addEventTimer("printsDEBUG");
         addEventTimer("ShiftTimer");
     }
 

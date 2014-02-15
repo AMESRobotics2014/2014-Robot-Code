@@ -71,8 +71,10 @@ public class RobotMain extends IterativeRobot {
             if (IM.FaceBott.getState()) {
             }
             IM.dPadValue();
-            if (MT.gdt(1) >= 1.0) {
+            
+            if (MT.gdt(1) >= 3.0) {
                 MT.sc(1);
+                System.out.println("Does the robot even lift????");
             }
 
             /*0// Second position - robot is lowering grabber pick up ball.
@@ -158,8 +160,8 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_Testlimits(){
-            if(MT.gdt(1) >= .6){
-                MT.sc(1);
+            if(MT.gdt(0) >= .6){
+                MT.sc(0);
                 System.out.println("Clutch Engage"+": "+IM.clutchEngagedLimit.get());
                 System.out.println("Clutch Released"+": "+IM.clutchReleasedLimit.get());
                 System.out.println("Ratchet down"+": "+IM.ratchetDownLimit.get());
