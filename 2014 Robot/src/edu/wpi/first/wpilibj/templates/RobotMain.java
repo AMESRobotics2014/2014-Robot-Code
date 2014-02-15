@@ -70,15 +70,16 @@ public class RobotMain extends IterativeRobot {
             wd.feed();
             if (IM.FaceBott.getState()) {
             }
-            IM.dPadValue();
+            IM.dPadValueUD();
             
-            if (MT.gdt(1) >= 3.0) {
+            if (MT.gdt(1) >= 5.0) {
                 MT.sc(1);
                 System.out.println("Does the robot even lift????");
+              //  MT.listIndicesDEBUG();
             }
             
-            Event.s_Testlimits();
-            System.out.println(MT.gdt(2));
+         //   Event.s_Testlimits();
+           // System.out.println(MT.gdt(2));
             if(IM.FaceRight.getState() & (MT.gdt(2) >= .6 )){
                 MT.sc(2);
             System.out.println("Voltage: " + IM.Poten.getVoltage());
@@ -124,10 +125,10 @@ public class RobotMain extends IterativeRobot {
             }
             if (/*IM.SettingsR.buttonState*/true) {
                // System.out.println("Manual");
-            //    MC.manualMode();
+                MC.manualMode();
             }
             //MC.grabber(false);
-            //  MC.elevator(1.0,InputManager.raiseGrabber.getState(),InputManager.lowerGrabber.getState(),false);
+          //    MC.elevatorOLD(1.0);
           //  MC.transmissionOLD();
         }
         
@@ -137,10 +138,10 @@ public class RobotMain extends IterativeRobot {
         //Sorted into scripted events and manual events by prefix s and m
         public static void m_Grab() {
             //Manually apply from input
-            if (IM.R1.getState() & !IM.GrabberLowerLimit.get()) {
+            if (IM.R1.getState() & IM.GrabberLowerLimit.get()) {
                 MC.grabber((byte) 1);
             }
-            if (IM.L1.getState() & !IM.GrabberLiftLimit.get()) {
+            if (IM.L1.getState() & IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
             } else {
                 MC.grabber((byte) 0);
@@ -149,9 +150,17 @@ public class RobotMain extends IterativeRobot {
         public static void m_Shoot(){
             
         }
+        public static void m_Elevator(){
+            if(IM.TopElevatorLimit.get() & IM.dPadValueLR() > .05 ){
+            MC.Elevator(IM.dPadValueLR());
+            }
+            else if(IM.LowerElevatorLimit.get() & IM.dPadValueLR() < -.05){
+            MC.Elevator(IM.dPadValueLR());
+            }
+        }
         public static void s_GrabSustain() {
             //Use scripted event
-            if(!IM.GrabberLowerLimit.get()){
+            if(IM.GrabberLowerLimit.get()){
             MC.grabber((byte) 1);
             }
             else{
@@ -159,7 +168,7 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_GrabRetract(){
-            if(!IM.GrabberLiftLimit.get()){
+            if(IM.GrabberLiftLimit.get()){
             MC.grabber((byte) 2);
             }
             else{

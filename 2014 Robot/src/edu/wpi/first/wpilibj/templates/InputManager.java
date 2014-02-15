@@ -57,7 +57,7 @@ public class InputManager {
         return dir;
     }
    
-    public static double[] dPadValue() {
+    public static double[] dPadValueUD() {
         double upDownDPad = -ps2Controller.getRawAxis(6);
         double oldRange = 2, newRange;
         
@@ -74,6 +74,19 @@ public class InputManager {
         dir[1] = (((dir[1] + 1) * newRange) / oldRange) + newMin;
        
         return dir;
+    }
+    public byte dPadValueLR(){
+        byte val;
+        if(ps2Controller.getRawAxis(5) > 0.05){
+            val = 1;
+        }
+        else if(ps2Controller.getRawAxis(5) < -.05){
+            val = -1;
+        }
+        else{
+            val = 0;
+        }
+        return val;
     }
     public static double[] scaleValues(double[] values, double buttonDPadValue) {
         double upDownDPad = -ps2Controller.getRawAxis(6);

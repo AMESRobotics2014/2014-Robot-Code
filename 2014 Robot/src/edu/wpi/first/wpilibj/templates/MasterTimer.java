@@ -94,24 +94,24 @@ public class MasterTimer extends Timer {
         }
         
         public void Init(String tid){
-            id = tid;
-            ot = get();
-            dt = -10;//Just Cause 2  
+            this.id = tid;
+            this.ot = get();
+            this.dt = -10;//Just Cause 2  
         }
 
         public double gdt() {
-            dt = get() - ot;
+            this.dt = get() - ot;
             //ot = get();
-            return dt;
+            return this.dt;
         }
         public void sc(){
-            ot = get();
+            this.ot = get();
         }
 
         public  void wipe() {
-            ot = 0;
-            dt = 0;
-            id = null;
+            this.ot = 0;
+            this.dt = 0;
+            this.id = null;
         }
     }
 }

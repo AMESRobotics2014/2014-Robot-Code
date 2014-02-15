@@ -18,7 +18,7 @@ public class MotorControl {
     protected static Jaguar elevatorMotor;
     protected static Relay low, ratchet, clutch;
     protected static Relay high;
-    InputManager IM;
+    static InputManager IM;
     
     public void init() {
         firstRightMotor = new Victor(RobotMap.firstRightMotor);
@@ -155,26 +155,38 @@ public class MotorControl {
             }
         }
         
-    public void elevator(double val, boolean Button1, boolean Button2, boolean autoAim) {
+    public void elevatorOLD(double val) {
         double vals = IM.ps2Controller.getRawAxis(5);
         
         if (vals == 0){
             elevatorMotor.set(0);
         }
         if (vals == 1){
-            if (IM.TopElevatorLimit.get()) {
+            if (!IM.TopElevatorLimit.get()) {
                 elevatorMotor.set(0);
             } else {
                 elevatorMotor.set(0.5);
             }
         }
         if (vals == -1){
-            if (IM.LowerElevatorLimit.get()) {
+            if (!IM.LowerElevatorLimit.get()) {
                 elevatorMotor.set(0);
             } else {
                 elevatorMotor.set(-0.5);
             }
         }
+    }
+    public void Elevator(byte dir){
+        if(dir == 0){
+            elevatorMotor.set(0);
+        }
+        else if(dir == 1){
+            elevatorMotor.set(0.5);
+        }
+        else if(dir == 2){
+            elevatorMotor.set(-0.5);
+        }
+        
     }
     public void transmissionOLD(){   
         if(IM.L2.getState()){
@@ -226,6 +238,8 @@ public class MotorControl {
         }else{
             clutch.set(Relay.Value.kOff);
         }
+       // double vals = IM.ps2Controller.getRawAxis(5);
+    //    if(vals)
     }
 //}
 }
