@@ -76,6 +76,7 @@ public class RobotMain extends IterativeRobot {
                 MT.sc(1);
                 System.out.println("Does the robot even lift????");
             }
+            Event.s_Testlimits();
 
             /*0// Second position - robot is lowering grabber pick up ball.
             if (someButtonIsPressed && elevatorIsFlat && grabberIsUp) {
