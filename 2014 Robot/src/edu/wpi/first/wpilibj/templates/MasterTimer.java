@@ -42,9 +42,9 @@ public class MasterTimer extends Timer {
     }
     
     public double gdt(int loc){
-        System.out.println("Getting gdt at location:" +loc);
+      //  System.out.println("Getting gdt at location:" +loc);
         use = (accessdata)actindex.elementAt(loc);
-        System.out.println("GDT is :" + use.gdt());
+       // System.out.println("GDT is :" + use.gdt());
         return use.gdt();
     }
             public void sc(int loc){

@@ -13,7 +13,7 @@ public class MotorControl {
     protected static Victor secondRightMotor;
     protected static Victor firstLeftMotor;
     protected static Victor secondLeftMotor;
-    protected static Victor shooterMotor1, shooterMotor2;
+    protected static Victor PullBack, shooterMotor2;
     protected static Relay GrabWheel, grabberMotor;
     protected static Jaguar elevatorMotor;
     protected static Relay low, ratchet, clutch;
@@ -23,7 +23,7 @@ public class MotorControl {
     public void init() {
         firstRightMotor = new Victor(RobotMap.firstRightMotor);
         firstLeftMotor = new Victor(RobotMap.firstLeftMotor);
-        shooterMotor1 = new Victor(RobotMap.shooterMotor2);
+        PullBack = new Victor(RobotMap.shooterMotor2);
         clutch = new Relay(RobotMap.clutch);
         ratchet = new Relay(RobotMap.ratchet);
         ratchet.setDirection(Relay.Direction.kBoth);
@@ -61,15 +61,15 @@ public class MotorControl {
         return val;
     }
 
-    public void shooterOLD() {
+    public void shooterOLD() { //Will be seperated into mutiple seperate methods
         if (IM.R2.getState()) {
             //shooterMotor1.set(1);
             System.out.println("Shooting");
             
             if (IM.PullbackLimit.get()) {
-                shooterMotor1.set(0);
+                PullBack.set(0);
             } else {
-                shooterMotor1.set(1);
+                PullBack.set(1);
             }
             
             if (IM.clutchReleasedLimit.get()) {
@@ -95,12 +95,15 @@ public class MotorControl {
             }
             
          } else {
-            shooterMotor1.set(0);
+            PullBack.set(0);
             //shooterMotor2.set(0);
             elevatorMotor.set(0);
             clutch.set(Relay.Value.kOff);
             ratchet.set(Relay.Value.kOff);
         }
+        
+    }
+    public void pullback(boolean rel/**/){
         
     }
 
@@ -159,14 +162,14 @@ public class MotorControl {
             elevatorMotor.set(0);
         }
         if (vals == 1){
-            if (IM.TopElevator.get()) {
+            if (IM.TopElevatorLimit.get()) {
                 elevatorMotor.set(0);
             } else {
                 elevatorMotor.set(0.5);
             }
         }
         if (vals == -1){
-            if (IM.LowerElevator.get()) {
+            if (IM.LowerElevatorLimit.get()) {
                 elevatorMotor.set(0);
             } else {
                 elevatorMotor.set(-0.5);
@@ -194,9 +197,9 @@ public class MotorControl {
   //  if(IM.SettingsR.getState()){
         
         if(IM.R2.getState()){
-            shooterMotor1.set(1);
+            PullBack.set(1);
         }else{
-            shooterMotor1.set(0);
+            PullBack.set(0);
         }
         if(IM.L1.getState()){
             grabberMotor.set(Relay.Value.kForward);

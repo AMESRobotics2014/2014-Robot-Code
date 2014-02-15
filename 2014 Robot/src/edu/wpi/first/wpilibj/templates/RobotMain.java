@@ -74,7 +74,7 @@ public class RobotMain extends IterativeRobot {
             if (MT.gdt(1) >= 1.0) {
                 MT.sc(1);
             }
-
+            /*
             // Second position - robot is lowering grabber pick up ball.
             if (someButtonIsPressed && elevatorIsFlat && grabberIsUp) {
                 //Event.sGrabarm();
@@ -106,6 +106,8 @@ public class RobotMain extends IterativeRobot {
                 // Make sure grabber is up.
                 MC.grabber((byte) 2);
             }
+            */
+            
 
             MC.drive(IM.getPureAxis());
             //MC.shooter();
@@ -155,6 +157,20 @@ public class RobotMain extends IterativeRobot {
             }
             else{
                 MC.grabber((byte) 0);
+            }
+        }
+        public static void s_Testlimits(){
+            if(MT.gdt(1) >= .6){
+                MT.sc(1);
+                System.out.println("Clutch Engage"+": "+IM.clutchEngagedLimit.get());
+                System.out.println("Clutch Released"+": "+IM.clutchReleasedLimit.get());
+                System.out.println("Ratchet down"+": "+IM.ratchetDownLimit.get());
+                System.out.println("Ratchet limit"+": "+IM.ratchetLimit.get());
+                System.out.println("Lift Limit"+": "+IM.GrabberLiftLimit.get());
+                System.out.println("Lower Limit"+": "+IM.GrabberLowerLimit.get());
+                System.out.println("Pullback limit"+": "+IM.PullbackLimit.get());
+                System.out.println("Elevator Top Limit"+": "+IM.TopElevatorLimit.get());
+                System.out.println("Elevator Bottom Limit"+": "+IM.LowerElevatorLimit.get());
             }
         }
         public static void s_XwingAttackMode(){

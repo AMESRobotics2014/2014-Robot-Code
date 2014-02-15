@@ -20,7 +20,7 @@ public class InputManager {
 
     protected static Joystick ps2Controller;
     protected button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR, FaceRight;
-    protected DigitalInput TopElevator, LowerElevator, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
+    protected DigitalInput TopElevatorLimit, LowerElevatorLimit, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
     static double[] dir = new double[2];
   
     public void init() {
@@ -35,8 +35,8 @@ public class InputManager {
         FaceRight = new button(3,true);
         
         
-        TopElevator = new DigitalInput(1);
-        LowerElevator = new DigitalInput(3);
+        TopElevatorLimit = new DigitalInput(1);
+        LowerElevatorLimit = new DigitalInput(3);
         PullbackLimit = new DigitalInput(7);
         GrabberLowerLimit = new DigitalInput(9);
         clutchEngagedLimit = new DigitalInput(11);
