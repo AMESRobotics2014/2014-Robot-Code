@@ -108,16 +108,16 @@ public class MotorControl {
         }else if(!rel){
             PullBack.set(-0.5);
         }
-        if(pull){
+        if(!pull){
             PullBack.set(0);
-        }else if(!pull){
+        }else if(pull){
             PullBack.set(1);
         }
     }
     public void clutch(boolean in){
-        if(!in){
+        if(in){
             clutch.set(Relay.Value.kForward);
-        } else if(in){
+        } else if(!in){
             clutch.set(Relay.Value.kOff);
         }
     }
@@ -162,18 +162,31 @@ public class MotorControl {
             
             if(dir == 1){
                     grabberMotor.set(Relay.Value.kForward);
-                    GrabWheel.set(Relay.Value.kOff);
             }
             else if(dir == 2){
                     grabberMotor.set(Relay.Value.kReverse);
             }
             else if(dir == 0){
                 grabberMotor.set(Relay.Value.kOff);
-                GrabWheel.set(Relay.Value.kOff);
             }
             else{
                 System.out.println("This shouldn't happen fix your grabber call");
                 grabberMotor.set(Relay.Value.kOff); 
+            }
+        }
+        public void grabberWheel(byte dir){
+            if(dir == 1){
+                    GrabWheel.set(Relay.Value.kReverse);
+            }
+            else if(dir == 2){
+                    GrabWheel.set(Relay.Value.kOff);
+            }
+            else if(dir == 0){
+                GrabWheel.set(Relay.Value.kOff);
+            }
+            else{
+                System.out.println("This shouldn't happen fix your wheel call");
+                GrabWheel.set(Relay.Value.kOff); 
             }
         }
         

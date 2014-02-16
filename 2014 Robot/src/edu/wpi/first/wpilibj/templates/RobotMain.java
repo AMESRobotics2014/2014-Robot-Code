@@ -76,37 +76,6 @@ public class RobotMain extends IterativeRobot {
             System.out.println("Voltage: " + IM.Poten.getVoltage());
             System.out.println("Value: " + IM.Poten.getValue());
             }
-            /*0// Second position - robot is lowering grabber pick up ball.
-            if (someButtonIsPressed && elevatorIsFlat && grabberIsUp) {
-                //Event.sGrabarm();
-
-                MC.grabber((byte) 1);
-            }
-            
-            // Lift grabber
-            else if (someOtherOtherOtherButton && grabberIsDown && elevatorIsFlat) {
-                MC.grabber((byte) 2);
-                
-                // After arm picks up ball elevate the elevator to the fixed angle.
-                // 123 is a dummy number. It signifies the potentiometer value that raises the elevator to the magic angle.
-                MC.elevator(123, turbo, turbo, turbo);
-            }
-            
-            // Third position - robot is getting ready to shoot.
-            else if (someOtherButtonIsPressed && elevatorIsAtFixedAngle && grabberIsUp && robotSpeedIsZero) {
-                // Get angle at which to set the elevator to.
-                // Get distance.
-                
-                // Release clutch, ratchet, and shoot.
-                MC.shooterOLD();
-            }
-            
-            // Get back to default position.
-            else if (someOtherOtherButtonIsPressed && noBallIsInRobot) {
-                // Set elevator flat.
-                // Make sure grabber is up.
-                MC.grabber((byte) 2);
-            }*/
             if (R.manualONLY) {
                 MC.manualMode();
             }
@@ -126,13 +95,16 @@ public class RobotMain extends IterativeRobot {
         }
         public static void m_Grab() {
             //Manually apply from input
-            if (IM.R1.getState() & IM.GrabberLowerLimit.get()) {
+            if (IM.L1.getState() & IM.GrabberLowerLimit.get()) {
                 MC.grabber((byte) 1);
             }
-            if (IM.L1.getState() & IM.GrabberLiftLimit.get()) {
+            else if (IM.R1.getState() & IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
             } else {
                 MC.grabber((byte) 0);
+            }
+            if(IM.R2.getState()){
+                
             }
         }
         public static void m_Shoot(){
@@ -172,9 +144,15 @@ public class RobotMain extends IterativeRobot {
           }
           
         }
-        public static void s_Shoot(){
+        public static void s_Pullback(){
+            MC.pullback(true,IM.PullbackLimit.get());
+        }
+        public static void s_Shoot(boolean dsbl){
            // if(Com.ConfirmShot()){
-                //shoot
+                MC.clutch(IM.clutchEngagedLimit.get());
+           if(!IM.PullbackLimit.get()){
+                MC.ratchet(IM.ratchetLimit.get());
+           }
            // }
         }
         public static void s_Testlimits(){
