@@ -98,15 +98,17 @@ public class InputManager {
         } else if (ps2Controller.getRawAxis(5) < -0.05) {
             val[0] = -1;
         }
+        else{
+            val[0] = 0;
+        }
         if (ps2Controller.getRawAxis(6) > 0.05) {
             val[1] = 1;
         } else if (ps2Controller.getRawAxis(6) < -.05) {
             val[1] = -1;
         } else {
-            val[0] = 0;
             val[1] = 0;
         }
-        System.out.println("Dpad got" + val[0] + " and "+ val[1]);
+        //System.out.println("Dpad got" + val[0] + " and "+ val[1]);
         return val;
     }
 

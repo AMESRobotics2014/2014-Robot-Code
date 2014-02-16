@@ -178,9 +178,9 @@ public class MotorControl {
             if(dir == 1){
                     GrabWheel.set(Relay.Value.kReverse);
             }
-            else if(dir == 2){
-                    GrabWheel.set(Relay.Value.kOff);
-            }
+          //  else if(dir == 2){
+            //        GrabWheel.set(Relay.Value.kOff);
+            //}
             else if(dir == 0){
                 GrabWheel.set(Relay.Value.kOff);
             }

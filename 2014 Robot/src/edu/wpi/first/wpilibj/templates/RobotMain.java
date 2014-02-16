@@ -107,7 +107,10 @@ public class RobotMain extends IterativeRobot {
                 MC.grabber((byte) 0);
             }
             if (IM.R2.getState()) {
-
+                MC.grabberWheel((byte)1);
+            }
+            else if(!IM.R2.getState()){
+                MC.grabberWheel((byte)0);
             }
         }
 
@@ -136,9 +139,12 @@ public class RobotMain extends IterativeRobot {
 
         public static void m_Elevator() {
             if (IM.TopElevatorLimit.get() & IM.dPadValue()[0] > .05) {
-                MC.Elevator(IM.dPadValue()[0]);
+                MC.Elevator((byte)1);
             } else if (IM.LowerElevatorLimit.get() & IM.dPadValue()[0] < -.05) {
-                MC.Elevator(IM.dPadValue()[0]);
+                MC.Elevator((byte)2);
+            }
+            else{
+                MC.Elevator((byte) 0);
             }
         }
 
