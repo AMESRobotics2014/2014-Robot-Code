@@ -42,7 +42,7 @@ public class RobotMap {
 */
     protected static final boolean verbose = false;
     protected static final boolean stdDEBUG = false;//Standard debug
-    protected static final boolean manualONLY = false;
+    protected static final boolean manualONLY = true;
     protected static final double printdelay = 3;
     
 }

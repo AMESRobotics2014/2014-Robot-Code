@@ -32,6 +32,7 @@ public class RobotMain extends IterativeRobot {
     private static MotorControl MC;
     private static RobotMap R;
     private static ImageProcessing IP;
+    //private static Communication Com;
     private static InputManager IM;
     private static MasterTimer MT;
     protected static Watchdog wd;
@@ -41,6 +42,8 @@ public class RobotMain extends IterativeRobot {
     public void robotInit() {
         MC = new MotorControl();
         MC.init();
+       // Com = new Communication();
+        //Com.init();
         //MC.test();
         wd = Watchdog.getInstance();
         wd.setExpiration(.5);
@@ -64,13 +67,7 @@ public class RobotMain extends IterativeRobot {
     public void teleopPeriodic() {
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
-           // IM.dPadValueOLD();
-            
-            if (MT.gdt(1) >= 5.0) {
-                MT.sc(1);
-                System.out.println("Does the robot even lift????");
-              //  MT.listIndicesDEBUG();
-            }
+           Event.Alwaysrun();
             
          //   Event.s_Testlimits();
            // System.out.println(MT.gdt(2));
@@ -110,26 +107,23 @@ public class RobotMain extends IterativeRobot {
                 // Make sure grabber is up.
                 MC.grabber((byte) 2);
             }*/
-
-            MC.drive(IM.getFinalAxis());
-            //MC.shooter();
-            if (IM.SettingsR.getState()) {
-              //  System.out.println("Toggling");
-                IM.SettingsR.buttonState = !IM.SettingsR.buttonState;
-            }
-            if (/*IM.SettingsR.buttonState*/true) {
-               // System.out.println("Manual");
+            if (R.manualONLY) {
                 MC.manualMode();
             }
-            //MC.grabber(false);
-          //    MC.elevatorOLD(1.0);
-          //  MC.transmissionOLD();
         }
         
     }
 
     public static class Event {
         //Sorted into scripted events and manual events by prefix s and m
+        public static void Alwaysrun(){
+              MC.drive(IM.getFinalAxis());
+              if (MT.gdt(1) >= 5.0) {
+                MT.sc(1);
+                System.out.println("Does the robot even lift????");
+              //  MT.listIndicesDEBUG();
+            }
+        }
         public static void m_Grab() {
             //Manually apply from input
             if (IM.R1.getState() & IM.GrabberLowerLimit.get()) {
@@ -170,10 +164,18 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_ShootAbs(){//The secret police will find you and shoot you no matter what
-            
+          if(IM.clutchReleasedLimit.get()){
+            MC.clutch(true);
+          }
+          else{
+              MC.clutch(false);
+          }
+          
         }
         public static void s_Shoot(){
-           // if(C)
+           // if(Com.ConfirmShot()){
+                //shoot
+           // }
         }
         public static void s_Testlimits(){
             if(MT.gdt(0) >= .6 & IM.FaceRight.getState()){

@@ -47,8 +47,8 @@ public class MasterTimer extends Timer {
 
     public void sc(int loc) {
         use = (accessdata) actindex.elementAt(loc);
-        actindex.removeElementAt(loc);
-        System.out.println(actindex.elementAt(loc));
+        //actindex.removeElementAt(loc);
+       // System.out.println(actindex.elementAt(loc));
         use.sc();
         actindex.setElementAt(use, loc);
     }

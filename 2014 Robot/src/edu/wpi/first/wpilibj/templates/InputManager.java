@@ -27,8 +27,8 @@ import edu.wpi.first.wpilibj.Joystick;
 public class InputManager {
 
     protected static Joystick ps2Controller;
-    protected button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR, FaceRight;
-    protected DigitalInput TopElevatorLimit, LowerElevatorLimit, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
+    protected static button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR, FaceRight;
+    protected static DigitalInput TopElevatorLimit, LowerElevatorLimit, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
     static double[] dir = new double[2];
     protected AnalogChannel Poten;
     static RobotMap R;
@@ -63,8 +63,8 @@ public class InputManager {
     }
 
     public static double[] getPureAxis() {
-        dir[0] = -ps2Controller.getRawAxis(2);
-        dir[1] = ps2Controller.getRawAxis(4);
+        dir[0] = ps2Controller.getRawAxis(2);
+        dir[1] = -ps2Controller.getRawAxis(4);
 
         dir = deadZone(dir);
         return dir;

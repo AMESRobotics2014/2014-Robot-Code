@@ -231,7 +231,7 @@ public class MotorControl {
   //  if(IM.SettingsR.getState()){
         
         if(IM.R2.getState()){
-            PullBack.set(1);
+            PullBack.set(1);//Jake is silly
         }else{
             PullBack.set(0);
         }
