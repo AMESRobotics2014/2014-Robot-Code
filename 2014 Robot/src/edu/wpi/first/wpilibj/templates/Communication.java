@@ -16,9 +16,9 @@ public class Communication {
         MT = new MasterTimer();
         MT.Init();
         
-        infoTable.setClientMode();
-        infoTable.setIPAddress("10.32.43.2");
-        infoTable = NetworkTable.getTable("Info");
+        //infoTable.setClientMode();
+        //infoTable.setIPAddress("10.32.43.2");
+        infoTable = NetworkTable.getTable("default");
     }
     
     public void processTable() {
