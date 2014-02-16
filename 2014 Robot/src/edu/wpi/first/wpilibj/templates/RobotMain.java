@@ -61,6 +61,10 @@ public class RobotMain extends IterativeRobot {
     }
 
     public void autonomousPeriodic() {
+                                        /* Plan */
+        // Check to see if goal is hot or not. If hot, shoot.
+        // There needs to be a method that specifically tells the robot to shoot in this autonomous mode.
+         
     }
 
     public void teleopPeriodic() {
@@ -81,7 +85,6 @@ public class RobotMain extends IterativeRobot {
                 MT.sc(3);
             }
         }
-        
     }
 
     public static class Event {
