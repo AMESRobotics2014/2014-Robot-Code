@@ -63,14 +63,8 @@ public class RobotMain extends IterativeRobot {
 
     public void teleopPeriodic() {
         while (true && isOperatorControl() && isEnabled()) {
-            /*----------------------------------------------------*/
-            /* robotDrive.tankDrive(leftJoystick, rightJoystick); */
-            /*----------------------------------------------------*/
-
             wd.feed();
-            if (IM.FaceBott.getState()) {
-            }
-            IM.dPadValueUD();
+           // IM.dPadValueOLD();
             
             if (MT.gdt(1) >= 5.0) {
                 MT.sc(1);
@@ -117,7 +111,7 @@ public class RobotMain extends IterativeRobot {
                 MC.grabber((byte) 2);
             }*/
 
-            MC.drive(IM.getPureAxis());
+            MC.drive(IM.getFinalAxis());
             //MC.shooter();
             if (IM.SettingsR.getState()) {
               //  System.out.println("Toggling");
@@ -151,11 +145,11 @@ public class RobotMain extends IterativeRobot {
             
         }
         public static void m_Elevator(){
-            if(IM.TopElevatorLimit.get() & IM.dPadValueLR() > .05 ){
-            MC.Elevator(IM.dPadValueLR());
+            if(IM.TopElevatorLimit.get() & IM.dPadValue()[0] > .05 ){
+            MC.Elevator(IM.dPadValue()[0]);
             }
-            else if(IM.LowerElevatorLimit.get() & IM.dPadValueLR() < -.05){
-            MC.Elevator(IM.dPadValueLR());
+            else if(IM.LowerElevatorLimit.get() & IM.dPadValue()[0] < -.05){
+            MC.Elevator(IM.dPadValue()[0]);
             }
         }
         public static void s_GrabSustain() {
@@ -174,6 +168,12 @@ public class RobotMain extends IterativeRobot {
             else{
                 MC.grabber((byte) 0);
             }
+        }
+        public static void s_ShootAbs(){//The secret police will find you and shoot you no matter what
+            
+        }
+        public static void s_Shoot(){
+           // if(C)
         }
         public static void s_Testlimits(){
             if(MT.gdt(0) >= .6 & IM.FaceRight.getState()){

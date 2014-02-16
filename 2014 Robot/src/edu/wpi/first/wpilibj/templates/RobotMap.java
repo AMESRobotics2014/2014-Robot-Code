@@ -11,29 +11,38 @@ package edu.wpi.first.wpilibj.templates;
 public class RobotMap {
     // Motor pins //
     protected static final int firstRightMotor = 6;
-    
     protected static final int firstLeftMotor = 5;
-    
     protected static final int shooterMotor2 = 10;
     protected static final int PullbackLimit = 7;//=================== +
     protected static final int GrabberLiftLimit = 9;//================ +
-    
     protected static final int ratchet = 3;
     protected static final int RachetLimit = 15;//=====================
-    
     protected static final int clutch = 8;
     protected static final int ClutchEngaged = 11;//=====================
     protected static final int ClutchReleased = 13;//=====================
-    
     protected static final int grabberMotor = 1;
     protected static final int densoMotor = 7;
-    
     protected static final int elevatorMotor = 2;
     protected static final int TopElevator = 1;//==================== +
     protected static final int LowerElevator = 3;//============== +
     protected static final int ElevatronPosition = 5;//========= +
     protected static final int high = 4;
     protected static final int PotenPin = 1;
-    //protected static final int low = 4;
-    //protected static final int pSwitch = p;
+    
+    
+    protected static final int expo_ramp = 3;
+    protected static final double normalThresh = .05;
+    
+    
+/*
+  ___  ___ ___ _   _  ___ 
+ |   \| __| _ ) | | |/ __|
+ | |) | _|| _ \ |_| | (_ |
+ |___/|___|___/\___/ \___|
+*/
+    protected static final boolean verbose = false;
+    protected static final boolean stdDEBUG = false;//Standard debug
+    protected static final boolean manualONLY = false;
+    protected static final double printdelay = 3;
+    
 }

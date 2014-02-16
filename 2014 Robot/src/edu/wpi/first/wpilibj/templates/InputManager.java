@@ -1,21 +1,29 @@
 /*
  */
-
-
 package edu.wpi.first.wpilibj.templates;
+
 import edu.wpi.first.wpilibj.AnalogChannel;
 import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
- * This class should hold all code, classes and methods for managing all inputs into the system, this includes buttons, joysticks, and other user interface devices.
- * <p>The class should handle, and manipulate these inputs into data to be sent to other parts of the robot. In most cases this class should only manage and create instructions for hardware, these instructions should be sent elsewhere before being fed to hardware.
- * <p>For example, this class should get input from the joysticks, organize it, prepare it, but never call on an actual motor to do any action.
- * Instead, send it to a motor controlling class that will take that data and use it appropriately.
+ * This class should hold all code, classes and methods for managing all inputs
+ * into the system, this includes buttons, joysticks, and other user interface
+ * devices.
+ * <p>
+ * The class should handle, and manipulate these inputs into data to be sent to
+ * other parts of the robot. In most cases this class should only manage and
+ * create instructions for hardware, these instructions should be sent elsewhere
+ * before being fed to hardware.
+ * <p>
+ * For example, this class should get input from the joysticks, organize it,
+ * prepare it, but never call on an actual motor to do any action. Instead, send
+ * it to a motor controlling class that will take that data and use it
+ * appropriately.
+ *
  * @author Erin Turnley
  */
-
 public class InputManager {
 
     protected static Joystick ps2Controller;
@@ -23,7 +31,8 @@ public class InputManager {
     protected DigitalInput TopElevatorLimit, LowerElevatorLimit, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
     static double[] dir = new double[2];
     protected AnalogChannel Poten;
-  
+    static RobotMap R;
+
     public void init() {
         ps2Controller = new Joystick(1);
         FaceTop = new button(4, true);
@@ -32,11 +41,10 @@ public class InputManager {
         R1 = new button(6, true);
         R2 = new button(8, true);
         L2 = new button(7, true);
-        FaceBott = new button(2,true);
+        FaceBott = new button(2, true);
         SettingsR = new button(10, true);
-        FaceRight = new button(3,true);
-        
-        
+        FaceRight = new button(3, true);
+
         TopElevatorLimit = new DigitalInput(1);
         LowerElevatorLimit = new DigitalInput(3);
         PullbackLimit = new DigitalInput(7);
@@ -47,90 +55,121 @@ public class InputManager {
         ratchetLimit = new DigitalInput(14);
         ratchetDownLimit = new DigitalInput(11);
     }
-   
+
+    public double[] getFinalAxis() {
+        double[] drv = new double[4];
+        drv = ramp(normalize(getPureAxis()));
+        return (drv);
+    }
+
     public static double[] getPureAxis() {
         dir[0] = -ps2Controller.getRawAxis(2);
         dir[1] = ps2Controller.getRawAxis(4);
-       
-       
+
         dir = deadZone(dir);
         return dir;
     }
-   
-    public static double[] dPadValueUD() {
+
+    public static double[] dPadValueOLD() {
         double upDownDPad = -ps2Controller.getRawAxis(6);
         double oldRange = 2, newRange;
-        
-        if ((upDownDPad == 1) && (oldRange <= 2) && (oldRange >= 1))
+        if ((upDownDPad == 1) && (oldRange <= 2) && (oldRange >= 1)) {
             newRange = oldRange + 0.2;
-        else if ((upDownDPad == -1) && (oldRange <= 2) && (oldRange >= 1))
+        } else if ((upDownDPad == -1) && (oldRange <= 2) && (oldRange >= 1)) {
             newRange = oldRange - 0.2;
-        else
+        } else {
             newRange = 0;
-        
+        }
+
         double newMin = (newRange / -2);
-        
+
         dir[0] = (((dir[0] + 1) * newRange) / oldRange) + newMin;
         dir[1] = (((dir[1] + 1) * newRange) / oldRange) + newMin;
-       
+
         return dir;
     }
-    public byte dPadValueLR(){
-        byte val;
-        if(ps2Controller.getRawAxis(5) > 0.05){
-            val = 1;
+
+    public byte[] dPadValue() {
+        byte[] val = new byte[2];
+        if (ps2Controller.getRawAxis(5) > 0.05) {
+            val[0] = 1;
+        } else if (ps2Controller.getRawAxis(5) < -.05) {
+            val[0] = -1;
         }
-        else if(ps2Controller.getRawAxis(5) < -.05){
-            val = -1;
-        }
-        else{
-            val = 0;
+        if (ps2Controller.getRawAxis(6) > 0.05) {
+            val[1] = 1;
+        } else if (ps2Controller.getRawAxis(6) < -.05) {
+            val[1] = -1;
+        } else {
+            val[0] = 0;
+            val[1] = 0;
         }
         return val;
     }
-    public static double[] scaleValues(double[] values, double buttonDPadValue) {
-        double upDownDPad = -ps2Controller.getRawAxis(6);
+
+    public static double[] scaleValues(double[] values) {
+        /*
+         double upDownDPad = -ps2Controller.getRawAxis(6);
        
-        double oldRange = 2, newRange = 0;
+         double oldRange = 2, newRange = 0;
        
-        if ((buttonDPadValue == -1) && (oldRange >= 1)) {
-            newRange = oldRange - 0.2;
-        } else if ((buttonDPadValue == 0)){
+         if ((buttonDPadValue == -1) && (oldRange >= 1)) {
+         newRange = oldRange - 0.2;
+         } else if ((buttonDPadValue == 0)){
             
-        }
-        else if ((buttonDPadValue == 1) && (oldRange <= 2)) {
-            newRange = oldRange + 0.2;
-        }
+         }
+         else if ((buttonDPadValue == 1) && (oldRange <= 2)) {
+         newRange = oldRange + 0.2;
+         }
        
-        double newMin = (newRange / -2);
+         double newMin = (newRange / -2);
        
-        values[0] = (((values[0] + 1) * newRange) / oldRange) + newMin;
-        values[1] = (((values[1] + 1) * newRange) / oldRange) + newMin;
-       
+         values[0] = (((values[0] + 1) * newRange) / oldRange) + newMin;
+         values[1] = (((values[1] + 1) * newRange) / oldRange) + newMin;
+         */
+
         return values;
     }
-   
-    protected static double[] deadZone(double[] axis) {
-        for (byte si = 0; si < axis.length; si++) {
-            if ((axis[si] <= 0.05) && (axis[si] >= -0.05))
-                axis[si] = 0;
+
+    protected static double[] normalize(double[] axis) {
+        if ((Math.abs((axis[0] - axis[1])) <= R.normalThresh) & (axis[0] * axis[1]) > 0) {
+            double tinydbl = (axis[0] + axis[1]) / 2;
+            axis[0] = (tinydbl);
+            axis[1] = (tinydbl);
         }
-       
         return axis;
     }
-    
-  
+
+    protected static double[] ramp(double[] axis) {
+        for (byte ri = 0; ri < axis.length; ri++) {
+            //axis[ri] = MathUtils.pow(axis[ri], rm.expo_ramp);
+            axis[ri] = (((.666) * MathUtils.pow(axis[ri], R.expo_ramp)) + ((.333) * axis[ri])) * 1;
+        }
+        return (axis);
+    }
+
+    protected static double[] deadZone(double[] axis) {
+        for (byte si = 0; si < axis.length; si++) {
+            if ((axis[si] <= 0.05) && (axis[si] >= -0.05)) {
+                axis[si] = 0;
+            }
+        }
+
+        return axis;
+    }
+
     protected static class button {
+
         boolean buttonState;
         int buttonPin;
-       
+
         public button(int buttonPin, boolean joystickState) {
             this.buttonPin = buttonPin;
         }
-       
+
         public boolean getState() {
-                buttonState = ps2Controller.getRawButton(this.buttonPin);
-           
+            buttonState = ps2Controller.getRawButton(this.buttonPin);
+
             return buttonState;
         }
     }

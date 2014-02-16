@@ -7,14 +7,11 @@ public class MasterTimer extends Timer {
 
     Vector actindex;
     accessdata use;
+
     public void MasterTimer() {
-        actindex = new Vector();
-        addEventTimer("TurboTimer");
-        addEventTimer("DEBUGprints");
-        addEventTimer("ShiftTimer");
     }
-    
-      public void Init() {
+
+    public void Init() {
         actindex = new Vector();
         addEventTimer("LimitDEBUG");
         addEventTimer("printsDEBUG");
@@ -28,44 +25,47 @@ public class MasterTimer extends Timer {
     }
 
     public void listIndicesDEBUG() {
-        try{
-        int i;
-        System.out.println("Test" + actindex.size());
-        for (i = 0; i < actindex.size(); i++) {
-           use = (accessdata)actindex.elementAt(i);
-            System.out.println("Name: " + use.id + " at index location:[" + i + "]");
-            System.out.println("Has gdt val of: " + use.gdt());
-        }
-        }catch(NullPointerException ex){
+        try {
+            int i;
+            System.out.println("Test" + actindex.size());
+            for (i = 0; i < actindex.size(); i++) {
+                use = (accessdata) actindex.elementAt(i);
+                System.out.println("Name: " + use.id + " at index location:[" + i + "]");
+                System.out.println("Has gdt val of: " + use.gdt());
+            }
+        } catch (NullPointerException ex) {
             System.out.println("This index doesn't exist D:");
         }
     }
-    
-    public double gdt(int loc){
-      //  System.out.println("Getting gdt at location:" +loc);
-        use = (accessdata)actindex.elementAt(loc);
-       // System.out.println("GDT is :" + use.gdt());
+
+    public double gdt(int loc) {
+        //  System.out.println("Getting gdt at location:" +loc);
+        use = (accessdata) actindex.elementAt(loc);
+        // System.out.println("GDT is :" + use.gdt());
         return use.gdt();
     }
-            public void sc(int loc){
-            use = (accessdata)actindex.elementAt(loc);
-            use.sc();
-            actindex.insertElementAt(use, loc);
-        }
+
+    public void sc(int loc) {
+        use = (accessdata) actindex.elementAt(loc);
+        actindex.removeElementAt(loc);
+        System.out.println(actindex.elementAt(loc));
+        use.sc();
+        actindex.setElementAt(use, loc);
+    }
 
     public void Freset() {//Full reset!!!
         this.reset();
         int i;
         for (i = 0; i < actindex.size(); i++) {
-            use = (accessdata)actindex.elementAt(i);
+            use = (accessdata) actindex.elementAt(i);
             use.wipe();
         }
     }
 
     public void Ereset(int[] exclude) {//Exclusion reset!!!
         int i;
-        for (i = 0; i < actindex.size()-1; i++) {
-            use = (accessdata)actindex.elementAt(i);
+        for (i = 0; i < actindex.size() - 1; i++) {
+            use = (accessdata) actindex.elementAt(i);
             for (int k = 0; k < exclude.length; k++) {
                 if (i == exclude[k]) {
                     break;
@@ -79,21 +79,21 @@ public class MasterTimer extends Timer {
     public void Sreset(int[] include) {//Selective reset
         int i;
         for (i = 0; i < include.length; i++) {
-            use = (accessdata)actindex.elementAt(i);
+            use = (accessdata) actindex.elementAt(i);
             use.wipe();
         }
     }
 
     public class accessdata {
 
-         double ot;
-         double dt;
-         String id;
+        double ot;
+        double dt;
+        String id;
 
         accessdata(String tid) {
         }
-        
-        public void Init(String tid){
+
+        public void Init(String tid) {
             this.id = tid;
             this.ot = get();
             this.dt = -10;//Just Cause 2  
@@ -104,11 +104,12 @@ public class MasterTimer extends Timer {
             //ot = get();
             return this.dt;
         }
-        public void sc(){
+
+        public void sc() {
             this.ot = get();
         }
 
-        public  void wipe() {
+        public void wipe() {
             this.ot = 0;
             this.dt = 0;
             this.id = null;

@@ -18,7 +18,7 @@ public class MotorControl {
     protected static Jaguar elevatorMotor;
     protected static Relay low, ratchet, clutch;
     protected static Relay high;
-    static InputManager IM;
+    protected static InputManager IM;
     
     public void init() {
         firstRightMotor = new Victor(RobotMap.firstRightMotor);
