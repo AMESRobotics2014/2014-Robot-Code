@@ -76,8 +76,6 @@ public class RobotMain extends IterativeRobot {
                 if (!IM.SettingsL.getState()) {
                     Event.m_Elevator();
                     Event.m_Grab();
-               // Event.m_Pullback();
-                    //Event.m_Shoot();
                 } else {
                     MC.manualMode();
                 }
