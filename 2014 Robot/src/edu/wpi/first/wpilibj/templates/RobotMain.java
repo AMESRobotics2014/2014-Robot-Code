@@ -66,148 +66,153 @@ public class RobotMain extends IterativeRobot {
     public void teleopPeriodic() {
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
-           Event.Alwaysrun();
-            if (R.manualONLY) {
-                if(!IM.SettingsL.getState()){
-                Event.m_Elevator();
-                Event.m_Grab();
-               // Event.m_Pullback();
-                //Event.m_Shoot();
-                }
-                else{
-                MC.manualMode();
-                }
-            }
-            
+
             if (MT.gdt(3) >= 1) {
                 Com.processTable();
                 MT.sc(3);
             }
+            Event.Alwaysrun();
+            if (R.manualONLY) {
+                if (!IM.SettingsL.getState()) {
+                    Event.m_Elevator();
+                    Event.m_Grab();
+               // Event.m_Pullback();
+                    //Event.m_Shoot();
+                } else {
+                    MC.manualMode();
+                }
+            }
         }
-        
+
     }
 
     public static class Event {
+
         //Sorted into scripted events and manual events by prefix s and m
-        public static void Alwaysrun(){
-              MC.drive(IM.getFinalAxis());
-              if (MT.gdt(1) >= 5.0) {
+        public static void Alwaysrun() {
+            MC.drive(IM.getFinalAxis());
+            if (MT.gdt(1) >= 5.0) {
                 MT.sc(1);
                 System.out.println("Does the robot even lift????");
-              //  MT.listIndicesDEBUG();
+                //  MT.listIndicesDEBUG();
             }
         }
+
         public static void m_Grab() {
             //Manually apply from input
             if (IM.L1.getState() & IM.GrabberLowerLimit.get()) {
                 MC.grabber((byte) 1);
-            }
-            else if (IM.R1.getState() & IM.GrabberLiftLimit.get()) {
+            } else if (IM.R1.getState() & IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
             } else {
                 MC.grabber((byte) 0);
             }
-            if(IM.R2.getState()){
-                
+            if (IM.R2.getState()) {
+
             }
         }
-        public static void m_Shoot(){
-            if(IM.FaceBott.getState()){
+
+        public static void m_Shoot() {
+            if (IM.FaceBott.getState()) {
                 MC.clutch(IM.clutchEngagedLimit.get());
-            }
-            else if(IM.FaceRight.getState()){
+            } else if (IM.FaceRight.getState()) {
                 MC.clutch(IM.clutchReleasedLimit.get());
             }
-            if(IM.FaceTop.getState()){
-            MC.ratchet(IM.ratchetLimit.get(), false);
-        }
-            else if(IM.FaceLeft.getState()){
+            if (IM.FaceTop.getState()) {
+                MC.ratchet(IM.ratchetLimit.get(), false);
+            } else if (IM.FaceLeft.getState()) {
                 MC.ratchet(IM.ratchetDownLimit.get(), true);
             }
-            
+
         }
-        public static void m_Pullback(){
-            if(IM.dPadValue()[0] > .05){
-            MC.pullback(false, IM.PullbackLimit.get());
+
+        public static void m_Pullback() {
+            if (IM.dPadValue()[0] > .05) {
+                MC.pullback(false, IM.PullbackLimit.get());
             }
-            if(IM.dPadValue()[0] < -.05){
-            MC.pullback(true, false);
-            }
-        }
-        public static void m_Elevator(){
-            if(IM.TopElevatorLimit.get() & IM.dPadValue()[0] > .05 ){
-            MC.Elevator(IM.dPadValue()[0]);
-            }
-            else if(IM.LowerElevatorLimit.get() & IM.dPadValue()[0] < -.05){
-            MC.Elevator(IM.dPadValue()[0]);
+            if (IM.dPadValue()[0] < -.05) {
+                MC.pullback(true, false);
             }
         }
+
+        public static void m_Elevator() {
+            if (IM.TopElevatorLimit.get() & IM.dPadValue()[0] > .05) {
+                MC.Elevator(IM.dPadValue()[0]);
+            } else if (IM.LowerElevatorLimit.get() & IM.dPadValue()[0] < -.05) {
+                MC.Elevator(IM.dPadValue()[0]);
+            }
+        }
+
         public static void s_GrabSustain() {
             //Use scripted event
-            if(IM.GrabberLowerLimit.get()){
-            MC.grabber((byte) 1);
-            }
-            else{
+            if (IM.GrabberLowerLimit.get()) {
+                MC.grabber((byte) 1);
+            } else {
                 MC.grabber((byte) 0);
             }
         }
-        public static void s_GrabRetract(){
-            if(IM.GrabberLiftLimit.get()){
-            MC.grabber((byte) 2);
-            }
-            else{
+
+        public static void s_GrabRetract() {
+            if (IM.GrabberLiftLimit.get()) {
+                MC.grabber((byte) 2);
+            } else {
                 MC.grabber((byte) 0);
             }
         }
-        public static void s_ShootAbs(){//The secret police will find you and shoot you no matter what
-          if(IM.clutchReleasedLimit.get()){
-            MC.clutch(true);
-          }
-          else{
-              MC.clutch(false);
-          }
-          
+
+        public static void s_ShootAbs() {//The secret police will find you and shoot you no matter what
+            if (IM.clutchReleasedLimit.get()) {
+                MC.clutch(true);
+            } else {
+                MC.clutch(false);
+            }
+
         }
-        public static void s_Pullback(){
-            MC.pullback(true,IM.PullbackLimit.get());
+
+        public static void s_Pullback() {
+            MC.pullback(true, IM.PullbackLimit.get());
         }
-        public static void s_Shoot(boolean dsbl){
-           // if(Com.ConfirmShot()){
-                MC.clutch(IM.clutchReleasedLimit.get());
-           if(!IM.PullbackLimit.get() & IM.clutchReleasedLimit.get()){
+
+        public static void s_Shoot(boolean dsbl) {
+            // if(Com.ConfirmShot()){
+            MC.clutch(IM.clutchReleasedLimit.get());
+            if (!IM.PullbackLimit.get() & IM.clutchReleasedLimit.get()) {
                 MC.ratchet(IM.ratchetLimit.get(), true);
-           }
-           // }
+            }
+            // }
         }
-        public static void s_Testlimits(){
-            if(MT.gdt(0) >= .6 & IM.FaceRight.getState()){
+
+        public static void s_Testlimits() {
+            if (MT.gdt(0) >= .6 & IM.FaceRight.getState()) {
                 MT.sc(0);
                 System.out.println("Checking limits");
-                System.out.println("Clutch Engage"+": "+IM.clutchEngagedLimit.get());
-                System.out.println("Clutch Released"+": "+IM.clutchReleasedLimit.get());
-                System.out.println("Ratchet down"+": "+IM.ratchetDownLimit.get());
-                System.out.println("Ratchet limit"+": "+IM.ratchetLimit.get());
-                System.out.println("Lift Limit"+": "+IM.GrabberLiftLimit.get());
-                System.out.println("Lower Limit"+": "+IM.GrabberLowerLimit.get());
-                System.out.println("Pullback limit"+": "+IM.PullbackLimit.get());
-                System.out.println("Elevator Top Limit"+": "+IM.TopElevatorLimit.get());
-                System.out.println("Elevator Bottom Limit"+": "+IM.LowerElevatorLimit.get());
+                System.out.println("Clutch Engage" + ": " + IM.clutchEngagedLimit.get());
+                System.out.println("Clutch Released" + ": " + IM.clutchReleasedLimit.get());
+                System.out.println("Ratchet down" + ": " + IM.ratchetDownLimit.get());
+                System.out.println("Ratchet limit" + ": " + IM.ratchetLimit.get());
+                System.out.println("Lift Limit" + ": " + IM.GrabberLiftLimit.get());
+                System.out.println("Lower Limit" + ": " + IM.GrabberLowerLimit.get());
+                System.out.println("Pullback limit" + ": " + IM.PullbackLimit.get());
+                System.out.println("Elevator Top Limit" + ": " + IM.TopElevatorLimit.get());
+                System.out.println("Elevator Bottom Limit" + ": " + IM.LowerElevatorLimit.get());
             }
         }
-        public static void s_testPot(){
-             if(IM.FaceRight.getState() & (MT.gdt(2) >= .6 )){
+
+        public static void s_testPot() {
+            if (IM.FaceRight.getState() & (MT.gdt(2) >= .6)) {
                 MT.sc(2);
                 System.out.println("Voltage: " + IM.Poten.getVoltage());
                 System.out.println("Value: " + IM.Poten.getValue());
             }
         }
-        public static void s_XwingAttackMode(){
+
+        public static void s_XwingAttackMode() {
             UsetheForce(9001);
         }
     }
 
     //Not sure if I want to keep this or not, will be good for complex button combos but I'm not sure we need it}
-    public static void UsetheForce(int mitichlorians){
+    public static void UsetheForce(int mitichlorians) {
         System.out.println("Feel don't think");
     }
 }
