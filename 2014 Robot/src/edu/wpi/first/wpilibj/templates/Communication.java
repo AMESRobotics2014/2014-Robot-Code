@@ -23,12 +23,11 @@ public class Communication {
     
     public void processTable() {
         //while ((true) && (MT.gdt(0) <= 1)) {
-        double dist = infoTable.getNumber("Distance", 0.0);
+        double distance = infoTable.getNumber("Distance", 0.0);
+        boolean hot = infoTable.getBoolean("Hot", false);
         double angle = infoTable.getNumber("Angle", 0.0);
             
-        System.out.println("Dist: " + dist + "Angle: " + angle);
-        
-        MT.sc(1);
+        System.out.println("Distance: " + distance + "Hot or Not: " + hot + "Angle: " + angle);
         //}
     }
     public boolean ConfirmShot(){
