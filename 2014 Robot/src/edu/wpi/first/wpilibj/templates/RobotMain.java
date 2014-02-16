@@ -65,7 +65,12 @@ public class RobotMain extends IterativeRobot {
             wd.feed();
            Event.Alwaysrun();
             if (R.manualONLY) {
+                if(!IM.FaceRight.getState()){
+                Event.m_Elevator();
+                }
+                else{
                 MC.manualMode();
+                }
             }
         }
         
