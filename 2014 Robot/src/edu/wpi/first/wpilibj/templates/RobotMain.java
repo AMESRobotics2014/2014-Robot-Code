@@ -34,6 +34,7 @@ public class RobotMain extends IterativeRobot {
     private static ImageProcessing IP;
     private static InputManager IM;
     private static MasterTimer MT;
+    private static Communication Com;
     protected static Watchdog wd;
     boolean turbo, manualControl;
     boolean shiftSTR;
@@ -51,6 +52,8 @@ public class RobotMain extends IterativeRobot {
         MT.Init();
         IM = new InputManager();
         IM.init();
+        Com = new Communication();
+        Com.init();
         IP = new ImageProcessing();
         wd = Watchdog.getInstance();
         wd.setExpiration(0.5);
@@ -71,6 +74,11 @@ public class RobotMain extends IterativeRobot {
                 else{
                 MC.manualMode();
                 }
+            }
+            
+            if (MT.gdt(3) >= 1) {
+                Com.processTable();
+                MT.sc(3);
             }
         }
         
