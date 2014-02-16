@@ -118,6 +118,7 @@ public class Communication {
             }
         }
         
+        /*
         public void run() {
             NetworkTable.setClientMode();
             NetworkTable.setIPAddress("10.32.43.2");
@@ -134,4 +135,5 @@ public class Communication {
                 System.out.println("Dist: " + dist);
             }
         }
+        */
 }
