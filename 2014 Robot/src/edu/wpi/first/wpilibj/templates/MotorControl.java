@@ -213,12 +213,15 @@ public class MotorControl {
     }
     public void Elevator(byte dir){
         if(dir == 0){
+            System.out.println("Elevator 0");
             elevatorMotor.set(0);
         }
         else if(dir == 1){
+            System.out.println("Elevator forward");
             elevatorMotor.set(0.5);
         }
         else if(dir == 2){
+            System.out.println("Elevator reverse");
             elevatorMotor.set(-0.5);
         }
         

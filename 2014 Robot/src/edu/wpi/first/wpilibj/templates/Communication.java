@@ -16,8 +16,8 @@ public class Communication {
         MT = new MasterTimer();
         MT.Init();
         
-        infoTable.setClientMode();
-        infoTable.setIPAddress("10.32.43.2");
+      //  infoTable.setClientMode();
+        //infoTable.setIPAddress("10.32.43.2");
         infoTable = NetworkTable.getTable("Info");
     }
     
@@ -27,7 +27,7 @@ public class Communication {
         boolean hot = infoTable.getBoolean("Hot", false);
         double angle = infoTable.getNumber("Angle", 0.0);
             
-        System.out.println("Distance: " + distance + "Hot or Not: " + hot + "Angle: " + angle);
+        //System.out.println("Distance: " + distance + "Hot or Not: " + hot + "Angle: " + angle);
         //}
     }
     public boolean ConfirmShot(){

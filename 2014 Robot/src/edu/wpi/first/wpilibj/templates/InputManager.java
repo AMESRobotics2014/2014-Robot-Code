@@ -95,7 +95,7 @@ public class InputManager {
         byte[] val = new byte[2];
         if (ps2Controller.getRawAxis(5) > 0.05) {
             val[0] = 1;
-        } else if (ps2Controller.getRawAxis(5) < -.05) {
+        } else if (ps2Controller.getRawAxis(5) < -0.05) {
             val[0] = -1;
         }
         if (ps2Controller.getRawAxis(6) > 0.05) {
@@ -106,6 +106,7 @@ public class InputManager {
             val[0] = 0;
             val[1] = 0;
         }
+        System.out.println("Dpad got" + val[0] + " and "+ val[1]);
         return val;
     }
 

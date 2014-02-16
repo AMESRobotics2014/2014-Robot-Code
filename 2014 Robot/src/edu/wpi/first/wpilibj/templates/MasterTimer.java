@@ -16,6 +16,7 @@ public class MasterTimer extends Timer {
         addEventTimer("LimitDEBUG");
         addEventTimer("printsDEBUG");
         addEventTimer("potential");
+        addEventTimer("TableTimer");
     }
 
     public void addEventTimer(String tid) {

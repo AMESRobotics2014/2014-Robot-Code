@@ -78,6 +78,7 @@ public class RobotMain extends IterativeRobot {
                     Event.m_Grab();
                 } else {
                     MC.manualMode();
+                    MC.elevatorOLD(IM.dPadValueOLD()[0]);
                 }
             }
         }
