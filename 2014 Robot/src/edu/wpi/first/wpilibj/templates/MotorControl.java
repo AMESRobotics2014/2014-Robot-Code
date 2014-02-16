@@ -103,12 +103,12 @@ public class MotorControl {
         
     }
     public void pullback(boolean rel, boolean pull){
-        if(rel){
+        if(!rel & PullBack.get() < 0){
             PullBack.set(0);
-        }else if(!rel){
+        }else if(rel){
             PullBack.set(-0.5);
         }
-        if(!pull){
+        if(!pull & PullBack.get() > 0){
             PullBack.set(0);
         }else if(pull){
             PullBack.set(1);
@@ -120,11 +120,11 @@ public class MotorControl {
         } else if(!in){
             clutch.set(Relay.Value.kOff);
         }
-    }
-    public void ratchet(boolean down){
-        if(!down){
+    } 
+    public void ratchet(boolean reve, boolean rev){
+        if(reve){
             ratchet.set(Relay.Value.kForward);
-        }else if(down){
+        }else if(!reve){
             ratchet.set(Relay.Value.kOff);
         }
     }

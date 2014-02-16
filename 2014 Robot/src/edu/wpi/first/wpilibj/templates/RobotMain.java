@@ -32,7 +32,6 @@ public class RobotMain extends IterativeRobot {
     private static MotorControl MC;
     private static RobotMap R;
     private static ImageProcessing IP;
-    //private static Communication Com;
     private static InputManager IM;
     private static MasterTimer MT;
     protected static Watchdog wd;
@@ -42,9 +41,6 @@ public class RobotMain extends IterativeRobot {
     public void robotInit() {
         MC = new MotorControl();
         MC.init();
-       // Com = new Communication();
-        //Com.init();
-        //MC.test();
         wd = Watchdog.getInstance();
         wd.setExpiration(.5);
         wd.setEnabled(true);
@@ -68,14 +64,6 @@ public class RobotMain extends IterativeRobot {
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
            Event.Alwaysrun();
-            
-         //   Event.s_Testlimits();
-           // System.out.println(MT.gdt(2));
-            if(IM.FaceRight.getState() & (MT.gdt(2) >= .6 )){
-                MT.sc(2);
-            System.out.println("Voltage: " + IM.Poten.getVoltage());
-            System.out.println("Value: " + IM.Poten.getValue());
-            }
             if (R.manualONLY) {
                 MC.manualMode();
             }
@@ -108,7 +96,27 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void m_Shoot(){
+            if(IM.FaceBott.getState()){
+                MC.clutch(IM.clutchEngagedLimit.get());
+            }
+            else if(IM.FaceRight.getState()){
+                MC.clutch(IM.clutchReleasedLimit.get());
+            }
+            if(IM.FaceTop.getState()){
+            MC.ratchet(IM.ratchetLimit.get(), false);
+        }
+            else if(IM.FaceLeft.getState()){
+                MC.ratchet(IM.ratchetDownLimit.get(), true);
+            }
             
+        }
+        public static void m_Pullback(){
+            if(IM.dPadValue()[0] > .05){
+            MC.pullback(false, IM.PullbackLimit.get());
+            }
+            if(IM.dPadValue()[0] < -.05){
+            MC.pullback(true, false);
+            }
         }
         public static void m_Elevator(){
             if(IM.TopElevatorLimit.get() & IM.dPadValue()[0] > .05 ){
@@ -149,9 +157,9 @@ public class RobotMain extends IterativeRobot {
         }
         public static void s_Shoot(boolean dsbl){
            // if(Com.ConfirmShot()){
-                MC.clutch(IM.clutchEngagedLimit.get());
-           if(!IM.PullbackLimit.get()){
-                MC.ratchet(IM.ratchetLimit.get());
+                MC.clutch(IM.clutchReleasedLimit.get());
+           if(!IM.PullbackLimit.get() & IM.clutchReleasedLimit.get()){
+                MC.ratchet(IM.ratchetLimit.get(), true);
            }
            // }
         }
@@ -170,40 +178,19 @@ public class RobotMain extends IterativeRobot {
                 System.out.println("Elevator Bottom Limit"+": "+IM.LowerElevatorLimit.get());
             }
         }
+        public static void s_testPot(){
+             if(IM.FaceRight.getState() & (MT.gdt(2) >= .6 )){
+                MT.sc(2);
+                System.out.println("Voltage: " + IM.Poten.getVoltage());
+                System.out.println("Value: " + IM.Poten.getValue());
+            }
+        }
         public static void s_XwingAttackMode(){
             UsetheForce(9001);
         }
     }
 
-    //Not sure if I want to keep this or not, will be good for complex button combos but I'm not sure we need it
-    public static class ButtonEvents {
-
-        static boolean b;
-
-        public static boolean R1() {
-            return IM.R1.getState();
-        }
-
-        public static boolean R2() {
-            return IM.R2.getState();
-        }
-
-        public static boolean L1() {
-            return IM.L1.getState();
-        }
-
-        public static boolean L2() {
-            return IM.L2.getState();
-        }
-        
-        public static boolean EnterAttackMode(){
-            return IM.FaceTop.getState();
-        }
-        public static boolean EnterPickupMode(){
-            return IM.FaceRight.getState();
-    }
-        
-    }
+    //Not sure if I want to keep this or not, will be good for complex button combos but I'm not sure we need it}
     public static void UsetheForce(int mitichlorians){
         System.out.println("Feel don't think");
     }

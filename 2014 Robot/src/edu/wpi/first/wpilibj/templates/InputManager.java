@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class InputManager {
 
     protected static Joystick ps2Controller;
-    protected static button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR, FaceRight;
+    protected static button FaceTop, L1, R1, R2, L2, FaceBott, SettingsR, FaceRight, FaceLeft;
     protected static DigitalInput TopElevatorLimit, LowerElevatorLimit, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
     static double[] dir = new double[2];
     protected AnalogChannel Poten;
@@ -44,6 +44,7 @@ public class InputManager {
         FaceBott = new button(2, true);
         SettingsR = new button(10, true);
         FaceRight = new button(3, true);
+        FaceLeft = new button(1,true); 
 
         TopElevatorLimit = new DigitalInput(1);
         LowerElevatorLimit = new DigitalInput(3);
@@ -107,7 +108,7 @@ public class InputManager {
         return val;
     }
 
-    public static double[] scaleValues(double[] values) {
+    public static double[] scaleValuesOLD(double[] values) {
         /*
          double upDownDPad = -ps2Controller.getRawAxis(6);
        
