@@ -114,17 +114,30 @@ public class MotorControl {
             PullBack.set(1);
         }
     }
-    public void clutch(boolean in){
-        if(in){
+    public void clutch(int dir){
+        if(dir == 1){
             clutch.set(Relay.Value.kForward);
-        } else if(!in){
+        } else if(dir == 2){
+            clutch.set(Relay.Value.kOff);
+        }
+        else if(dir == 0){
+            clutch.set(Relay.Value.kOff);
+        }
+        else{
             clutch.set(Relay.Value.kOff);
         }
     } 
-    public void ratchet(boolean reve, boolean rev){
-        if(reve){
+    public void ratchet(int dir){
+        if(dir == 1){
             ratchet.set(Relay.Value.kForward);
-        }else if(!reve){
+        }
+        else if(dir==2){
+            ratchet.set(Relay.Value.kReverse);
+        }
+        else if(dir ==0){
+            ratchet.set(Relay.Value.kOff);
+        }
+        else{
             ratchet.set(Relay.Value.kOff);
         }
     }
@@ -213,15 +226,15 @@ public class MotorControl {
     }
     public void Elevator(byte dir){
         if(dir == 0){
-            System.out.println("Elevator 0");
+        //    System.out.println("Elevator 0");
             elevatorMotor.set(0);
         }
         else if(dir == 1){
-            System.out.println("Elevator forward");
+          //  System.out.println("Elevator forward");
             elevatorMotor.set(0.5);
         }
         else if(dir == 2){
-            System.out.println("Elevator reverse");
+            //System.out.println("Elevator reverse");
             elevatorMotor.set(-0.5);
         }
         
