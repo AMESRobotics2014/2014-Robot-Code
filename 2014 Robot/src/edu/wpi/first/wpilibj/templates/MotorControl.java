@@ -102,16 +102,16 @@ public class MotorControl {
         }
         
     }
-    public void pullback(boolean rel, boolean pull){
-        if(!rel & PullBack.get() < 0){
-            PullBack.set(0);
-        }else if(rel){
+    public void pullback(int dir){
+        if(dir == 1){
+            PullBack.set(.5);
+        }else if(dir == 2){
             PullBack.set(-0.5);
         }
-        if(!pull & PullBack.get() > 0){
+        else if(dir == 0){
             PullBack.set(0);
-        }else if(pull){
-            PullBack.set(1);
+        }else{
+            PullBack.set(0);
         }
     }
     public void clutch(int dir){
@@ -231,11 +231,11 @@ public class MotorControl {
         }
         else if(dir == 1){
           //  System.out.println("Elevator forward");
-            elevatorMotor.set(0.5);
+            elevatorMotor.set(1);
         }
         else if(dir == 2){
             //System.out.println("Elevator reverse");
-            elevatorMotor.set(-0.5);
+            elevatorMotor.set(-1);
         }
         
     }

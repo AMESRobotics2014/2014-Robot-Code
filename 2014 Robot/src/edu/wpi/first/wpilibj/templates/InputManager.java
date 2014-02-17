@@ -51,11 +51,11 @@ public class InputManager {
         LowerElevatorLimit = new DigitalInput(3);
         PullbackLimit = new DigitalInput(7);
         GrabberLowerLimit = new DigitalInput(10);
-        clutchEngagedLimit = new DigitalInput(12);
+        clutchEngagedLimit = new DigitalInput(13);
         GrabberLiftLimit = new DigitalInput(9);
-        clutchReleasedLimit = new DigitalInput(13);
+        clutchReleasedLimit = new DigitalInput(11);
         ratchetLimit = new DigitalInput(14);
-        ratchetDownLimit = new DigitalInput(11);
+        ratchetDownLimit = new DigitalInput(12);
     }
 
     public double[] getFinalAxis() {

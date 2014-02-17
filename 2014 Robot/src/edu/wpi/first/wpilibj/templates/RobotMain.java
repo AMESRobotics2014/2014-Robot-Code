@@ -70,23 +70,23 @@ public class RobotMain extends IterativeRobot {
     public void teleopPeriodic() {
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
-              if(IM.FaceLeft.getState()){
                 Event.s_Testlimits();
-            }
-
-            if (MT.gdt(3) >= 1) {
-                Com.processTable();
-                MT.sc(3);
-            }
+                Event.s_testPot();
+            //if (MT.gdt(3) >= 1) {
+            //    Com.processTable();
+          //      MT.sc(3);
+            //}
             Event.Alwaysrun();
             if (R.manualONLY) {
                 if (!IM.SettingsL.getState()) {
                     Event.m_Elevator();
                     Event.m_Grab();
                     Event.m_Shoot();
+                    Event.m_Pullback();
                 } else {
+                    Event.s_Shoot();
+                    System.out.println("Ahhhhhh hhhhhhhh! Turn it off turn it off");
                     MC.manualMode();
-                    MC.elevatorOLD(IM.dPadValueOLD()[0]);
                 }
             }
         }
@@ -104,7 +104,6 @@ public class RobotMain extends IterativeRobot {
                 //  MT.listIndicesDEBUG();
             }
         }
-
         public static void m_Grab() {
             //Manually apply from input
             if (IM.L1.getState() & IM.GrabberLowerLimit.get()) {
@@ -114,43 +113,43 @@ public class RobotMain extends IterativeRobot {
             } else {
                 MC.grabber((byte) 0);
             }
-            if (IM.R2.getState()) {
+            if (IM.L2.getState()) {
                 MC.grabberWheel((byte)1);
             }
-            else if(!IM.R2.getState()){
+            else if(!IM.L2.getState()){
                 MC.grabberWheel((byte)0);
             }
         }
-
         public static void m_Shoot() {
             if (IM.FaceRight.getState()/* & IM.clutchEngagedLimit.get()*/) {
+                
                 MC.clutch(1);
             }
             else{
                 MC.clutch(0);
             }
            
-            if (IM.FaceTop.getState() & IM.ratchetDownLimit.get() ) {
-                MC.ratchet(1);
-            } else if (IM.FaceBott.getState() &  IM.ratchetLimit.get()) {
+            if (IM.FaceTop.getState() & IM.ratchetLimit.get() ) {
                 MC.ratchet(2);
+            } else if (IM.FaceBott.getState() &  IM.ratchetDownLimit.get()) {
+                MC.ratchet(1);
             }
             else{
                 MC.ratchet(0);
             }
 
         }
-        
-
         public static void m_Pullback() {
-            if (IM.dPadValue()[0] > .05) {
-                MC.pullback(false, IM.PullbackLimit.get());
+            if (IM.R2.getState() & IM.dPadValue()[1] > .05 & IM.PullbackLimit.get()) {
+                MC.pullback(2);
             }
-            if (IM.dPadValue()[0] < -.05) {
-                MC.pullback(true, false);
+            if (IM.R2.getState() & IM.dPadValue()[1] < -.05) {
+                MC.pullback(1);
+            }
+            else{
+                MC.pullback(0);
             }
         }
-
         public static void m_Elevator() {
             if (IM.TopElevatorLimit.get() & IM.dPadValue()[0] > .05) {
                 MC.Elevator((byte)1);
@@ -161,7 +160,6 @@ public class RobotMain extends IterativeRobot {
                 MC.Elevator((byte) 0);
             }
         }
-
         public static void s_GrabSustain() {
             //Use scripted event
             if (IM.GrabberLowerLimit.get()) {
@@ -170,7 +168,6 @@ public class RobotMain extends IterativeRobot {
                 MC.grabber((byte) 0);
             }
         }
-
         public static void s_GrabRetract() {
             if (IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
@@ -178,7 +175,6 @@ public class RobotMain extends IterativeRobot {
                 MC.grabber((byte) 0);
             }
         }
-
         public static void s_ShootAbs() {//The secret police will find you and shoot you no matter what
             if (IM.clutchReleasedLimit.get()) {
                 MC.clutch(0);
@@ -187,22 +183,28 @@ public class RobotMain extends IterativeRobot {
             }
 
         }
-
         public static void s_Pullback() {
-            MC.pullback(true, IM.PullbackLimit.get());
+            if(IM.PullbackLimit.get()){
+            MC.pullback(1);
+            }
         }
-
-        public static void s_Shoot(boolean dsbl) {
+        public static void s_Shoot() {
             // if(Com.ConfirmShot()){
+            if(IM.FaceRight.getState() & IM.clutchReleasedLimit.get()){
             MC.clutch(1);
+            }else{
+                MC.clutch(0);
+            }
             if (!IM.PullbackLimit.get() & IM.clutchReleasedLimit.get()) {
+                MC.ratchet(1);
+            }
+            else{
                 MC.ratchet(0);
             }
             // }
         }
-
         public static void s_Testlimits() {
-            if (MT.gdt(0) >= .6) {
+            if (MT.gdt(0) >= .6 & IM.FaceLeft.getState()) {
                 MT.sc(0);
                 System.out.println("Checking limits");
                 System.out.println("Clutch Engage" + ": " + IM.clutchEngagedLimit.get());
@@ -216,15 +218,12 @@ public class RobotMain extends IterativeRobot {
                 System.out.println("Elevator Bottom Limit" + ": " + IM.LowerElevatorLimit.get());
             }
         }
-
         public static void s_testPot() {
-            if (IM.FaceRight.getState() & (MT.gdt(2) >= .6)) {
-                MT.sc(2);
-                System.out.println("Voltage: " + IM.Poten.getVoltage());
+            if (IM.FaceLeft.getState() & (MT.gdt(3) >= .6)) {
+                MT.sc(3);
                 System.out.println("Value: " + IM.Poten.getValue());
             }
         }
-
         public static void s_XwingAttackMode() {
             UsetheForce(9001);
         }
