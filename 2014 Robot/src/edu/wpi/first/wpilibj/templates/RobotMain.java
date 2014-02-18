@@ -70,24 +70,25 @@ public class RobotMain extends IterativeRobot {
             Event.Alwaysrun();
             if (R.manualONLY) {
                 if (!IM.SettingsL.getState()) {
-                   /* if(MT.gdt(4) < 15){
-                        System.out.println("grab event");
-                        Event.s_GrabSustain();
-                    }
-                    else if(!(MT.gdt(4) > 25)){
-                        Event.s_GrabRetract();
-                        System.out.println("retract event");
-                    }
-                    else{
-                        System.out.println("Shutdown event");
-                        Event.s_GrabShutdown();
-                    }*/
+                    
                     Event.m_Elevator();
                     Event.m_Grab();
                     Event.m_Shoot();
                     Event.m_Pullback();
                     Event.m_Shift();
                 } else {
+                    if(MT.gdt(4) < 3){
+                        System.out.println("grab event");
+                        Event.s_GrabSustain();
+                    }
+                    else if((MT.gdt(4) > 10)){
+                        Event.s_GrabRetract();
+                        System.out.println("retract event");
+                    }
+                    else{
+                        System.out.println("Shutdown event");
+                        Event.s_GrabShutdown();
+                    }
                     Event.s_Testlimits();
                 Event.s_testPot();
                 }
@@ -189,15 +190,17 @@ public class RobotMain extends IterativeRobot {
         }
         public static void s_GrabSustain() {
             //Use scripted event
+            MC.grabberWheel((byte)1);
             if (IM.GrabberLowerLimit.get()) {
-                MC.grabber((byte) 2);
+                MC.grabber((byte) 1);
             } else {
                 MC.grabber((byte) 0);
             }
         }
         public static void s_GrabRetract() {
+            MC.grabberWheel((byte)0);
             if (IM.GrabberLiftLimit.get()) {
-                MC.grabber((byte) 1);
+                MC.grabber((byte) 2);
             } else {
                 MC.grabber((byte) 0);
             }
@@ -242,8 +245,8 @@ public class RobotMain extends IterativeRobot {
             // }
         }
         public static void s_Testlimits() {
-            if (MT.gdt(0) >= .6 & IM.FaceLeft.getState()) {
-                MT.gdt(0);
+            if (MT.gdt(0) >= .8 & IM.FaceLeft.getState()) {
+                MT.sc(0);
                 System.out.println("Checking limits");
                 System.out.println("Clutch Engage" + ": " + IM.clutchEngagedLimit.get());
                 System.out.println("Clutch Released" + ": " + IM.clutchReleasedLimit.get());
@@ -257,7 +260,7 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_testPot() {
-            if (IM.FaceLeft.getState() & (MT.gdt(3) >= .6)) {
+            if (IM.FaceLeft.getState() & (MT.gdt(3) >= .8)) {
                 MT.sc(3);
                 System.out.println("Value: " + IM.Poten.getValue());
             }
