@@ -53,7 +53,7 @@ public class InputManager {
         GrabberLowerLimit = new DigitalInput(10);
         clutchEngagedLimit = new DigitalInput(13);
         GrabberLiftLimit = new DigitalInput(9);
-        clutchReleasedLimit = new DigitalInput(11);
+        clutchReleasedLimit = new DigitalInput(5);
         ratchetLimit = new DigitalInput(14);
         ratchetDownLimit = new DigitalInput(12);
     }

@@ -70,8 +70,7 @@ public class RobotMain extends IterativeRobot {
     public void teleopPeriodic() {
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
-                Event.s_Testlimits();
-                Event.s_testPot();
+                
             //if (MT.gdt(3) >= 1) {
             //    Com.processTable();
           //      MT.sc(3);
@@ -83,17 +82,17 @@ public class RobotMain extends IterativeRobot {
                     Event.m_Grab();
                     Event.m_Shoot();
                     Event.m_Pullback();
+                    Event.m_Shift();
                 } else {
-                    Event.s_Shoot();
-                    System.out.println("Ahhhhhh hhhhhhhh! Turn it off turn it off");
-                    MC.manualMode();
+                    Event.s_Testlimits();
+                Event.s_testPot();
                 }
             }
         }
     }
 
     public static class Event {
-
+        static boolean firing = false;
         //Sorted into scripted events and manual events by prefix s and m
         public static void Alwaysrun() {
             MC.drive(IM.getFinalAxis());
@@ -121,8 +120,9 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void m_Shoot() {
-            if (IM.FaceRight.getState()/* & IM.clutchEngagedLimit.get()*/) {
-                
+            
+            if (IM.FaceRight.getState() /*& IM.clutchReleasedLimit.get()*/) {
+                firing = true;
                 MC.clutch(1);
             }
             else{
@@ -143,11 +143,22 @@ public class RobotMain extends IterativeRobot {
             if (IM.R2.getState() & IM.dPadValue()[1] > .05 & IM.PullbackLimit.get()) {
                 MC.pullback(2);
             }
-            if (IM.R2.getState() & IM.dPadValue()[1] < -.05) {
+            else if (IM.R2.getState() & IM.dPadValue()[1] < -.05) {
                 MC.pullback(1);
+            }
+            else if(IM.FaceLeft.getState()){
+                MC.pullback(3);
             }
             else{
                 MC.pullback(0);
+            }
+        }
+        public static void m_Shift(){
+            if(IM.dPadValue()[1] > .05){
+            MC.transmission(true);
+            }
+            else if(IM.dPadValue()[1] < .05){
+                MC.transmission(false);
             }
         }
         public static void m_Elevator() {
@@ -184,8 +195,16 @@ public class RobotMain extends IterativeRobot {
 
         }
         public static void s_Pullback() {
+            if(!firing){
             if(IM.PullbackLimit.get()){
-            MC.pullback(1);
+            MC.pullback(3);
+            }
+            else{
+                MC.pullback(0);
+            }
+            }
+            else{
+                MC.pullback(0);
             }
         }
         public static void s_Shoot() {

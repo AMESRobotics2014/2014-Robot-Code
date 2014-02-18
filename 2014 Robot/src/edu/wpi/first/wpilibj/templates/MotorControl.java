@@ -104,12 +104,19 @@ public class MotorControl {
     }
     public void pullback(int dir){
         if(dir == 1){
-            PullBack.set(.5);
+            PullBack.set(-1);
         }else if(dir == 2){
-            PullBack.set(-0.5);
+            PullBack.set(0.75);
+        }
+        else if(dir == 3){
+            PullBack.set(0.3);
         }
         else if(dir == 0){
             PullBack.set(0);
+        }
+        else if(dir == 4){
+            PullBack.set(-.2);
+        
         }else{
             PullBack.set(0);
         }
