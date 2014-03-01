@@ -13,11 +13,11 @@ public class MasterTimer extends Timer {
 
     public void Init() {
         actindex = new Vector();
-        addEventTimer("LimitDEBUG");
-        addEventTimer("printsDEBUG");
-        addEventTimer("potential");
-        addEventTimer("TableTimer");
-        addEventTimer("Retract");
+        addEventTimer("LimitDEBUG");//0
+        addEventTimer("printsDEBUG");//1
+        addEventTimer("potential");//2
+        addEventTimer("TableTimer");//3
+        addEventTimer("Retract");//4
     }
 
     public void addEventTimer(String tid) {

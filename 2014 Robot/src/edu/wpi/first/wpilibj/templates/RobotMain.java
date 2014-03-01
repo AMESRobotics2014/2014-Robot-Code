@@ -38,7 +38,7 @@ public class RobotMain extends IterativeRobot {
     protected static Watchdog wd;
     boolean turbo, manualControl;
     boolean shiftSTR;
-
+   static byte mode;
     public void robotInit() {
         MC = new MotorControl();
         MC.init();
@@ -58,6 +58,7 @@ public class RobotMain extends IterativeRobot {
         wd = Watchdog.getInstance();
         wd.setExpiration(0.5);
         wd.feed();
+        mode = 1;//1 for drive, 2 for pickup, 3 for carry
     }
 
     public void autonomousPeriodic() {
@@ -67,41 +68,58 @@ public class RobotMain extends IterativeRobot {
         MT.Freset();
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
-            Event.Alwaysrun();
-            if (R.manualONLY) {
+           Event.Alwaysrun();
+           if (R.manualONLY) {
                 if (!IM.SettingsL.getState()) {
-                    
                     Event.m_Elevator();
                     Event.m_Grab();
                     Event.m_Shoot();
                     Event.m_Pullback();
                     Event.m_Shift();
-                } else {
-                    if(MT.gdt(4) < 3){
-                        System.out.println("grab event");
-                        Event.s_GrabSustain();
+                } else if(mode == 1) {
+                    Event.s_GrabRetract();
+                    Event.s_GrabShutdown();
+                    Event.s_Elevatordown();
+                    Event.s_Pullback();
+                    Event.s_Shift(true);
+                }else if(mode == 2){
+                    //Event.s_GrabSustain();
+                    Event.s_Shift(false);
+                    Event.s_Elevatordown();
+                    if(IM.PullbackLimit.get()){
+                        Event.s_Pullback();
                     }
-                    else if((MT.gdt(4) > 10)){
-                        Event.s_GrabRetract();
-                        System.out.println("retract event");
-                    }
-                    else{
-                        System.out.println("Shutdown event");
-                        Event.s_GrabShutdown();
-                    }
-                    Event.s_Testlimits();
-                Event.s_testPot();
+                    Event.m_Grab();
                 }
             }
         }
         MT.Freset();
     }
 
+    //These are unesscessary but more intuitive
+    public static void enterDrive(){
+        mode = 1;
+    }
+    public static void enterPickup(){
+        mode = 2;
+    }
+    public static void enterCarry(){
+        mode = 3; 
+    }
     public static class Event {
         static boolean firing = false;
         //Sorted into scripted events and manual events by prefix s and m
         public static void Alwaysrun() {
             MC.drive(IM.getFinalAxis());
+            if(IM.R1.getState()){
+                enterDrive();
+            }
+            if(IM.L2.getState()){
+                enterPickup();
+            }
+            if(IM.R2.getState()){
+                enterCarry();
+            }
             if (MT.gdt(1) >= 16) {
                 MT.sc(1);
                 Event.Debug();
@@ -207,6 +225,23 @@ public class RobotMain extends IterativeRobot {
         }
         public static void s_GrabShutdown(){
             MC.grabber((byte)0);
+        }
+        public static void s_GrabPrep(){
+            MC.grabberWheel((byte)1);
+            if (IM.GrabberLowerLimit.get()) {
+                MC.grabber((byte) 1);
+            } else {
+                MC.grabber((byte) 0);
+            }
+        }
+        public static void s_Elevator(boolean ovride, int overtarg/*Whether to override potentiometer target and what the target should be*/){
+            
+        }
+        public static void s_Elevatordown(){
+            
+        }
+        public static void s_Shift(boolean fast){
+            
         }
         public static void s_ShootAbs() {//The secret police will find you and shoot you no matter what
             if (IM.clutchReleasedLimit.get()) {

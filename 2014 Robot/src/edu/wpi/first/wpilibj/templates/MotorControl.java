@@ -42,13 +42,6 @@ public class MotorControl {
         firstRightMotor.set(limit(mv[0]));
         firstLeftMotor.set(limit(mv[1]));
     }
-
-    public void stopDrive() {
-        firstRightMotor.set(0);
-
-        firstLeftMotor.set(0);
-    }
-
     public static double limit(double val) {
         if (val < -1) {
             val = -1;
@@ -61,47 +54,6 @@ public class MotorControl {
         return val;
     }
 
-    public void shooterOLD() { //Will be seperated into mutiple seperate methods
-        if (IM.R2.getState()) {
-            //shooterMotor1.set(1);
-            System.out.println("Shooting");
-            
-            if (IM.PullbackLimit.get()) {
-                PullBack.set(0);
-            } else {
-                PullBack.set(1);
-            }
-            
-            if (IM.clutchReleasedLimit.get()) {
-                clutch.set(Relay.Value.kOff);
-            } else {
-                clutch.set(Relay.Value.kForward);
-            }
-            
-            if (IM.clutchEngagedLimit.get()) {
-                clutch.set(Relay.Value.kOff);
-            } else {
-                clutch.set(Relay.Value.kForward);
-            }
-            
-            if (IM.ratchetLimit.get()) {
-                if (IM.ratchetDownLimit.get()) {
-                    ratchet.set(Relay.Value.kOff);
-                } else {
-                    ratchet.set(Relay.Value.kForward);
-                }
-            } else {
-                ratchet.set(Relay.Value.kReverse);
-            }
-            
-         } else {
-            PullBack.set(0);
-            elevatorMotor.set(0);
-            clutch.set(Relay.Value.kOff);
-            ratchet.set(Relay.Value.kOff);
-        }
-        
-    }
     public void pullback(int dir){
         if(dir == 1){
             PullBack.set(-1);
@@ -148,33 +100,6 @@ public class MotorControl {
             ratchet.set(Relay.Value.kOff);
         }
     }
-    public void grabberOLD(boolean Switch1) {
-        if(IM.L1.getState()){
-            grabberMotor.set(Relay.Value.kReverse);
-            GrabWheel.set(Relay.Value.kOff);
-            elevatorMotor.set(0.4);
-            elevatorMotor.set(0.0);
-            System.out.println("Grabber Motor Reverse: " + (Relay.Value.kReverse));
-        }else{
-            grabberMotor.set(Relay.Value.kOff);
-        }
-        if(IM.R2.getState()){
-            System.out.println("LowerGrabberif");
-            grabberMotor.set(Relay.Value.kForward);
-            //delay(time);
-            GrabWheel.set(Relay.Value.kReverse);               
-        }else{
-            grabberMotor.set(Relay.Value.kOff);
-            GrabWheel.set(Relay.Value.kOff);
-        }
-        if(Switch1){
-            grabberMotor.set(Relay.Value.kOff);
-        }
-        
-                if (IM.GrabberLiftLimit.get()) {
-            grabberMotor.set(Relay.Value.kOff);
-        }
-                }
     
     
         public void grabber(byte dir) {
@@ -210,27 +135,6 @@ public class MotorControl {
             }
         }
         
-    public void elevatorOLD(double val) {
-        double vals = IM.ps2Controller.getRawAxis(5);
-        
-        if (vals == 0){
-            elevatorMotor.set(0);
-        }
-        if (vals == 1){
-            if (!IM.TopElevatorLimit.get()) {
-                elevatorMotor.set(0);
-            } else {
-                elevatorMotor.set(0.5);
-            }
-        }
-        if (vals == -1){
-            if (!IM.LowerElevatorLimit.get()) {
-                elevatorMotor.set(0);
-            } else {
-                elevatorMotor.set(-0.5);
-            }
-        }
-    }
     public void Elevator(byte dir){
         if(dir == 0){
         //    System.out.println("Elevator 0");
@@ -245,14 +149,6 @@ public class MotorControl {
             elevatorMotor.set(-1);
         }
         
-    }
-    public void transmissionOLD(){   
-        if(IM.L2.getState()){
-
-           high.set(Relay.Value.kOff);
-        }else{
-         high.set(Relay.Value.kForward);  
-        }
     }
     public void transmission(boolean fast){
         if(!fast){
