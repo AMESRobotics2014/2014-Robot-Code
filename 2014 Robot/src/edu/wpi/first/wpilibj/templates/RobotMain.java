@@ -12,6 +12,7 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Watchdog;
 
@@ -61,6 +62,39 @@ public class RobotMain extends IterativeRobot {
     }
 
     public void autonomousPeriodic() {
+        //from 14ft
+        if(MT.gdt(5) <= 3){
+            MC.firstRightMotor.set(1);
+            MC.firstLeftMotor.set(1);           
+        }
+        if(MT.gdt(5) >= 3 && MT.gdt(5) <= 4.75){
+            MC.firstLeftMotor.set(-0.5);
+            MC.firstRightMotor.set(0.5);
+        }
+            MC.clutch.set(Relay.Value.kForward);
+        if (IM.clutchReleasedLimit.get()) {
+            MC.clutch.set(Relay.Value.kOff);
+            MC.ratchet.set(Relay.Value.kReverse);
+        }
+        /*//from 18ft
+        if(hot == true){
+        MC.clutch.set(Relay.Value.kForward);
+        MC.ratchet.set(Relay.Value.kReverse);
+        }else{
+        if(MT.gdt(5) <= .75){
+            MC.firstRightMotor.set(-0.5);
+            MC.firstLeftMotor.set(0.5);
+        }
+        if(MT.gdt(5) >= 1.75 && MT.gdt(5) <= 4.75){
+            MC.firstRightMotor.set(1);
+            MC.firstLeftMotor.set(1); 
+        }
+            MC.clutch.set(Relay.Value.kForward);
+        if (IM.clutchReleasedLimit.get()) {
+            MC.clutch.set(Relay.Value.kOff);
+            MC.ratchet.set(Relay.Value.kReverse);
+        }
+        }*/
     }
 
     public void teleopPeriodic() {

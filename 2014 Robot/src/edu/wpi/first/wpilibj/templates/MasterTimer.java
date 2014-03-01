@@ -18,6 +18,7 @@ public class MasterTimer extends Timer {
         addEventTimer("potential");
         addEventTimer("TableTimer");
         addEventTimer("Retract");
+        addEventTimer("AtonTimer");
     }
 
     public void addEventTimer(String tid) {
