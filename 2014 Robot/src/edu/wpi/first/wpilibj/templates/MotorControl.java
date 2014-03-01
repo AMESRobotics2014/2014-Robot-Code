@@ -77,7 +77,7 @@ public class MotorControl {
         if(dir == 1){
             clutch.set(Relay.Value.kForward);
         } else if(dir == 2){
-            clutch.set(Relay.Value.kOff);
+            clutch.set(Relay.Value.kReverse); // Changed "kOff" to "kReverse".
         }
         else if(dir == 0){
             clutch.set(Relay.Value.kOff);
@@ -110,6 +110,7 @@ public class MotorControl {
             }
             else if(dir == 2){
                     grabberMotor.set(Relay.Value.kReverse);
+                    GrabWheel.set(Relay.Value.kOff);
             }
             else if(dir == 0){
                 grabberMotor.set(Relay.Value.kOff);
@@ -196,4 +197,7 @@ public class MotorControl {
     //    if(vals)
     }
 //}
+
+    void a_piviot2() {
+    }
 }

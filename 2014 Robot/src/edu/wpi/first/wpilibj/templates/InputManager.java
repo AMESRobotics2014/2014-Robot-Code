@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.AnalogChannel;
 import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
  * This class should hold all code, classes and methods for managing all inputs

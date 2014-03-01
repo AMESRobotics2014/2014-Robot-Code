@@ -12,6 +12,7 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Watchdog;
 
@@ -62,6 +63,39 @@ public class RobotMain extends IterativeRobot {
     }
 
     public void autonomousPeriodic() {
+        //from 14ft
+        if(MT.gdt(5) <= 3){
+            MC.firstRightMotor.set(1);
+            MC.firstLeftMotor.set(1);           
+        }
+        if(MT.gdt(5) >= 3 && MT.gdt(5) <= 4.75){
+            MC.firstLeftMotor.set(-0.5);
+            MC.firstRightMotor.set(0.5);
+        }
+            MC.clutch.set(Relay.Value.kForward);
+        if (IM.clutchReleasedLimit.get()) {
+            MC.clutch.set(Relay.Value.kOff);
+            MC.ratchet.set(Relay.Value.kReverse);
+        }
+        /*//from 18ft
+        if(hot == true){
+        MC.clutch.set(Relay.Value.kForward);
+        MC.ratchet.set(Relay.Value.kReverse);
+        }else{
+        if(MT.gdt(5) <= .75){
+            MC.firstRightMotor.set(-0.5);
+            MC.firstLeftMotor.set(0.5);
+        }
+        if(MT.gdt(5) >= 1.75 && MT.gdt(5) <= 4.75){
+            MC.firstRightMotor.set(1);
+            MC.firstLeftMotor.set(1); 
+        }
+            MC.clutch.set(Relay.Value.kForward);
+        if (IM.clutchReleasedLimit.get()) {
+            MC.clutch.set(Relay.Value.kOff);
+            MC.ratchet.set(Relay.Value.kReverse);
+        }
+        }*/
     }
 
     public void teleopPeriodic() {
@@ -206,16 +240,42 @@ public class RobotMain extends IterativeRobot {
                 MC.Elevator((byte) 0);
             }
         }
+        // Add more suspension to the grabber pick-up.
         public static void s_GrabSustain() {
+            
+            /**
+             * if (R.grabberDown) {
+             *  Event.s_GrabSustain();
+             * } else {
+             *  Event.s_GrabRetract();
+             * }
+             */
+            
             //Use scripted event
-            MC.grabberWheel((byte)1);
-            if (IM.GrabberLowerLimit.get()) {
-                MC.grabber((byte) 1);
-            } else {
-                MC.grabber((byte) 0);
+                MC.grabberWheel((byte)1);
+                if (IM.GrabberLowerLimit.get()) {
+                    MC.grabber((byte) 1);
+                } else {
+                    MC.grabber((byte) 0);
+                }
             }
-        }
         public static void s_GrabRetract() {
+            
+            /**
+             * if (R.grabberUp) {
+             * 
+             *  if (IM.PullbackMotor.get()) {
+             *      System.out.println("Good");
+             *      Event.s_GrabRetract();
+             *      Event.s_ElevatorUp();
+             *  } else {
+             *      Event.s_Pullback();
+             *      Event.s_GrabRetract();
+             *      Event.s_ElevatorUp();
+             *  }
+             * }
+             */
+            
             MC.grabberWheel((byte)0);
             if (IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
@@ -245,11 +305,10 @@ public class RobotMain extends IterativeRobot {
         }
         public static void s_ShootAbs() {//The secret police will find you and shoot you no matter what
             if (IM.clutchReleasedLimit.get()) {
-                MC.clutch(0);
+                MC.clutch(1); // Changed the value "0" to "1"
             } else {
                 MC.clutch(0);
             }
-
         }
         public static void s_Pullback() {
             if(!firing){
@@ -265,6 +324,15 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_Shoot() {
+            
+            /**
+             * if (R.shoot) {
+             *  Event.s_Shoot();
+             *  MC.clutch(2);
+             *  MC.ratchet(2);
+             * }
+             */
+            
             // if(Com.ConfirmShot()){
             if(IM.FaceRight.getState() & IM.clutchReleasedLimit.get()){
             MC.clutch(1);
