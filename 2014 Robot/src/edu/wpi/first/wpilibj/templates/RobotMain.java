@@ -188,15 +188,25 @@ public class RobotMain extends IterativeRobot {
                 MC.Elevator((byte) 0);
             }
         }
+        // Add more suspension to the grabber pick-up.
         public static void s_GrabSustain() {
+            
+            /**
+             * if (R.grabberDown) {
+             *  Event.s_GrabSustain();
+             * } else {
+             *  Event.s_GrabRetract();
+             * }
+             */
+            
             //Use scripted event
-            MC.grabberWheel((byte)1);
-            if (IM.GrabberLowerLimit.get()) {
-                MC.grabber((byte) 1);
-            } else {
-                MC.grabber((byte) 0);
+                MC.grabberWheel((byte)1);
+                if (IM.GrabberLowerLimit.get()) {
+                    MC.grabber((byte) 1);
+                } else {
+                    MC.grabber((byte) 0);
+                }
             }
-        }
         public static void s_GrabRetract() {
             MC.grabberWheel((byte)0);
             if (IM.GrabberLiftLimit.get()) {
@@ -210,11 +220,10 @@ public class RobotMain extends IterativeRobot {
         }
         public static void s_ShootAbs() {//The secret police will find you and shoot you no matter what
             if (IM.clutchReleasedLimit.get()) {
-                MC.clutch(0);
+                MC.clutch(1); // Changed the value "0" to "1"
             } else {
                 MC.clutch(0);
             }
-
         }
         public static void s_Pullback() {
             if(!firing){

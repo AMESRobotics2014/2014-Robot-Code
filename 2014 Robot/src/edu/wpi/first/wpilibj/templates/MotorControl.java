@@ -185,6 +185,7 @@ public class MotorControl {
             }
             else if(dir == 2){
                     grabberMotor.set(Relay.Value.kReverse);
+                    GrabWheel.set(Relay.Value.kOff);
             }
             else if(dir == 0){
                 grabberMotor.set(Relay.Value.kOff);
