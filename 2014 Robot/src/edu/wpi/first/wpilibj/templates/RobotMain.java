@@ -208,6 +208,22 @@ public class RobotMain extends IterativeRobot {
                 }
             }
         public static void s_GrabRetract() {
+            
+            /**
+             * if (R.grabberUp) {
+             * 
+             *  if (IM.PullbackMotor.get()) {
+             *      System.out.println("Good");
+             *      Event.s_GrabRetract();
+             *      Event.s_ElevatorUp();
+             *  } else {
+             *      Event.s_Pullback();
+             *      Event.s_GrabRetract();
+             *      Event.s_ElevatorUp();
+             *  }
+             * }
+             */
+            
             MC.grabberWheel((byte)0);
             if (IM.GrabberLiftLimit.get()) {
                 MC.grabber((byte) 2);
@@ -239,6 +255,15 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_Shoot() {
+            
+            /**
+             * if (R.shoot) {
+             *  Event.s_Shoot();
+             *  MC.clutch(2);
+             *  MC.ratchet(2);
+             * }
+             */
+            
             // if(Com.ConfirmShot()){
             if(IM.FaceRight.getState() & IM.clutchReleasedLimit.get()){
             MC.clutch(1);
