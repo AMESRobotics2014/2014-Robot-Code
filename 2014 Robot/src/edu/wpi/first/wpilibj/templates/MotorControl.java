@@ -34,6 +34,7 @@ public class MotorControl {
         GrabWheel.setDirection(Relay.Direction.kReverse);
         elevatorMotor = new Jaguar(RobotMap.elevatorMotor);
         high = new Relay(RobotMap.high);
+        high.setDirection(Relay.Direction.kBoth);
 
         IM = new InputManager();
     }
@@ -153,7 +154,7 @@ public class MotorControl {
     }
     public void transmission(boolean fast){
         if(!fast){
-            high.set(Relay.Value.kOff);
+            high.set(Relay.Value.kReverse);
         }
         else if (fast){
             high.set(Relay.Value.kForward);
