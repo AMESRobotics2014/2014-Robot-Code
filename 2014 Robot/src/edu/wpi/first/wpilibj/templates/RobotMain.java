@@ -111,6 +111,22 @@ public class RobotMain extends IterativeRobot {
                     Event.m_Pullback();
                     Event.m_Shift();
                 } else if(mode == 1) {
+                    if (IM.FaceLeft.getState()) {
+                        Event.s_ElevatorUp();
+                        Event.s_GrabSustain();
+                    } else if (!IM.FaceLeft.getState()) {
+                        Event.s_ElevatorUp();
+                        Event.s_GrabRetract();
+                    } else if (IM.FaceBott.getState()) {
+                        // Raise elevator to set point.
+                        Event.s_ElevatorUp();
+                        
+                        Event.s_GrabRetract();
+                        Event.s_Pullback();
+                    } else if (IM.FaceRight.getState()) {
+                        // Shoot
+                        Event.s_Shoot();
+                    }
                     Event.s_GrabRetract();
                     Event.s_GrabShutdown();
                     Event.s_Elevatordown();
@@ -298,7 +314,21 @@ public class RobotMain extends IterativeRobot {
             
         }
         public static void s_Elevatordown(){
-            
+            MC.Elevator((byte) 2);
+            if (IM.LowerElevatorLimit.get())
+                MC.Elevator((byte) 2);
+            else
+                MC.Elevator((byte) 0);
+        }
+        public static void s_ElevatorUp() {
+            MC.Elevator((byte) 1);
+            if (IM.TopElevatorLimit.get())
+                MC.Elevator((byte) 1);
+            else
+                MC.Elevator((byte) 0);
+        }
+        public static void s_ElevatorStop() {
+            MC.Elevator((byte) 0);
         }
         public static void s_Shift(boolean fast){
             
@@ -323,6 +353,9 @@ public class RobotMain extends IterativeRobot {
                 MC.pullback(0);
             }
         }
+        public static void s_Pass() {
+            
+        }
         public static void s_Shoot() {
             
             /**
@@ -334,7 +367,24 @@ public class RobotMain extends IterativeRobot {
              */
             
             // if(Com.ConfirmShot()){
+            
+            /** ORIGINAL */
+            /*
             if(IM.FaceRight.getState() & IM.clutchReleasedLimit.get()){
+            MC.clutch(1);
+            }else{
+                MC.clutch(0);
+            }
+            if (!IM.PullbackLimit.get() & IM.clutchReleasedLimit.get()) {
+                MC.ratchet(1);
+            }
+            else{
+                MC.ratchet(0);
+            }
+            */
+            
+            /** NEW */
+            if(IM.clutchReleasedLimit.get()){
             MC.clutch(1);
             }else{
                 MC.clutch(0);

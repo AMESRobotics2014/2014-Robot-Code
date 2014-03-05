@@ -69,7 +69,14 @@ public class MotorControl {
         else if(dir == 4){
             PullBack.set(-.2);
         
-        }else{
+        } else if (dir == 5) {
+            // Time the movement of this - let's say about 1/2 second for now.
+            //if (timer < 1/2 second) {
+              //  PullBack.set(-1);
+            //} else {
+              //  PullBack.set(0);
+            //}
+        } else{
             PullBack.set(0);
         }
     }
