@@ -104,7 +104,13 @@ public class RobotMain extends IterativeRobot {
             wd.feed();
            Event.Alwaysrun();
            if (R.manualONLY) {
-                if (!IM.SettingsL.getState()) {
+                    Event.m_Elevator();
+                    Event.m_Grab();
+                    Event.m_Shoot();
+                    Event.m_Pullback();
+                    Event.m_Shift();
+           }
+                if (mode == 4) {
                     Event.m_Elevator();
                     Event.m_Grab();
                     Event.m_Shoot();
@@ -124,8 +130,15 @@ public class RobotMain extends IterativeRobot {
                         Event.s_Pullback();
                     }
                     Event.m_Grab();
+                }else if(mode == 3){
+                    Event.s_GrabRetract();
+                    Event.s_GrabShutdown();
+                    Event.s_Elevator(false, -3243);
+                    Event.s_Shift(true);
+                    if(IM.FaceTop.getState()){
+                    Event.s_ShootAbs();
+                    }
                 }
-            }
         }
         MT.Freset();
     }
@@ -139,6 +152,17 @@ public class RobotMain extends IterativeRobot {
     }
     public static void enterCarry(){
         mode = 3; 
+    }
+    public static void enterManual(){
+        mode = 4;
+    }
+    public static void cycleMode(){
+        if(mode !=3){
+            mode++;
+        }
+        else{
+            mode = 1;
+        }
     }
     public static class Event {
         static boolean firing = false;
@@ -304,6 +328,9 @@ public class RobotMain extends IterativeRobot {
             
         }
         public static void s_ShootAbs() {//The secret police will find you and shoot you no matter what
+            if(IM.ratchetLimit.get()){
+                MC.ratchet(2);
+            }
             if (IM.clutchReleasedLimit.get()) {
                 MC.clutch(1); // Changed the value "0" to "1"
             } else {
