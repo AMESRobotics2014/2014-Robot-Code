@@ -386,9 +386,9 @@ public class RobotMain extends IterativeRobot {
         public static void s_Pass() {
             if (!IM.PullbackLimit.get()) {
                 Event.s_Shoot();
-                // Pull back for 1/2 second.
+                // Pull back for 1/2 second and release.
             } else {
-                // Pull back for 1/2 second.
+                // Pull back for 1/2 second and release.
             }
         }
         public static void s_Shoot() {
