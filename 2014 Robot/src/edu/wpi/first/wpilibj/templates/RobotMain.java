@@ -103,6 +103,7 @@ public class RobotMain extends IterativeRobot {
         while (true && isOperatorControl() && isEnabled()) {
             wd.feed();
            Event.Alwaysrun();
+           Event.m_Shift();
            if (R.manualONLY) {
                     Event.m_Elevator();
                     Event.m_Grab();
@@ -138,7 +139,7 @@ public class RobotMain extends IterativeRobot {
                     Event.s_Elevatordown();
                     Event.s_Pullback();
                     Event.s_Shift(true);
-                }else if(mode == 2){
+                } else if(mode == 2){
                     //Event.s_GrabSustain();
                     Event.s_Shift(false);
                     Event.s_Elevatordown();
@@ -146,7 +147,7 @@ public class RobotMain extends IterativeRobot {
                         Event.s_Pullback();
                     }
                     Event.m_Grab();
-                }else if(mode == 3){
+                } else if(mode == 3){
                     Event.s_GrabRetract();
                     Event.s_GrabShutdown();
                     Event.s_Elevator(false, -3243);
@@ -381,7 +382,12 @@ public class RobotMain extends IterativeRobot {
             }
         }
         public static void s_Pass() {
-            
+            if (!IM.PullbackLimit.get()) {
+                Event.s_Shoot();
+                // Pull back for 1/2 second.
+            } else {
+                // Pull back for 1/2 second.
+            }
         }
         public static void s_Shoot() {
             
