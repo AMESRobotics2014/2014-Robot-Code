@@ -133,6 +133,8 @@ public class RobotMain extends IterativeRobot {
                     } else if (IM.FaceRight.getState()) {
                         // Shoot
                         Event.s_Shoot();
+                    } else if (IM.FaceTop.getState()) {
+                        Event.s_Pass();
                     }
                     Event.s_GrabRetract();
                     Event.s_GrabShutdown();
