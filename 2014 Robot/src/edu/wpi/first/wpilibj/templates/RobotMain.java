@@ -73,12 +73,14 @@ public class RobotMain extends IterativeRobot {
             MC.firstRightMotor.set(0.5);
         }
             MC.clutch.set(Relay.Value.kForward);
-        if (IM.clutchReleasedLimit.get()) {
+            // Slightly raised elevator.
+            Event.s_ElevatorUp();
+        if (((IM.clutchReleasedLimit.get()) && (Com.hot) && (!IM.TopElevatorLimit.get())) || (MT.gdt(5) <= 8)) {
             MC.clutch.set(Relay.Value.kOff);
             MC.ratchet.set(Relay.Value.kReverse);
         }
         /*//from 18ft
-        if(hot == true){
+        if(Com.hot){
         MC.clutch.set(Relay.Value.kForward);
         MC.ratchet.set(Relay.Value.kReverse);
         }else{
@@ -91,7 +93,9 @@ public class RobotMain extends IterativeRobot {
             MC.firstLeftMotor.set(1); 
         }
             MC.clutch.set(Relay.Value.kForward);
-        if (IM.clutchReleasedLimit.get()) {
+            // Slightly raised elevator.
+            Event.s_ElevatorUp();
+        if (((IM.clutchReleasedLimit.get()) && (Com.hot) && (!IM.TopElevatorLimit.get())) || (MT.gdt(5) <= 8)) {
             MC.clutch.set(Relay.Value.kOff);
             MC.ratchet.set(Relay.Value.kReverse);
         }

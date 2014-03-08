@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Communication {
     NetworkTable infoTable;
     MasterTimer MT;
+    double distance, angle;
+    boolean hot;
     
     public void init() {
         MT = new MasterTimer();
@@ -23,9 +25,9 @@ public class Communication {
     
     public void processTable() {
         //while ((true) && (MT.gdt(0) <= 1)) {
-        double distance = infoTable.getNumber("Distance", 0.0);
-        boolean hot = infoTable.getBoolean("Hot", false);
-        double angle = infoTable.getNumber("Angle", 0.0);
+        distance = infoTable.getNumber("Distance", 0.0);
+        hot = infoTable.getBoolean("Hot", false);
+        angle = infoTable.getNumber("Angle", 0.0);
             
         //System.out.println("Distance: " + distance + "Hot or Not: " + hot + "Angle: " + angle);
         //}
