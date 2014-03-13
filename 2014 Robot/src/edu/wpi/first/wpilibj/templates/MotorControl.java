@@ -210,7 +210,4 @@ public class MotorControl {
     //    if(vals)
     }
 //}
-
-    void a_piviot2() {
-    }
 }

@@ -79,27 +79,6 @@ public class RobotMain extends IterativeRobot {
             MC.clutch.set(Relay.Value.kOff);
             MC.ratchet.set(Relay.Value.kReverse);
         }
-        /*//from 18ft
-        if(Com.hot){
-        MC.clutch.set(Relay.Value.kForward);
-        MC.ratchet.set(Relay.Value.kReverse);
-        }else{
-        if(MT.gdt(5) <= .75){
-            MC.firstRightMotor.set(-0.5);
-            MC.firstLeftMotor.set(0.5);
-        }
-        if(MT.gdt(5) >= 1.75 && MT.gdt(5) <= 4.75){
-            MC.firstRightMotor.set(1);
-            MC.firstLeftMotor.set(1); 
-        }
-            MC.clutch.set(Relay.Value.kForward);
-            // Slightly raised elevator.
-            Event.s_ElevatorUp();
-        if (((IM.clutchReleasedLimit.get()) && (Com.hot) && (!IM.TopElevatorLimit.get())) || (MT.gdt(5) <= 8)) {
-            MC.clutch.set(Relay.Value.kOff);
-            MC.ratchet.set(Relay.Value.kReverse);
-        }
-        }*/
     }
 
     public void teleopPeriodic() {
@@ -108,20 +87,13 @@ public class RobotMain extends IterativeRobot {
             wd.feed();
            Event.Alwaysrun();
            Event.m_Shift();
-           if (R.manualONLY) {
+           if (R.manualONLY | mode == 4) {
                     Event.m_Elevator();
                     Event.m_Grab();
                     Event.m_Shoot();
                     Event.m_Pullback();
                     Event.m_Shift();
-           }
-                if (mode == 4) {
-                    Event.m_Elevator();
-                    Event.m_Grab();
-                    Event.m_Shoot();
-                    Event.m_Pullback();
-                    Event.m_Shift();
-                } else if(mode == 1) {
+           }else if(mode == 1) {
                     if (IM.FaceLeft.getState()) {
                         Event.s_ElevatorUp();
                         Event.s_GrabSustain();
@@ -131,7 +103,6 @@ public class RobotMain extends IterativeRobot {
                     } else if (IM.FaceBott.getState()) {
                         // Raise elevator to set point.
                         Event.s_ElevatorUp();
-                        
                         Event.s_GrabRetract();
                         Event.s_Pullback();
                     } else if (IM.FaceRight.getState()) {
@@ -146,7 +117,7 @@ public class RobotMain extends IterativeRobot {
                     Event.s_Pullback();
                     Event.s_Shift(true);
                 } else if(mode == 2){
-                    //Event.s_GrabSustain();
+                    Event.s_GrabSustain();
                     Event.s_Shift(false);
                     Event.s_Elevatordown();
                     if(IM.PullbackLimit.get()){
@@ -299,7 +270,7 @@ public class RobotMain extends IterativeRobot {
              */
             
             //Use scripted event
-                MC.grabberWheel((byte)1);
+               // MC.grabberWheel((byte)1);
                 if (IM.GrabberLowerLimit.get()) {
                     MC.grabber((byte) 1);
                 } else {
@@ -333,16 +304,8 @@ public class RobotMain extends IterativeRobot {
         public static void s_GrabShutdown(){
             MC.grabber((byte)0);
         }
-        public static void s_GrabPrep(){
-            MC.grabberWheel((byte)1);
-            if (IM.GrabberLowerLimit.get()) {
-                MC.grabber((byte) 1);
-            } else {
-                MC.grabber((byte) 0);
-            }
-        }
         public static void s_Elevator(boolean ovride, int overtarg/*Whether to override potentiometer target and what the target should be*/){
-            
+            //TODO
         }
         public static void s_Elevatordown(){
             MC.Elevator((byte) 2);
