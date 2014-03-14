@@ -20,6 +20,7 @@ public class MasterTimer extends Timer {
         addEventTimer("Retract");
         addEventTimer("AtonTimer");
         addEventTimer("ShortThrow");
+        addEventTimer("ModeCycler");
     }
 
     public void addEventTimer(String tid) {

@@ -198,7 +198,10 @@ public class RobotMain extends IterativeRobot {
         static boolean firing = false;
         //Sorted into scripted events and manual events by prefix s and m
         public static void Alwaysrun() {
-            
+            if(IM.SettingsL.getState() & MT.gdt(7) >= .2){
+                MT.sc(7);
+                cycleMode();
+            }
             
             
             MC.drive(IM.getFinalAxis());
