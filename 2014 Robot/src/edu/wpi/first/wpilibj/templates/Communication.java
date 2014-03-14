@@ -29,7 +29,7 @@ public class Communication {
         hot = infoTable.getBoolean("Hot", false);
         angle = infoTable.getNumber("Angle", 0.0);
             
-        //System.out.println("Distance: " + distance + "Hot or Not: " + hot + "Angle: " + angle);
+        System.out.println("Distance: " + distance + "Hot or Not: " + hot + "Angle: " + angle);
         //}
     }
     public boolean ConfirmShot(){

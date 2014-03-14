@@ -39,6 +39,7 @@ public class RobotMain extends IterativeRobot {
     protected static Watchdog wd;
     boolean turbo, manualControl;
     boolean shiftSTR;
+    public static boolean start;
    static byte mode;
     public void robotInit() {
         MC = new MotorControl();
@@ -60,25 +61,53 @@ public class RobotMain extends IterativeRobot {
         wd.setExpiration(0.5);
         wd.feed();
         mode = 1;//1 for drive, 2 for pickup, 3 for carry
-    }
-
-    public void autonomousPeriodic() {
-        //from 14ft
-        if(MT.gdt(5) <= 3){
-            MC.firstRightMotor.set(1);
-            MC.firstLeftMotor.set(1);           
+        start = true;
+        while(!isEnabled() & isTest()){
+                 MC.compress(IM.chkpres());
+                 if(IM.chkpres()){
+                     break;
+                 }
+             }
         }
-        if(MT.gdt(5) >= 3 && MT.gdt(5) <= 4.75){
-            MC.firstLeftMotor.set(-0.5);
+
+   public void autonomousPeriodic() {
+        //from 14ft
+       
+       while(isEnabled()){
+           wd.feed();
+       if(start){
+           MT.Freset();
+       }
+       start = false;
+       System.out.println("Time:" + MT.gdt(5));
+        if(MT.gdt(5) <= 4.5){
+            System.out.println("Autonomous foreward");
+            MC.firstRightMotor.set(1);
+            MC.firstLeftMotor.set(-1);           
+        }
+        if(MT.gdt(5) >= 4.5 & MT.gdt(5) <= 6){
+            System.out.println("Auto turn");
+            MC.firstLeftMotor.set(0.5);
             MC.firstRightMotor.set(0.5);
         }
+        if(MT.gdt(5) >= 3 & MT.gdt(5) <= 7.5){
+            System.out.println("Auto elev");
+            Event.s_ElevatorUp();
+        }else{
+            System.out.println("No more Evlevatoradfadf");
+            Event.s_ElevatorStop();}
+       // Event.s_ElevatorUp();
             MC.clutch.set(Relay.Value.kForward);
             // Slightly raised elevator.
-            Event.s_ElevatorUp();
-        if (((IM.clutchReleasedLimit.get()) && (Com.hot) && (!IM.TopElevatorLimit.get())) || (MT.gdt(5) <= 8)) {
-            MC.clutch.set(Relay.Value.kOff);
-            MC.ratchet.set(Relay.Value.kReverse);
+            
+        if ((/*(IM.clutchReleasedLimit.get())*/ /*&& (Com.hot)*//*(!IM.TopElevatorLimit.get())) && */(MT.gdt(5) <= 8))) {
+            //MC.clutch.set(Relay.Value.kOff);
+            System.out.println("Shooting auto");
+            //MC.ratchet(2);
+            //MC.clutch(1);
+            //MC.ratchet.set(Relay.Value.kReverse);
         }
+       }
     }
 
     public void teleopPeriodic() {
@@ -89,10 +118,11 @@ public class RobotMain extends IterativeRobot {
            Event.m_Shift();
            if (R.manualONLY | mode == 4) {
                     Event.m_Elevator();
-                    Event.m_Grab();
-                    Event.m_Shoot();
+                 //   Event.m_Grab();
+               //     Event.m_Shoot();
                     Event.m_Pullback();
                     Event.m_Shift();
+                    Event.s_Testlimits();
            }else if(mode == 1) {
                     if (IM.FaceLeft.getState()) {
                         Event.s_ElevatorUp();
@@ -150,6 +180,11 @@ public class RobotMain extends IterativeRobot {
     public static void enterManual(){
         mode = 4;
     }
+    public static void autoinit(boolean start){
+        if (start){
+           MT.Freset();
+        }
+    }
     public static void cycleMode(){
         if(mode !=3){
             mode++;
@@ -162,6 +197,9 @@ public class RobotMain extends IterativeRobot {
         static boolean firing = false;
         //Sorted into scripted events and manual events by prefix s and m
         public static void Alwaysrun() {
+            
+            
+            
             MC.drive(IM.getFinalAxis());
             if(IM.R1.getState()){
                 enterDrive();
@@ -319,7 +357,7 @@ public class RobotMain extends IterativeRobot {
             if (IM.TopElevatorLimit.get())
                 MC.Elevator((byte) 1);
             else
-                MC.Elevator((byte) 0);
+               MC.Elevator((byte) 0);
         }
         public static void s_ElevatorStop() {
             MC.Elevator((byte) 0);

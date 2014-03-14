@@ -7,6 +7,7 @@ import com.sun.squawk.util.MathUtils;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+//import edu.wpi.first.wpilibj.
 
 /**
  * This class should hold all code, classes and methods for managing all inputs
@@ -30,6 +31,9 @@ public class InputManager {
     protected static Joystick ps2Controller;
     protected static button FaceTop, SettingsL, L1, R1, R2, L2, FaceBott, SettingsR, FaceRight, FaceLeft;
     protected static DigitalInput TopElevatorLimit, LowerElevatorLimit, PullbackLimit, GrabberLowerLimit, GrabberLiftLimit, clutchEngagedLimit, clutchReleasedLimit, ratchetLimit, ratchetDownLimit;
+    //protected static 
+    protected static DigitalInput  Pressure;
+//protected static PWM piPower;
     static double[] dir = new double[2];
     protected AnalogChannel Poten;
     static RobotMap R;
@@ -47,7 +51,9 @@ public class InputManager {
         SettingsL = new button(9,true);
         FaceRight = new button(3, true);
         FaceLeft = new button(1,true); 
+        
 
+        Pressure = new DigitalInput(6);
         TopElevatorLimit = new DigitalInput(1);
         LowerElevatorLimit = new DigitalInput(3);
         PullbackLimit = new DigitalInput(7);
@@ -55,14 +61,18 @@ public class InputManager {
         clutchEngagedLimit = new DigitalInput(13);
         GrabberLiftLimit = new DigitalInput(9);
         clutchReleasedLimit = new DigitalInput(5);
-        ratchetLimit = new DigitalInput(14);
-        ratchetDownLimit = new DigitalInput(12);
+        ratchetLimit = new DigitalInput(12);
+        ratchetDownLimit = new DigitalInput(14);
+        
     }
 
     public double[] getFinalAxis() {
         double[] drv = new double[4];
         drv = ramp(normalize(getPureAxis()));
         return (drv);
+    }
+    public boolean chkpres(){
+        return(Pressure.get());
     }
 
     public static double[] getPureAxis() {

@@ -19,6 +19,7 @@ public class MotorControl {
     protected static Relay low, ratchet, clutch;
     protected static Relay high;
     protected static InputManager IM;
+  //  protected static Relay compress;
     
     public void init() {
         firstRightMotor = new Victor(RobotMap.firstRightMotor);
@@ -35,6 +36,8 @@ public class MotorControl {
         elevatorMotor = new Jaguar(RobotMap.elevatorMotor);
         high = new Relay(RobotMap.high);
         high.setDirection(Relay.Direction.kBoth);
+      //  compress = new Relay(4);
+       // compress.setDirection(Relay.Direction.kForward);
 
         IM = new InputManager();
     }
@@ -53,6 +56,14 @@ public class MotorControl {
         }
 
         return val;
+    }
+    public static void compress(boolean stahp){
+        if(!stahp){
+            high.set(Relay.Value.kForward);
+        }
+        else{
+            high.set(Relay.Value.kOff);
+        }
     }
 
     public void pullback(int dir){
