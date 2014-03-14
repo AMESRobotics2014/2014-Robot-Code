@@ -37,8 +37,8 @@ public class Communication {
         return(true);
     }
     //Creates a new void to access the robot speed which is located in the main class getPure access int. Then it will project the speed on a moniter using the Dashboard.
-    public void RobotSpeed(double getPureAxis){
-         String RSpeed = Double.toString(getPureAxis);
+    public void RobotSpeed(double speed){
+         String RSpeed = Double.toString(speed);
          
          if (!RSpeed.equals(" ")){
              String Speed = "Robot Speed: ";
@@ -46,22 +46,12 @@ public class Communication {
                    }
     }   
  //=================================================================================================================
-    //Creates new void to access the robot direction, the direction is accessed under the main class in UNKNOWN. Then it will be presented on the Dashboard.
-    public void RobotDirection(double UNKNOWN){
-        String RDirection = Double.toString(UNKNOWN);
-        
-        if(!RDirection.equals(" ")){
-            String Direction = "Robot Direction: ";
-            SmartDashboard.putString(Direction, RDirection);
-        }
-    }
-//================================================================================================================
     //Creates new viod to access the Robot angle and then like the other voids it prints it to the Dashboard.
-    public void RobotAngle(double UNKNOWN){
+    public void ElevPot(double UNKNOWN){
         String RAngle = Double.toString(UNKNOWN);
         
         if(!RAngle.equals(" ")){
-            String Angle = "Robot Angle: ";
+            String Angle = "Potentiometer: ";
             SmartDashboard.putString(Angle, RAngle);
         }
     }

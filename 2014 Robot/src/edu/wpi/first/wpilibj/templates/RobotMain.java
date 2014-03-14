@@ -98,12 +98,12 @@ public class RobotMain extends IterativeRobot {
        // Event.s_ElevatorUp();
             // Slightly raised elevator.
             
-        if ((/*(IM.clutchReleasedLimit.get())*/ /*&& (Com.hot)*//*(!IM.TopElevatorLimit.get())) && */(MT.gdt(5) >= 4) & (MT.gdt(5) <= 4.5))) {
+        if ((MT.gdt(5) >= 4) & (MT.gdt(5) <= 4.5)) {
             System.out.println("Shooting auto");
             MC.clutch(1);
         }
         else{MC.clutch(0);}
-        if ((/*(IM.clutchReleasedLimit.get())*/ /*&& (Com.hot)*//*(!IM.TopElevatorLimit.get())) && */(MT.gdt(5) >= 4.5) & (MT.gdt(5) <= 5))) {
+        if (((MT.gdt(5) >= 4.5) & (MT.gdt(5) <= 5))) {
             System.out.println("RShooting auto");
             MC.ratchet(2);
         }else{MC.ratchet(0);}
@@ -202,8 +202,7 @@ public class RobotMain extends IterativeRobot {
                 MT.sc(7);
                 cycleMode();
             }
-            
-            
+            DashboardPost();
             MC.drive(IM.getFinalAxis());
             if(IM.R1.getState()){
                 enterDrive();
@@ -218,6 +217,12 @@ public class RobotMain extends IterativeRobot {
                 MT.sc(1);
                 Event.Debug();
             }
+        }
+        
+        public static void DashboardPost(){
+            Com.RobotSpeed(IM.getFinalAxis()[0]);
+            Com.RobotSpeed(IM.getFinalAxis()[1]);
+            Com.ElevPot(IM.Poten.getValue());
         }
         public static void s_FastDebug(){
             
