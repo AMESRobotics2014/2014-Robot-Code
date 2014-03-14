@@ -119,8 +119,8 @@ public class RobotMain extends IterativeRobot {
            Event.m_Shift();
            if (R.manualONLY | mode == 4) {
                     Event.m_Elevator();
-                 //   Event.m_Grab();
-               //     Event.m_Shoot();
+                    Event.m_Grab();
+                    Event.m_Shoot();
                     Event.m_Pullback();
                     Event.m_Shift();
                     Event.s_Testlimits();
