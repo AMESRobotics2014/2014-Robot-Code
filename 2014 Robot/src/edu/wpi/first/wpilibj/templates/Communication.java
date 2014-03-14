@@ -44,7 +44,107 @@ public class Communication {
              String Speed = "Robot Speed: ";
              SmartDashboard.putString(Speed, RSpeed);
                    }
-    }   
+    }
+    
+        public void LimTE(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "TopElevator:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+                public void LimLE(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "LowerElevator:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+         public void LimPB(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "Pullback:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+         public void LimGL(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "GrabberLowered:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+         public void LimEL(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "Clutch Limit:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+         public void LimLL(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "Grabberlift:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+         public void LimRL(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "ClutchRelease:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+         public void LimRaL(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "RatchetUpLimit:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
+         public void LimDL(boolean value){
+            String state;
+         if(value){
+             state = "Free";
+         }else{state = "Triggered";}
+         
+         if (!state.equals("")){
+             String prefix = "Ratchet Down:";
+             SmartDashboard.putString(prefix, state);
+                   }
+    }
  //=================================================================================================================
     //Creates new viod to access the Robot angle and then like the other voids it prints it to the Dashboard.
     public void ElevPot(double UNKNOWN){

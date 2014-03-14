@@ -223,6 +223,15 @@ public class RobotMain extends IterativeRobot {
             Com.RobotSpeed(IM.getFinalAxis()[0]);
             Com.RobotSpeed(IM.getFinalAxis()[1]);
             Com.ElevPot(IM.Poten.getValue());
+            Com.LimDL(IM.ratchetDownLimit.get());
+            Com.LimEL(IM.clutchEngagedLimit.get());
+            Com.LimGL(IM.GrabberLowerLimit.get());
+            Com.LimLE(IM.LowerElevatorLimit.get());
+            Com.LimLL(IM.GrabberLiftLimit.get());
+            Com.LimPB(IM.PullbackLimit.get());
+            Com.LimRL(IM.clutchReleasedLimit.get());
+            Com.LimRaL(IM.ratchetLimit.get());
+            Com.LimTE(IM.TopElevatorLimit.get());
         }
         public static void s_FastDebug(){
             
