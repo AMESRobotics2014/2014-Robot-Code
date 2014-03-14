@@ -62,12 +62,12 @@ public class RobotMain extends IterativeRobot {
         wd.feed();
         mode = 1;//1 for drive, 2 for pickup, 3 for carry
         start = true;
-        while(!isEnabled() & isTest()){
+      /*  while(!isEnabled() & isTest()){
                  MC.compress(IM.chkpres());
                  if(IM.chkpres()){
                      break;
                  }
-             }
+             }*/
         }
 
    public void autonomousPeriodic() {
@@ -80,33 +80,34 @@ public class RobotMain extends IterativeRobot {
        }
        start = false;
        System.out.println("Time:" + MT.gdt(5));
-        if(MT.gdt(5) <= 4.5){
+        if(MT.gdt(5) <= 2.5){
             System.out.println("Autonomous foreward");
             MC.firstRightMotor.set(1);
             MC.firstLeftMotor.set(-1);           
         }
-        if(MT.gdt(5) >= 4.5 & MT.gdt(5) <= 6){
+        if(MT.gdt(5) >= 2.5 & MT.gdt(5) <= 3.5){
             System.out.println("Auto turn");
-            MC.firstLeftMotor.set(0.5);
-            MC.firstRightMotor.set(0.5);
+            MC.firstLeftMotor.set(1);
+            MC.firstRightMotor.set(1);
         }
-        if(MT.gdt(5) >= 3 & MT.gdt(5) <= 7.5){
+        if(MT.gdt(5) >= 2.5 & MT.gdt(5) <= 4){
             System.out.println("Auto elev");
             Event.s_ElevatorUp();
         }else{
-            System.out.println("No more Evlevatoradfadf");
             Event.s_ElevatorStop();}
        // Event.s_ElevatorUp();
-            MC.clutch.set(Relay.Value.kForward);
             // Slightly raised elevator.
             
-        if ((/*(IM.clutchReleasedLimit.get())*/ /*&& (Com.hot)*//*(!IM.TopElevatorLimit.get())) && */(MT.gdt(5) <= 8))) {
-            //MC.clutch.set(Relay.Value.kOff);
+        if ((/*(IM.clutchReleasedLimit.get())*/ /*&& (Com.hot)*//*(!IM.TopElevatorLimit.get())) && */(MT.gdt(5) >= 4) & (MT.gdt(5) <= 4.5))) {
             System.out.println("Shooting auto");
-            //MC.ratchet(2);
-            //MC.clutch(1);
-            //MC.ratchet.set(Relay.Value.kReverse);
+            MC.clutch(1);
         }
+        else{MC.clutch(0);}
+        if ((/*(IM.clutchReleasedLimit.get())*/ /*&& (Com.hot)*//*(!IM.TopElevatorLimit.get())) && */(MT.gdt(5) >= 4.5) & (MT.gdt(5) <= 5))) {
+            System.out.println("RShooting auto");
+            MC.ratchet(2);
+        }else{MC.ratchet(0);}
+        wd.feed();
        }
     }
 
