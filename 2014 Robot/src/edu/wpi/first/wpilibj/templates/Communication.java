@@ -1,20 +1,16 @@
 package edu.wpi.first.wpilibj.templates;
+
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * This class is responsible for all communication with other devices such as the Raspberry pie, the driver's station, some 
- * cameras, and anything else external.
- * @author Alex, Evan, Devon(raspie), Collin, Erin
- */
-//=================================================================================================================
 public class Communication {
+    
     NetworkTable infoTable;
     MasterTimer MT;
     double distance, angle;
     boolean hot;
     
-    public void init() {
+    public void Init() {
         MT = new MasterTimer();
         MT.Init();
         
@@ -182,50 +178,31 @@ public class Communication {
         }
     }
     //===================================================================================================================
-        public void ErrorFour(String EFour){
+    public void ErrorFour(String EFour){
 
-            if(!EFour.equals(" ")){
-                SmartDashboard.putString("Error: ", EFour);
-            }
+        if(!EFour.equals(" ")){
+            SmartDashboard.putString("Error: ", EFour);
         }
+    }
 //===============================================================================
-        public void ErrorFive(String EFive){
+    public void ErrorFive(String EFive){
 
-            if(!EFive.equals(" ")){
-                SmartDashboard.putString("Error: ", EFive);
+        if(!EFive.equals(" ")){
+            SmartDashboard.putString("Error: ", EFive);
         }
-        }
+    }
 //===============================================================================
-        public void ErrorSix(String ESix){
+    public void ErrorSix(String ESix){
             
-            if(ESix.equals(" ")){
-                SmartDashboard.putString("Error: ", ESix);
-            }
+        if(ESix.equals(" ")){
+            SmartDashboard.putString("Error: ", ESix);
         }
+    }
 //=====================================================================================================
-        public void ErrorSeven(String ESeven){
+    public void ErrorSeven(String ESeven){
             
-            if(ESeven.equals(" ")){
-                SmartDashboard.putString("Error: ", ESeven);
-            }
+        if(ESeven.equals(" ")){
+            SmartDashboard.putString("Error: ", ESeven);
         }
-        
-        /*
-        public void run() {
-            NetworkTable.setClientMode();
-            NetworkTable.setIPAddress("10.32.43.2");
-            NetworkTable table = NetworkTable.getTable("Table");
-            
-            while (true) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    //Logger.getLogger(NetworkTablesDesktopClient.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                double dist = table.getNumber("Dist", 0.0);
-                System.out.println("Dist: " + dist);
-            }
-        }
-        */
+    } 
 }
