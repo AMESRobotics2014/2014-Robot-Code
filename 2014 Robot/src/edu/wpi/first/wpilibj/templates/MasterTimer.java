@@ -4,14 +4,13 @@ import edu.wpi.first.wpilibj.Timer;
 import java.util.Vector;
 
 public class MasterTimer extends Timer {
-
     Vector actindex;
     accessdata use;
-
-    public void MasterTimer() {
+    
+    public void MasterTimer(){
+        
     }
-
-    public void Init() {
+    public void Init(){
         actindex = new Vector();
         addEventTimer("LimitDEBUG");
         addEventTimer("printsDEBUG");
@@ -22,13 +21,11 @@ public class MasterTimer extends Timer {
         addEventTimer("ShortThrow");
         addEventTimer("ModeCycler");
     }
-
     public void addEventTimer(String tid) {
         use = new accessdata(tid);
         use.Init(tid);
         actindex.addElement(use);
     }
-
     public void listIndicesDEBUG() {
         try {
             int i;
@@ -42,14 +39,12 @@ public class MasterTimer extends Timer {
             System.out.println("This index doesn't exist D:");
         }
     }
-
     public double gdt(int loc) {
         //  System.out.println("Getting gdt at location:" +loc);
         use = (accessdata) actindex.elementAt(loc);
         // System.out.println("GDT is :" + use.gdt());
         return use.gdt();
     }
-
     public void sc(int loc) {
         use = (accessdata) actindex.elementAt(loc);
         //actindex.removeElementAt(loc);
@@ -57,7 +52,6 @@ public class MasterTimer extends Timer {
         use.sc();
         actindex.setElementAt(use, loc);
     }
-
     public void Freset() {//Full reset!!!
         this.reset();
         int i;
@@ -67,7 +61,6 @@ public class MasterTimer extends Timer {
             actindex.setElementAt(use, i);
         }
     }
-
     public void Ereset(int[] exclude) {//Exclusion reset!!!
         int i;
         for (i = 0; i < actindex.size() - 1; i++) {
@@ -82,7 +75,6 @@ public class MasterTimer extends Timer {
             }
         }
     }
-
     public void Sreset(int[] include) {//Selective reset
         int i;
         for (i = 0; i < include.length; i++) {
@@ -91,7 +83,6 @@ public class MasterTimer extends Timer {
             actindex.setElementAt(use, i);
         }
     }
-
     public class accessdata {
 
         double ot;
@@ -123,4 +114,5 @@ public class MasterTimer extends Timer {
             this.id = null;
         }
     }
+    
 }
